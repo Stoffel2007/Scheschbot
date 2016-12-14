@@ -15,11 +15,12 @@ Kommando-Funktionen:
 Inline-Funktionen:
     - randomize:
         @Scheschbot <beliebiger Text> => <beigeliebr Txet>
-    - answer:
-        Bot reagiert auf bestimmte Wörter und Sätze (teilweise mit Vorbedingungen)
 
 andere Funktionen:
-
+    - answer:
+        Bot reagiert auf bestimmte Wörter und Sätze (teilweise mit Vorbedingungen)
+    - random schesch:
+        Bot postet manchmal irgendwelche zufälligen Nachrichten
 
 Ideen:
   - Schnellgericht vorschlagen (inline)
