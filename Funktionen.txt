@@ -1,21 +1,25 @@
 #########################################################################
-# Diese Datei liefert ein Überblick über die Funktionen,                #
+# Diese Datei liefert einen Überblick über die Funktionen,                #
 # die umgesetzt werden sollen                                           #
 #########################################################################
 
-Funktionen:
-  -  help
-  -  answer
-  -  Nudeln (und anderes) kochen
-  -  pr0 (img, gif, mp4)
-  -  random messages
-  
+Kommando-Funktionen:
+    - help:
+        gibt einen Überblick über verfügbare Aktionen
+    - kochen:
+        verschiedene Gerichte stehen zur Auswahl, wenn man Pech hat, isst der Scheschbot einem alles weg
+        zeitbasierte Events müssen implementiert werden
+    - pr0gramm:
+        ein Bild, GIF oder Video wird aus pr0gramm geholt, entweder per Zufall, Suchbegriff, ID oder das neueste
 
-Funktionen inline: 
-  -  Wechstaben verbuchseln (inline)
-  
-  
+Inline-Funktionen:
+    - randomize:
+        @Scheschbot <beliebiger Text> => <beigeliebr Txet>
+    - answer:
+        Bot reagiert auf bestimmte Wörter und Sätze (teilweise mit Vorbedingungen)
+
+andere Funktionen:
 
 
-spätere Implementierung / Ideen: 
-  - schnellgericht (inline)
+Ideen:
+  - Schnellgericht vorschlagen (inline)
