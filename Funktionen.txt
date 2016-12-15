@@ -21,6 +21,7 @@ andere Funktionen:
         Bot reagiert auf bestimmte Wörter und Sätze (teilweise mit Vorbedingungen)
     - random schesch:
         Bot postet manchmal irgendwelche zufälligen Nachrichten
+        Idee: Bot postet zufälligen Sticker aus dem Package Bach-Grötsch
 
 Ideen:
   - Schnellgericht vorschlagen (inline)
