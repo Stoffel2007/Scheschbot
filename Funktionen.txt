@@ -20,11 +20,11 @@ andere Funktionen:
     - answer:
         Bot reagiert auf bestimmte Wörter und Sätze (teilweise mit Vorbedingungen)
         Idee: auf meherere Fragen in einer Nachricht (durch Satzzeichen getrennt) separat antworten
-    - random schesch:
+    - randomschesch:
         Bot postet manchmal irgendwelche zufälligen Nachrichten
         Idee: Bot postet zufälligen Sticker aus dem Package Bach-Grötsch
 
 Ideen:
     - Schnellgericht vorschlagen (inline)
-    - Zufallsfakten (evtl. erster Absatz aus Wikipedia)
+    - Zufallsfakten in randomschesch mit einbinden (evtl. erster Absatz aus Wikipedia)
     - Stupsfunktion (inline)
