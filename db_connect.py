@@ -1,13 +1,13 @@
 import pymysql
 
 
-def connect():
+def connect(db_name):
     # Connection herstellen
     conn = pymysql.connect(host='127.0.0.1',
                            port=3306,
                            user='root',
-                           passwd='admin',
-                           db='mysql')
+                           passwd='',
+                           db=db_name)
 
     # eine bestimmte Verbindungsart
     cur = conn.cursor()
