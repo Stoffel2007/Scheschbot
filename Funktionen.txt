@@ -25,6 +25,9 @@ andere Funktionen:
     - randomschesch:
         Bot postet manchmal irgendwelche zufälligen Nachrichten
         Idee: Bot postet zufälligen Sticker aus dem Package Bach-Grötsch
+    - mood:
+        Wenn jemand bestimmte Wörter verwendet (Ausdrücke, Nettigkeiten), mag er diese Person mehr oder weniger.
+        Diese Skala beeinflusst das Verhalten verschiedener Funktionen (Nudeln wegessen usw.)
 
 Ideen:
     - Schnellgericht vorschlagen (inline)
