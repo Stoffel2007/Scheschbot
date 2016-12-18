@@ -1,24 +1,20 @@
 import pymysql
 
 
-def connect(db_name):
+def query(db_name, query_string):
     # Connection herstellen
-    conn = pymysql.connect(host='127.0.0.1',
-                           port=3306,
-                           user='root',
-                           passwd='',
-                           db=db_name)
+    connection = pymysql.connect(host='127.0.0.1',
+                                 port=3306,
+                                 user='root',
+                                 passwd='',
+                                 db=db_name)
 
-    # eine bestimmte Verbindungsart
-    cur = conn.cursor()
-
-    # SQL-Query
-    cur.execute('SELECT Host, User FROM user')
-
-    # Ergebnis ausgeben
-    for r in cur:
-        print(r)
+    # Verbindungsart Cursor
+    cursor = connection.cursor()
+    cursor.execute(query_string)
 
     # Cursor und Connection schließen
-    cur.close()
-    conn.close()
+    cursor.close()
+    connection.close()
+
+    return cursor
