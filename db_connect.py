@@ -1,13 +1,13 @@
 import pymysql
 
 
-def query(db_name, query_string):
+def query(query_string):
     # Connection herstellen
     connection = pymysql.connect(host='127.0.0.1',
                                  port=3306,
                                  user='root',
                                  passwd='',
-                                 db=db_name)
+                                 db='scheschbot')
 
     # Verbindungsart Cursor
     cursor = connection.cursor()

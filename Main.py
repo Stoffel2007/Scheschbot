@@ -2,7 +2,7 @@ import db_connect
 
 
 def main():
-    result = db_connect.query('mysql', 'SELECT Host, User FROM user')
+    result = db_connect.query('SELECT * FROM users')
     for line in result:
         print(line)
 
