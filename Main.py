@@ -1,3 +1,5 @@
+import threading
+
 import telegram
 import time
 import constants
@@ -28,10 +30,25 @@ def main():
         for update in bot.getUpdates(offset=last_update_id):
             # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben
             print("update = ", update)
+            if update.message:
+                if update.message.text == "/kochnudeln":
+                    bot.send_message(update.message.chat_id, "Ok, wird gemacht....")
+                    kochnudeln()
             last_update_id = update.update_id + 1
+
         if temp is not last_update_id:
             print("last_update_id", last_update_id)
+
         time.sleep(3)
+
+
+def kochnudeln():
+    eieruhr = threading.Timer(10, setEvent)
+    eieruhr.start()
+
+
+def setEvent():
+    print("Nudeln sind fertig!")
 
 
 if __name__ == '__main__':
