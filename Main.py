@@ -19,7 +19,7 @@ def main():
     # ID des letzten unverarbeiteten Updates holen
     try:
         last_update_id = bot.getUpdates()[-1].update_id
-    except IndexError: # falls keine Updates
+    except IndexError:  # falls keine Updates
         last_update_id = None
     print("last_update_id = ", last_update_id)
 
