@@ -1,6 +1,6 @@
 import telegram
 import time
-
+import constants
 import db_connect
 
 
@@ -13,8 +13,7 @@ def main():
         print()
 
     # Bot-Objekt erstellen
-    token = '134973318:AAHUxunH8j8-KOa69SoEfy3qG4KnvzscR2U'
-    bot = telegram.Bot(token)
+    bot = telegram.Bot(constants.scheschkey)
 
     # ID des letzten unverarbeiteten Updates holen
     try:
