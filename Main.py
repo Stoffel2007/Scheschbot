@@ -26,12 +26,20 @@ def main():
         temp = last_update_id
         # alle Updates seit letztem Update holen
         for update in bot.getUpdates(offset=last_update_id):
+            if update.inline_query and update.inline_query.query:
+                bot.answer_inline_query(update.inline_query.id, answer_inline(update.inline_query))
             # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben
             print("update = ", update)
             last_update_id = update.update_id + 1
         if temp is not last_update_id:
             print("last_update_id", last_update_id)
         time.sleep(3)
+
+
+def answer_inline(inline_query):
+    text = "Oh, hallo, Herr " + inline_query.query + "!"
+    input_text = telegram.InputTextMessageContent(text)
+    return [telegram.InlineQueryResultArticle('test_inline_query', "Mederer", input_text)]
 
 
 if __name__ == '__main__':
