@@ -9,6 +9,7 @@ def query(query_string):
                                  passwd='',
                                  db='scheschbot')
 
+    query_string = 'SELECT * FROM users'
     # Verbindungsart Cursor
     cursor = connection.cursor()
     cursor.execute(query_string)

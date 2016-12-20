@@ -6,7 +6,6 @@ import db_connect
 
 def main():
     # Beispiel-Query
-    result = db_connect.query('SELECT * FROM users')
     for line in result:
         for value in line:
             print(value, end="\t")
