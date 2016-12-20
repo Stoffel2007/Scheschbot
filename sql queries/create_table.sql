@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS users
+CREATE TABLE IF NOT EXISTS scheschbot.users
 (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     telegram_id INT NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users
 )
 DEFAULT CHARACTER SET = 'utf16';
 
-INSERT INTO users
+INSERT INTO scheschbot.users
 (telegram_id, like_percentage, first_name)
 VALUES
 (123153, 30, 'Timo'),
