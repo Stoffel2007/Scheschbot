@@ -33,7 +33,7 @@ def main():
             if update.message:
                 if update.message.text == "/kochnudeln":
                     bot.send_message(update.message.chat_id, "Ok, wird gemacht....")
-                    kochnudeln()
+                    koch_nudeln()
             last_update_id = update.update_id + 1
 
         if temp is not last_update_id:
@@ -42,12 +42,12 @@ def main():
         time.sleep(3)
 
 
-def kochnudeln():
-    eieruhr = threading.Timer(10, setEvent)
+def koch_nudeln():
+    eieruhr = threading.Timer(10, set_event)
     eieruhr.start()
 
 
-def setEvent():
+def set_event():
     print("Nudeln sind fertig!")
 
 
