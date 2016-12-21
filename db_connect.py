@@ -9,6 +9,8 @@ def query(query_string):
                                      user='root',
                                      passwd='',
                                      db='scheschbot')
+
+        # Verbindungsart Cursor
         cursor = connection.cursor()
         cursor.execute(query_string)
 
@@ -20,5 +22,3 @@ def query(query_string):
     except pymysql.err.OperationalError:
         print("Error connecting to the database")
         return False
-    # Verbindungsart Cursor
-
