@@ -2,7 +2,7 @@ import pymysql
 import time
 
 
-def query(query_string):
+def __query(query_string):
     # maximal 10 mal versuchen, Verbindung zur Datenbank herstellen
     # ansonsten False zurückliefern
     try_counter = 0
@@ -43,7 +43,7 @@ def select(table, column, where_expression):
     query_string = 'SELECT ' + column + ' ' +\
                    'FROM ' + table + ' ' +\
                    'WHERE ' + where_expression
-    return query(query_string)
+    return __query(query_string)
 
 
 # UPDATE-Abfrage auf der Datenbank
@@ -54,7 +54,7 @@ def update(table, column_array, value_array, where_expression):
 
     # Werte für die SQL-Query vorbereiten (Anführungszeichen, NULL)
     for i in range(0, len(value_array)):
-        value_array[i] = prepare_for_query(value_array[i])
+        value_array[i] = __prepare_for_query(value_array[i])
 
     # Spaltennamen und Spaltenwerte zusammenführen
     set_string = ''
@@ -68,7 +68,7 @@ def update(table, column_array, value_array, where_expression):
                    'SET ' + set_string + ' ' +\
                    'WHERE ' + where_expression
 
-    query(query_string)
+    __query(query_string)
 
 
 # INSERT-Abfrage auf der Datenbank
@@ -79,7 +79,7 @@ def insert(table, column_array, value_array):
 
     # Werte für die SQL-Query vorbereiten (Anführungszeichen, NULL)
     for i in range(0, len(value_array)):
-        value_array[i] = prepare_for_query(value_array[i])
+        value_array[i] = __prepare_for_query(value_array[i])
 
     # Werte durch Kommata trennen
     value_string = ''
@@ -101,11 +101,11 @@ def insert(table, column_array, value_array):
                    '(' + column_string + ') ' +\
                    'VALUES (' + value_string + ')'
 
-    query(query_string)
+    __query(query_string)
 
 
 # Wert für die SQL-Query vorbereiten
-def prepare_for_query(value):
+def __prepare_for_query(value):
     # überprüft, ob ein Objekt ein Integer ist
     def is_int(number):
         try:
