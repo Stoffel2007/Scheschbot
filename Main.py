@@ -36,9 +36,12 @@ def main():
         # alle Updates seit letztem Update holen
         try:
             for update in bot.getUpdates(offset=last_update_id):
-                mood.set_mood(update.message.from_user, 60)
                 # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben
                 print("update = ", update)
+                if update.message:
+                    mood.set_mood(update.message.from_user, 60)
+                else:
+                    print("Message ist None")
                 last_update_id = update.update_id + 1
             if temp is not last_update_id:
                 print("last_update_id", last_update_id)
