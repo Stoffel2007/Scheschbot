@@ -7,14 +7,6 @@ import random
 
 
 def main():
-    # Beispiel-Query
-    result = db_connect.query('SELECT * FROM users')
-    if result:
-        for line in result:
-            for value in line:
-                print(value, end="\t")
-            print()
-
     # Bot-Objekt erstellen
     bot = telegram.Bot(constants.scheschkey)
 
