@@ -1,8 +1,9 @@
 import telegram
-import time
 import constants
 import db_connect
 import mood
+import time
+import random
 
 
 def main():
@@ -39,9 +40,10 @@ def main():
                 # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben
                 print("update = ", update)
 
-                # like_percentage des Users neu setzen
+                # like_percentage des Users zufällig neu setzen
                 user = get_user(update)
-                mood.set_mood(user, 60)
+                like_percentage = random.randint(0, 100)
+                mood.set_mood(user, like_percentage)
 
                 # like_percentage des Users neu setzen in der Datenbank
                 last_update_id = update.update_id + 1
