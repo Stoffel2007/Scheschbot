@@ -19,13 +19,13 @@ def main():
     bot = telegram.Bot(constants.scheschkey)
 
     # ID des letzten unverarbeiteten Updates holen
+    last_update_id = None
     connected = False
     while not connected:
         try:
             last_update_id = bot.getUpdates()[-1].update_id
             connected = True
         except IndexError:  # falls keine Updates
-            last_update_id = None
             connected = True
         except telegram.error.NetworkError:
             print("Verbindung fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
