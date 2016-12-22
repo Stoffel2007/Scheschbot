@@ -29,24 +29,26 @@ def set_mood(user, like_percentage):
 
     user_result = db_connect.query('SELECT telegram_id FROM users WHERE telegram_id =' + user.id.__str__())
 
-    user_exists = user_result.fetchone()
+    # bei Fehlschlagen der Datenbankanfrage würde False zurückgeliefert werden
+    if user_result:
+        user_exists = user_result.fetchone()
 
-    if user_exists:
-        # Sende like_percentage
-        db_connect.query('UPDATE users ' +
-                         'SET like_percentage = ' + like_percentage.__str__() + ', ' +
-                         'first_name = "' + user.first_name + '", ' +
-                         'last_name = ' + last_name + ', ' +
-                         'username = ' + username + ' '
-                         'WHERE telegram_id = ' + user.id.__str__())
+        if user_exists:
+            # Sende like_percentage
+            db_connect.query('UPDATE users ' +
+                             'SET like_percentage = ' + like_percentage.__str__() + ', ' +
+                             'first_name = "' + user.first_name + '", ' +
+                             'last_name = ' + last_name + ', ' +
+                             'username = ' + username + ' '
+                             'WHERE telegram_id = ' + user.id.__str__())
 
-    else:
-        # füge neuen User hinzu
-        db_connect.query('INSERT INTO users ' +
-                         '(telegram_id, like_percentage, first_name, last_name, username) ' +
-                         'VALUES ' +
-                         '(' + user.id.__str__() + ', ' +
-                         like_percentage.__str__() + ', "' +
-                         user.first_name.__str__() + '", ' +
-                         last_name.__str__() + ', ' +
-                         username.__str__() + ')')
+        else:
+            # füge neuen User hinzu
+            db_connect.query('INSERT INTO users ' +
+                             '(telegram_id, like_percentage, first_name, last_name, username) ' +
+                             'VALUES ' +
+                             '(' + user.id.__str__() + ', ' +
+                             like_percentage.__str__() + ', "' +
+                             user.first_name.__str__() + '", ' +
+                             last_name.__str__() + ', ' +
+                             username.__str__() + ')')

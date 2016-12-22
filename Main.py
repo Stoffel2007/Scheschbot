@@ -28,7 +28,7 @@ def main():
         except IndexError:  # falls keine Updates
             connected = True
         except telegram.error.NetworkError:
-            print("Verbindung fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
+            print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
             time.sleep(10)
     print("last_update_id = ", last_update_id)
 
@@ -51,7 +51,7 @@ def main():
                 print("last_update_id", last_update_id)
             time.sleep(3)
         except telegram.error.NetworkError:
-            print("Verbindung fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
+            print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
             time.sleep(10)
 
 
