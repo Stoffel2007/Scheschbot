@@ -12,11 +12,12 @@ Kommando-Funktionen:
     - pr0gramm:
         ein Bild, GIF oder Video wird aus pr0gramm geholt, entweder per Zufall, Suchbegriff, ID oder das neueste
 
+    - Aggronyme:
+        Bot beschreibt einen Namen anhand der einzelnen Buchstaben
+
 Inline-Funktionen:
     - randomize:
         @Scheschbot <beliebiger Text> => <beigeliebr Txet>
-    - Aggronyme:
-        Bot beschreibt einen Namen anhand der einzelnen Buchstaben
 
 andere Funktionen:
     - answer:

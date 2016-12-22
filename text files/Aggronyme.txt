@@ -1,24 +1,73 @@
-A abartig, assozial
-B balanzelos,
-C charismatisch,
-D deppert
-E egglhaft, ersetzbar,
-F frauenfeindlich
-H hochnäsig
-I idiotisch, ignorant
-J joggend
-K kannibalistisch
-L lieblos,
-M mickrig,
-N nebulös,
-P phasenverschoben,
-Q qualifiziert,
-R respektlos
-S scheiß,
-T transatlantisch,
-U unterirdisch
-V verflucht,
-W weißer,
+Buchstb Adjektiv                        Nomen
+A       abartig, assozial
+Ä       ägglhaft,
+B       balanzelos,
+C       charismatisch,
+D       deppert
+E       egglhaft, ersetzbar,
+F       frauenfeindlich
+H       hochnäsig
+I       idiotisch, ignorant
+J       joggend
+K       kannibalistisch
+L       lieblos,
+M       mickrig,                        (das)Monokel
+N       nebulös,
+O       oval,                           (der)Obatzn, (die)Orange, (das)Omen
+Ö       öde,
+P       phasenverschoben,
+Q       qualifiziert,
+R       respektlos
+S       scheiß,                         (die)Sauklau
+T       transatlantisch,                (der)Taliban
+U       unterirdisch
+Ü       überlebenswichtig,
+V       verflucht,
+W       weißer,
 X
-Y yuppi verachtend
+Y       yuppi verachtend
 Z
+
+
+"Aggronyme" - Kommandofuktion /aggro {Vorname Nachname}
+
+    Beschreibung:
+    diese Funktion wandelt einen Namen als Akronym in eine Beleidigung/Beschreibung um
+
+    Beispiel:
+    Timo: transatlantischer, idiotischer und mickriger Obatzn
+    Timo Bett: transatlantischer, idiotischer und mickriger Obatzn SOWIE ...
+
+    DB Struktur: siehe oben
+
+
+    funktionen:
+
+    - count_words(command_text) - wandelt die Wörter/(Anzahl der Namen) im Text in x-dimens Array um
+        return arr_words ([Timo]
+                          [Schmidt])
+
+    - count_letter(arr_words) - wandelt arr_words in Array von Buchstaben um
+        return arr_letters ([t,i,m,o]
+                            [s,c,h,m,i,d,t])
+
+    - get_insult(arr_letter):
+            * schaut wie viele Einträge je eine Dimension des Arrays hat
+            * holt für den Buchstaben alle Adjektive aus DB
+            * sucht sich random ein aus
+                *tue für (Xte-Dimension.length - 1)
+            * letzter Buchstabe ist ein Nomen, hole Nomen, suche random aus
+        return arr_insult ([transatlatisch, idiotisch, mikrieg, Obatzn]
+                           [scheiß, ... , Taliban]
+
+    - format_insult(arr_insult) - zusammen setzten des zu sendenden Strings
+            * in der DB ist Nomen mit Artikel gespeichert
+            * formatiere je nach Artikel die Adjektive zu er/e/es
+                Beispiel: mikrieg -> mikrieger/mikriege/mikrieges
+            * setzte Kommas, einfügen des "und" vor dem letzten Adj
+            * (Optional) füge ein "Sowie", das gleiche für 2tes Wort, ...
+
+
+HINT:
+numrows = len(input)    # 3 rows in your example
+numcols = len(input[0]) # 2 columns in your example
