@@ -52,10 +52,9 @@ def update(table, column_array, value_array, where_expression):
     if len(column_array) != len(value_array):
         raise IndexError("Anzahl an Spalten und Wertem stimmt nicht überein")
 
-    # Anführungszeichen bei Strings anfügen
+    # Werte für die SQL-Query vorbereiten (Anführungszeichen, NULL)
     for i in range(0, len(value_array)):
-        if not is_int(value_array[i]):
-            value_array[i] = '"' + value_array[i] + '"'
+        value_array[i] = prepare_for_query(value_array[i])
 
     # Spaltennamen und Spaltenwerte zusammenführen
     set_string = ''
@@ -78,10 +77,9 @@ def insert(table, column_array, value_array):
     if len(column_array) != len(value_array):
         raise IndexError("Anzahl an Spalten und Wertem stimmt nicht überein")
 
-    # Anführungszeichen bei Strings anfügen
+    # Werte für die SQL-Query vorbereiten (Anführungszeichen, NULL)
     for i in range(0, len(value_array)):
-        if not is_int(value_array[i]):
-            value_array[i] = '"' + value_array[i] + '"'
+        value_array[i] = prepare_for_query(value_array[i])
 
     # Werte durch Kommata trennen
     value_string = ''
@@ -104,6 +102,16 @@ def insert(table, column_array, value_array):
                    'VALUES (' + value_string + ')'
 
     query(query_string)
+
+
+# Wert für die SQL-Query vorbereiten
+def prepare_for_query(value):
+    print(value)
+    if not value:  # 'None' durch NULL ersetzen
+        return 'NULL'
+    if not is_int(value):  # String mit Anführungszeichen versehen
+        return '"' + value + '"'
+    return value  # Zahlen werden nicht verändert
 
 
 # überprüft, ob ein Objekt ein Integer ist
