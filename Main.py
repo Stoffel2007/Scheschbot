@@ -1,6 +1,5 @@
 import telegram
 import constants
-import db_connect
 import mood
 import time
 import random
