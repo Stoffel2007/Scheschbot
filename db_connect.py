@@ -106,18 +106,17 @@ def insert(table, column_array, value_array):
 
 # Wert für die SQL-Query vorbereiten
 def prepare_for_query(value):
+    # überprüft, ob ein Objekt ein Integer ist
+    def is_int(number):
+        try:
+            int(number)
+            return True
+        except ValueError:
+            return False
+
     print(value)
     if not value:  # 'None' durch NULL ersetzen
         return 'NULL'
     if not is_int(value):  # String mit Anführungszeichen versehen
         return '"' + value + '"'
     return value  # Zahlen werden nicht verändert
-
-
-# überprüft, ob ein Objekt ein Integer ist
-def is_int(number):
-    try:
-        int(number)
-        return True
-    except ValueError:
-        return False
