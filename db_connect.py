@@ -48,14 +48,6 @@ def select(table, column, where_expression):
 
 # UPDATE-Abfrage auf der Datenbank
 def update(table, column_array, value_array, where_expression):
-    # überprüft, ob ein Objekt ein Integer ist
-    def is_int(number):
-        try:
-            int(number)
-            return True
-        except ValueError:
-            return False
-
     # Fehler werfen, wenn die Anzahl an Spalten nicht mit der Anzahl an Werten übereinstimmt
     if len(column_array) != len(value_array):
         raise IndexError("Anzahl an Spalten und Wertem stimmt nicht überein")
@@ -82,14 +74,6 @@ def update(table, column_array, value_array, where_expression):
 
 # INSERT-Abfrage auf der Datenbank
 def insert(table, column_array, value_array):
-    # überprüft, ob ein Objekt ein Integer ist
-    def is_int(number):
-        try:
-            int(number)
-            return True
-        except ValueError:
-            return False
-
     # Fehler werfen, wenn die Anzahl an Spalten nicht mit der Anzahl an Werten übereinstimmt
     if len(column_array) != len(value_array):
         raise IndexError("Anzahl an Spalten und Wertem stimmt nicht überein")
@@ -120,3 +104,12 @@ def insert(table, column_array, value_array):
                    'VALUES (' + value_string + ')'
 
     query(query_string)
+
+
+# überprüft, ob ein Objekt ein Integer ist
+def is_int(number):
+    try:
+        int(number)
+        return True
+    except ValueError:
+        return False
