@@ -1,4 +1,5 @@
 import pymysql
+import time
 
 
 def query(query_string):
@@ -12,7 +13,11 @@ def query(query_string):
 
         # Verbindungsart Cursor
         cursor = connection.cursor()
+        start = time.time()
         cursor.execute(query_string)
+        end = time.time()
+        delta = end - start
+        print("Abfrage dauerte " + delta.__str__() + " Sekunden")
         connection.commit()
 
         # Cursor und Connection schließen
