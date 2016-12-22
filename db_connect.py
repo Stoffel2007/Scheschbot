@@ -44,3 +44,37 @@ def select(table, column, where_expression):
                    'FROM ' + table + ' ' +\
                    'WHERE ' + where_expression
     return query(query_string)
+
+
+# UPDATE-Abfrage auf der Datenbank
+def update(table, column_array, value_array, where_expression):
+    # überprüft, ob ein Objekt ein Integer ist
+    def is_int(number):
+        try:
+            int(number)
+            return True
+        except ValueError:
+            return False
+
+    # Fehler werfen, wenn die Anzahl an Spalten nicht mit der Anzahl an Werten übereinstimmt
+    if len(column_array) != len(value_array):
+        raise IndexError("Anzahl an Spalten und Wertem stimmt nicht überein")
+
+    # Anführungszeichen bei Strings anfügen
+    for i in range(0, len(value_array)):
+        if not is_int(value_array[i]):
+            value_array[i] = '"' + value_array[i] + '"'
+
+    # Spaltennamen und Spaltenwerte zusammenführen
+    set_string = ''
+    for i in range(0, len(column_array)):
+        set_string += column_array[i] + ' = ' + value_array[i].__str__()
+        # bei letztem Durchlauf kein Komma mehr setzen
+        if i < len(column_array) - 1:
+            set_string += ', '
+
+    query_string = 'UPDATE ' + table + ' ' +\
+                   'SET ' + set_string + ' ' +\
+                   'WHERE ' + where_expression
+
+    query(query_string)
