@@ -18,23 +18,34 @@ def main():
     bot = telegram.Bot(constants.scheschkey)
 
     # ID des letzten unverarbeiteten Updates holen
-    try:
-        last_update_id = bot.getUpdates()[-1].update_id
-    except IndexError:  # falls keine Updates
-        last_update_id = None
+    connected = False
+    while not connected:
+        try:
+            last_update_id = bot.getUpdates()[-1].update_id
+            connected = True
+        except IndexError:  # falls keine Updates
+            last_update_id = None
+            connected = True
+        except telegram.error.NetworkError:
+            print("Verbindung fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
+            time.sleep(10)
     print("last_update_id = ", last_update_id)
 
     while True:
         temp = last_update_id
         # alle Updates seit letztem Update holen
-        for update in bot.getUpdates(offset=last_update_id):
-            mood.set_mood(update.message.from_user, 60)
-            # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben
-            print("update = ", update)
-            last_update_id = update.update_id + 1
-        if temp is not last_update_id:
-            print("last_update_id", last_update_id)
-        time.sleep(3)
+        try:
+            for update in bot.getUpdates(offset=last_update_id):
+                mood.set_mood(update.message.from_user, 60)
+                # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben
+                print("update = ", update)
+                last_update_id = update.update_id + 1
+            if temp is not last_update_id:
+                print("last_update_id", last_update_id)
+            time.sleep(3)
+        except telegram.error.NetworkError:
+            print("Verbindung fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
+            time.sleep(10)
 
 
 if __name__ == '__main__':
