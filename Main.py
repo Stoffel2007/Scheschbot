@@ -1,8 +1,9 @@
 import telegram
-import time
 import constants
 import db_connect
 import mood
+import time
+import random
 
 
 def main():
@@ -18,23 +19,55 @@ def main():
     bot = telegram.Bot(constants.scheschkey)
 
     # ID des letzten unverarbeiteten Updates holen
-    try:
-        last_update_id = bot.getUpdates()[-1].update_id
-    except IndexError:  # falls keine Updates
-        last_update_id = None
+    last_update_id = None
+    connected = False
+    while not connected:
+        try:
+            last_update_id = bot.getUpdates()[-1].update_id
+            connected = True
+        except IndexError:  # falls keine Updates
+            connected = True
+        except telegram.error.NetworkError:
+            print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
+            time.sleep(10)
     print("last_update_id = ", last_update_id)
 
     while True:
         temp = last_update_id
         # alle Updates seit letztem Update holen
-        for update in bot.getUpdates(offset=last_update_id):
-            mood.set_mood(update.message.from_user, 60)
-            # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben
-            print("update = ", update)
-            last_update_id = update.update_id + 1
-        if temp is not last_update_id:
-            print("last_update_id", last_update_id)
-        time.sleep(3)
+        try:
+            for update in bot.getUpdates(offset=last_update_id):
+                # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben
+                print("update =", update)
+
+                # like_percentage des Users zufällig neu setzen
+                user = get_user(update)
+                like_percentage = random.randint(0, 100)
+                mood.set_mood(user, like_percentage)
+
+                # like_percentage des Users neu setzen in der Datenbank
+                last_update_id = update.update_id + 1
+            if temp is not last_update_id:
+                print("last_update_id", last_update_id)
+            time.sleep(3)
+        except telegram.error.NetworkError:
+            print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
+            time.sleep(10)
+
+
+# User-Objekt aus dem Update-Objekt holen
+# je nach Update-Art (Nachricht, Inline Query, usw. liegt das User-Objekt in einem anderen Teil des Update-Objekts
+def get_user(update):
+    if update.message:  # wenn eine Nachricht gesendet wurde
+        return update.message.from_user
+    if update.edited_message:  # wenn eine Nachricht bearbeitet wurde
+        return update.edited_message.from_user
+    if update.inline_query:  # wenn eine Inline Query bearbeitet wurde
+        return update.inline_query.from_user
+    if update.channel_post:  # wenn eine Kanalnachricht gesendet wurde
+        return update.channel_post.from_user
+    if update.edited_channel_post:  # wenn eine Kanalnachricht bearbeitet wurde
+        return update.edited_channel_post.from_user
 
 
 if __name__ == '__main__':
