@@ -3,7 +3,7 @@ import db_connect
 
 # liefert die like_percentage eines Users
 def get_mood(telegram_id):
-    moods = db_connect.query('SELECT like_percentage FROM users WHERE telegram_id =' + telegram_id.__str__())
+    moods = db_connect.select('users', 'like_percentage', 'telegram_id = ' + telegram_id.__str__())
 
     result = moods.fetchone()
 
@@ -29,7 +29,7 @@ def set_mood(user, like_percentage):
     else:
         username = "NULL"
 
-    user_result = db_connect.query('SELECT telegram_id FROM users WHERE telegram_id =' + user.id.__str__())
+    user_result = db_connect.select('users', 'telegram_id', 'telegram_id = ' + user.id.__str__())
 
     # bei Fehlschlagen der Datenbankanfrage würde False zurückgeliefert werden
     if user_result:
@@ -40,8 +40,9 @@ def set_mood(user, like_percentage):
                              'SET like_percentage = ' + like_percentage.__str__() + ', ' +
                              'first_name = "' + user.first_name + '", ' +
                              'last_name = ' + last_name + ', ' +
-                             'username = ' + username + ' '
+                             'username = ' + username + ' ' +
                              'WHERE telegram_id = ' + user.id.__str__())
+
         else:  # neuen User hinzufügen
             db_connect.query('INSERT INTO users ' +
                              '(telegram_id, like_percentage, first_name, last_name, username) ' +
