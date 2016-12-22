@@ -2,6 +2,7 @@ import telegram
 import time
 import constants
 import db_connect
+import mood
 
 
 def main():
@@ -27,6 +28,7 @@ def main():
         temp = last_update_id
         # alle Updates seit letztem Update holen
         for update in bot.getUpdates(offset=last_update_id):
+            mood.setMood(update.message.from_user, 60)
             # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben
             print("update = ", update)
             last_update_id = update.update_id + 1
