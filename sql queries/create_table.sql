@@ -37,7 +37,6 @@ VALUES
 CREATE TABLE IF NOT EXISTS scheschbot.aggronymes
 (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    letter CHAR NOT NULL,
     word CHAR(64) NOT NULL,
     type_id INT NOT NULL,
     FOREIGN KEY (type_id) REFERENCES word_types (id)
@@ -45,7 +44,16 @@ CREATE TABLE IF NOT EXISTS scheschbot.aggronymes
 DEFAULT CHARACTER SET = 'utf16'
 
 INSERT INTO scheschbot.aggronymes
-(letter, word, type_id)
+(word, type_id)
 VALUES
-('A', 'abartig', 1),
-('A', 'assozial', 1)
+('abartig', 1),
+('assozial', 1),
+('ägglhaft', 1),
+('balancelos', 1),
+('belanglos', 1),
+('charismatisch', 1),
+('deppert', 1),
+('egglhaft', 1),
+('ersetzbar', 1),
+('frauenfeindlich', 1),
+('hochnäsig', 1),
