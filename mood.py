@@ -36,12 +36,10 @@ def set_mood(user, like_percentage):
         user_exists = user_result.fetchone()
 
         if user_exists:  # like_percentage (und andere User-Attribute) aktualisieren
-            db_connect.query('UPDATE users ' +
-                             'SET like_percentage = ' + like_percentage.__str__() + ', ' +
-                             'first_name = "' + user.first_name + '", ' +
-                             'last_name = ' + last_name + ', ' +
-                             'username = ' + username + ' ' +
-                             'WHERE telegram_id = ' + user.id.__str__())
+            db_connect.update('users',
+                              ['like_percentage', 'first_name', 'last_name', 'username'],
+                              [like_percentage, user.first_name, user.last_name, user.username],
+                              'telegram_id=' + user.id.__str__())
 
         else:  # neuen User hinzufügen
             db_connect.query('INSERT INTO users ' +
