@@ -114,7 +114,6 @@ def __prepare_for_query(value):
         except ValueError:
             return False
 
-    print(value)
     if not value:  # 'None' durch NULL ersetzen
         return 'NULL'
     if not is_int(value):  # String mit Anführungszeichen versehen
