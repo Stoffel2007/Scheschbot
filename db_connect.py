@@ -36,3 +36,11 @@ def query(query_string):
             time.sleep(10)
     print("10 Fehlversuche beim Verbinden zur Datenbank => return False")
     return False
+
+
+# SELECT-Abfrage auf der Datenbank
+def select(table, column, where_expression):
+    query_string = 'SELECT ' + column + ' ' +\
+                   'FROM ' + table + ' ' +\
+                   'WHERE ' + where_expression
+    return query(query_string)

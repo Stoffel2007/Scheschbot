@@ -38,7 +38,7 @@ def main():
         try:
             for update in bot.getUpdates(offset=last_update_id):
                 # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben
-                print("update = ", update)
+                print("update =", update)
 
                 # like_percentage des Users zufällig neu setzen
                 user = get_user(update)
