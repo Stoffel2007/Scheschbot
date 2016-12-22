@@ -7,12 +7,45 @@ CREATE TABLE IF NOT EXISTS scheschbot.users
     last_name CHAR(64),
     username CHAR(64)
 )
-DEFAULT CHARACTER SET = 'utf16';
+DEFAULT CHARACTER SET = 'utf16'
 
 INSERT INTO scheschbot.users
-(telegram_id, like_percentage, first_name)
+(telegram_id, like_percentage, first_name, last_name, username)
 VALUES
-(123153, 30, 'Timo'),
-(123547, 90, 'Nusch'),
-(124895, 10, 'Frida'),
-(123521, 80, 'Andi')
+(105131864, 60, 'Joschi', NULL, NULL),
+(54185905, 48, 'Alex', 'Ey', NULL),
+(44867338, 10, 'Fredi', 'B', 'Oenner'),
+(213190902, 28, 'Pascal', 'Rögner', NULL),
+(82613330, 69, 'Wilhelmina', 'Fuchs', NULL),
+(72111412, 88, 'Stoffel', 'Zink', 'Stuffla')
+
+
+CREATE TABLE IF NOT EXISTS scheschbot.word_types
+(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name CHAR(64) NOT NULL
+)
+DEFAULT CHARACTER SET = 'utf16'
+
+INSERT INTO scheschbot.word_types
+(name)
+VALUES
+('Adjektiv'),
+('Nomen')
+
+
+CREATE TABLE IF NOT EXISTS scheschbot.aggronymes
+(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    letter CHAR NOT NULL,
+    word CHAR(64) NOT NULL,
+    type_id INT NOT NULL,
+    FOREIGN KEY (type_id) REFERENCES word_types (id)
+)
+DEFAULT CHARACTER SET = 'utf16'
+
+INSERT INTO scheschbot.aggronymes
+(letter, word, type_id)
+VALUES
+('A', 'abartig', 1),
+('A', 'assozial', 1)
