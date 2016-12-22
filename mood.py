@@ -42,11 +42,6 @@ def set_mood(user, like_percentage):
                               'telegram_id=' + user.id.__str__())
 
         else:  # neuen User hinzufügen
-            db_connect.query('INSERT INTO users ' +
-                             '(telegram_id, like_percentage, first_name, last_name, username) ' +
-                             'VALUES ' +
-                             '(' + user.id.__str__() + ', ' +
-                             like_percentage.__str__() + ', "' +
-                             user.first_name.__str__() + '", ' +
-                             last_name.__str__() + ', ' +
-                             username.__str__() + ')')
+            db_connect.insert('users',
+                              ['telegram_id', 'like_percentage', 'first_name', 'last_name', 'username'],
+                              [user.id, like_percentage, user.first_name, user.last_name, user.username])
