@@ -1,19 +1,21 @@
 import db_connect
 
 
-# Liefert die Like_Percentage von einer Telegram ID
+# liefert die like_percentage eines Users
 def get_mood(telegram_id):
-    # Query über db_connect abschicken und ResultSet empfangen
     moods = db_connect.query('SELECT like_percentage FROM users WHERE telegram_id =' + telegram_id.__str__())
 
     result = moods.fetchone()
 
     if result:
-        return result[0]  # fetchone()[0] muss man machen sonst kommt was komisches raus
-    else:
+        return result[0]  # fetchone() liefert ein Array (auch wenn nur ein Wert enthalten ist)
+    else:  # Abfrage lieferte kein Ergebnis
         return -1
 
 
+# like_percentage eines bestimmten Users ändern
+# falls User nicht existiert, neuen Eintrag in Tabelle erzeugen
+# andere User-Attribute (first_name, last_name, username) werden ebenfalls gesetzt
 def set_mood(user, like_percentage):
     # username und last_name können "None" sein
     # in diesem Fall NULL in die Datenbank eintragen
@@ -33,17 +35,14 @@ def set_mood(user, like_percentage):
     if user_result:
         user_exists = user_result.fetchone()
 
-        if user_exists:
-            # Sende like_percentage
+        if user_exists:  # like_percentage (und andere User-Attribute) aktualisieren
             db_connect.query('UPDATE users ' +
                              'SET like_percentage = ' + like_percentage.__str__() + ', ' +
                              'first_name = "' + user.first_name + '", ' +
                              'last_name = ' + last_name + ', ' +
                              'username = ' + username + ' '
                              'WHERE telegram_id = ' + user.id.__str__())
-
-        else:
-            # füge neuen User hinzu
+        else:  # neuen User hinzufügen
             db_connect.query('INSERT INTO users ' +
                              '(telegram_id, like_percentage, first_name, last_name, username) ' +
                              'VALUES ' +
