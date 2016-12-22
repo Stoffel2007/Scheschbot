@@ -38,10 +38,12 @@ def main():
             for update in bot.getUpdates(offset=last_update_id):
                 # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben
                 print("update = ", update)
-                if update.message:
-                    mood.set_mood(update.message.from_user, 60)
-                else:
-                    print("Message ist None")
+
+                # like_percentage des Users neu setzen
+                user = get_user(update)
+                mood.set_mood(user, 60)
+
+                # like_percentage des Users neu setzen in der Datenbank
                 last_update_id = update.update_id + 1
             if temp is not last_update_id:
                 print("last_update_id", last_update_id)
@@ -49,6 +51,21 @@ def main():
         except telegram.error.NetworkError:
             print("Verbindung fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
             time.sleep(10)
+
+
+# User-Objekt aus dem Update-Objekt holen
+# je nach Update-Art (Nachricht, Inline Query, usw. liegt das User-Objekt in einem anderen Teil des Update-Objekts
+def get_user(update):
+    if update.message:  # wenn eine Nachricht gesendet wurde
+        return update.message.from_user
+    if update.edited_message:  # wenn eine Nachricht bearbeitet wurde
+        return update.edited_message.from_user
+    if update.inline_query:  # wenn eine Inline Query bearbeitet wurde
+        return update.inline_query.from_user
+    if update.channel_post:  # wenn eine Kanalnachricht gesendet wurde
+        return update.channel_post.from_user
+    if update.edited_channel_post:  # wenn eine Kanalnachricht bearbeitet wurde
+        return update.edited_channel_post.from_user
 
 
 if __name__ == '__main__':
