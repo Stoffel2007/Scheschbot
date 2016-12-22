@@ -1,11 +1,20 @@
 import telegram
 import constants
+import db_connect
 import mood
 import time
 import random
 
 
 def main():
+    # Beispiel-Query
+    result = db_connect.select('users', '*', '1 = 1')
+    if result:
+        for line in result:
+            for value in line:
+                print(value, end="\t")
+            print()
+
     # Bot-Objekt erstellen
     bot = telegram.Bot(constants.scheschkey)
 
