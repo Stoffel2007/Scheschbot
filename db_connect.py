@@ -94,7 +94,6 @@ def insert(table, column_array, value_array):
     if len(column_array) != len(value_array):
         raise IndexError("Anzahl an Spalten und Wertem stimmt nicht überein")
 
-    print(value_array);
     # Anführungszeichen bei Strings anfügen
     for i in range(0, len(value_array)):
         if not is_int(value_array[i]):
