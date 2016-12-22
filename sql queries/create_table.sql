@@ -34,55 +34,72 @@ VALUES
 ('Nomen')
 
 
+CREATE TABLE IF NOT EXISTS scheschbot.genus
+(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    article CHAR(3) NOT NULL
+)
+DEFAULT CHARACTER SET = 'utf16'
+
+INSERT INTO scheschbot.genus
+(article)
+VALUES
+('der'),
+('die'),
+('das')
+
+
 CREATE TABLE IF NOT EXISTS scheschbot.aggronymes
 (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     word CHAR(64) NOT NULL,
     type_id INT NOT NULL,
-    FOREIGN KEY (type_id) REFERENCES word_types (id)
+    genus_id INT,
+    FOREIGN KEY (type_id) REFERENCES scheschbot.word_types (id),
+    FOREIGN KEY (genus_id) REFERENCES scheschbot.genus (id)
 )
 DEFAULT CHARACTER SET = 'utf16'
 
 INSERT INTO scheschbot.aggronymes
-(word, type_id)
+(word, type_id, genus_id)
 VALUES
-('abartig', 1),
-('assozial', 1),
-('ägglhaft', 1),
-('balancelos', 1),
-('belanglos', 1),
-('blöd', 1),
-('charismatisch', 1),
-('deppert', 1),
-('dumm', 1),
-('doof', 1),
-('egglhaft', 1),
-('ersetzbar', 1),
-('frauenfeindlich', 1),
-('hochnäsig', 1),
-('idiotisch', 1),
-('ignorant', 1),
-('joggend', 1),
-('kannibalistisch', 1),
-('lieblos', 1),
-('mickrig', 1),
-('Monokel', 2),
-('nebulös', 1),
-('oval', 1),
-('Obazda', 2),
-('Orange', 2),
-('Omen', 2),
-('öde', 1),
-('phasenverschoben', 1),
-('qualifiziert', 1),
-('respektlos', 1),
-('scheiß', 2),
-('Sauklaue', 2),
-('transatlantisch', 1),
-('Taliban', 2),
-('unterirdisch', 1),
-('überlebenswichtig', 1),
-('verflucht', 1),
-('weiß', 1),
-('weis', 1),
-('Yuppie verachtend', 1)
+('abartig', 1, NULL),
+('assozial', 1, NULL),
+('ägglhaft', 1, NULL),
+('balancelos', 1, NULL),
+('belanglos', 1, NULL),
+('blöd', 1, NULL),
+('charismatisch', 1, NULL),
+('deppert', 1, NULL),
+('dumm', 1, NULL),
+('doof', 1, NULL),
+('egglhaft', 1, NULL),
+('ersetzbar', 1, NULL),
+('frauenfeindlich', 1, NULL),
+('hochnäsig', 1, NULL),
+('idiotisch', 1, NULL),
+('ignorant', 1, NULL),
+('joggend', 1, NULL),
+('kannibalistisch', 1, NULL),
+('lieblos', 1, NULL),
+('mickrig', 1, NULL),
+('Monokel', 2, 3),
+('nebulös', 1, NULL),
+('oval', 1, NULL),
+('Obazda', 2, 1),
+('Orange', 2, 2),
+('Omen', 2, 3),
+('öde', 1, NULL),
+('phasenverschoben', 1, NULL),
+('qualifiziert', 1, NULL),
+('respektlos', 1, NULL),
+('Scheiß', 2, 1),
+('Sauklaue', 2, 2),
+('transatlantisch', 1, NULL),
+('Taliban', 2, 1),
+('unterirdisch', 1, NULL),
+('überlebenswichtig', 1, NULL),
+('verflucht', 1, NULL),
+('weiß', 1, NULL),
+('weis', 1, NULL),
+('Yuppie verachtend', 1, NULL)
