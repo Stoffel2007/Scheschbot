@@ -4,6 +4,8 @@ import db_connect
 import mood
 import time
 import random
+from Async.AsyncHandler import *
+from Async.Event import Event
 
 
 def main():
@@ -19,6 +21,9 @@ def main():
     # Bot-Objekt erstellen
     bot = telegram.Bot(constants.scheschkey)
 
+    # ID des letzten unverarbeiteten Updates holen
+    ahandler = AsyncHandler()
+
     last_update_id = get_last_update_id(bot)
     print("last_update_id =", last_update_id)
 
@@ -29,6 +34,11 @@ def main():
             for update in bot.getUpdates(offset=last_update_id):
                 # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben
                 print("update =", update)
+
+                if update.message:
+                    if update.message.text == "/kochnudeln":
+                        bot.send_message(update.message.chat_id, "Ok, wird gemacht....")
+                        ahandler.addevent(koch_nudeln(update.message.chat_id))
 
                 # like_percentage des Users zufällig neu setzen
                 user = get_user(update)
@@ -65,6 +75,12 @@ def get_user(update):
         return update.edited_message.from_user
     if update.inline_query:  # wenn eine Inline Query bearbeitet wurde
         return update.inline_query.from_user
+
+
+def koch_nudeln(eventid):
+    kochennudeln = Event(eventid, [[5, "backe Mandarinen"],
+                                   [5, "esse SToffel"]])
+    return kochennudeln
 
 
 if __name__ == '__main__':
