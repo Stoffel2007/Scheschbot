@@ -3,12 +3,11 @@ import db_connect
 
 # liefert die like_percentage eines Users
 def get_mood(telegram_id):
-    moods = db_connect.select('users', 'like_percentage', 'telegram_id = ' + telegram_id.__str__())
+    result = db_connect.select('users', 'like_percentage', 'telegram_id = ' + telegram_id.__str__())
 
-    result = moods.fetchone()
-
+    # zurückgeliefertes Array enthält einen Wert
     if result:
-        return result[0]  # fetchone() liefert ein Array (auch wenn nur ein Wert enthalten ist)
+        return result[0][0]  # select() liefert ein 2D-Array (auch wenn nur ein Wert enthalten ist)
     else:  # Abfrage lieferte kein Ergebnis
         return -1
 
@@ -20,15 +19,15 @@ def set_mood(user, like_percentage):
     user_result = db_connect.select('users', 'telegram_id', 'telegram_id = ' + user.id.__str__())
 
     # bei Fehlschlagen der Datenbankanfrage würde False zurückgeliefert werden
-    if user_result:
-        user_exists = user_result.fetchone()
-
-        if user_exists:  # like_percentage (und andere User-Attribute) aktualisieren
+    if user_result is not False:
+        # zurückgeliefertes Array enthält einen Wert
+        if user_result:  # like_percentage (und andere User-Attribute) aktualisieren
             db_connect.update('users',
                               ['like_percentage', 'first_name', 'last_name', 'username'],
                               [like_percentage, user.first_name, user.last_name, user.username],
                               'telegram_id=' + user.id.__str__())
 
+        # zurückgeliefertes Array enthält keinen Wert
         else:  # neuen User hinzufügen
             db_connect.insert('users',
                               ['telegram_id', 'like_percentage', 'first_name', 'last_name', 'username'],

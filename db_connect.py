@@ -28,11 +28,19 @@ def __query(query_string):
             print("Abfrage dauerte " + delta.__str__() + " Sekunden")
             connection.commit()
 
+            # Ergebnis in Array speichern
+            result = []
+            for line in cursor:
+                line_array = []
+                for value in line:
+                    line_array.append(value)
+                result.append(line_array)
+
             # Cursor und Connection schließen
             cursor.close()
             connection.close()
 
-            return cursor
+            return result
         except pymysql.err.OperationalError:
             print("Verbindung zur Datenbank fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
             # hochzählen
