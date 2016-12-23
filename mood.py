@@ -5,18 +5,22 @@ import db_connect
 def get_mood(telegram_id):
     result = db_connect.select('users', 'like_percentage', 'telegram_id = ' + telegram_id.__str__())
 
-    # zurückgeliefertes Array enthält einen Wert
-    if result:
-        return result[0][0]  # select() liefert ein 2D-Array (auch wenn nur ein Wert enthalten ist)
-    else:  # Abfrage lieferte kein Ergebnis
-        return -1
+    # bei Fehlschlagen der Datenbankanfrage würde False zurückgeliefert werden
+    if result is not False:
+        # zurückgeliefertes Array enthält einen Wert
+        if result:
+            return result[0][0]  # select() liefert ein 2D-Array (auch wenn nur ein Wert enthalten ist)
+        else:  # Abfrage lieferte kein Ergebnis
+            return -1
+    else:
+        return False
 
 
 # like_percentage eines bestimmten Users ändern
 # falls User nicht existiert, neuen Eintrag in Tabelle erzeugen
 # andere User-Attribute (first_name, last_name, username) werden ebenfalls gesetzt
 def set_mood(user, like_percentage):
-    user_result = db_connect.select('users', 'telegram_id', 'telegram_id = ' + user.id.__str__())
+    user_result = db_connect.select('users', where_expression='telegram_id = ' + user.id.__str__())
 
     # bei Fehlschlagen der Datenbankanfrage würde False zurückgeliefert werden
     if user_result is not False:
