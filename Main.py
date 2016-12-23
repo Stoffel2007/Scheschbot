@@ -19,18 +19,7 @@ def main():
     # Bot-Objekt erstellen
     bot = telegram.Bot(constants.scheschkey)
 
-    # ID des letzten unverarbeiteten Updates holen
-    last_update_id = None
-    connected = False
-    while not connected:
-        try:
-            last_update_id = bot.getUpdates()[-1].update_id
-            connected = True
-        except IndexError:  # falls keine Updates
-            connected = True
-        except telegram.error.NetworkError:
-            print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
-            time.sleep(10)
+    last_update_id = get_last_update_id(bot)
     print("last_update_id =", last_update_id)
 
     while True:
@@ -51,6 +40,18 @@ def main():
             if temp is not last_update_id:
                 print("last_update_id =", last_update_id)
             time.sleep(3)
+        except telegram.error.NetworkError:
+            print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
+            time.sleep(10)
+
+
+# ID des letzten unverarbeiteten Updates holen
+def get_last_update_id(bot):
+    while True:
+        try:
+            return bot.getUpdates()[-1].update_id
+        except IndexError:  # falls keine Updates
+            return None
         except telegram.error.NetworkError:
             print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
             time.sleep(10)
