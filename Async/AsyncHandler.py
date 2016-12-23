@@ -7,7 +7,6 @@ class AsyncHandler:
         """
         Constroctor
         """
-        # self.__events = []
         self.__update = []
 
     def getupdate(self):
@@ -19,16 +18,29 @@ class AsyncHandler:
         return re
 
     def updateavailable(self):
+        """
+        Checks if a update is available
+        :return:
+        """
         if len(self.__update) > 0:
             return True
         return False
 
     def addevent(self, event):
+        """
+        Adds event to an timer
+        :param event:
+        :return:
+        """
         t = threading.Timer(event.getcurrenttask().time, lambda x=event: self.__timout(x))
         t.start()
-        # self.__events.append(event)
 
     def __timout(self, event):
+        """
+        method that pushes the event output into __updates and restarts the timer if needed
+        :param event:
+        :return:
+        """
         self.__update += [[event.getmsgid(), event.getcurrenttask().content]]
         if event.checknexttask():
             t = threading.Timer(event.getnexttask().time, lambda x=event: self.__timout(x))

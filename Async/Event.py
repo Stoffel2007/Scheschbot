@@ -20,7 +20,7 @@ class Event:
                 except TypeError:
                     self.__tasklist += [task]
         else:
-            print(Event.__init__.__doc__, 1)
+            print(Event.__init__.__doc__)
 
     def checknexttask(self):
         """
