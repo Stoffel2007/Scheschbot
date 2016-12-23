@@ -33,7 +33,6 @@ def main():
                 # like_percentage des Users zufällig neu setzen
                 user = get_user(update)
                 like_percentage = random.randint(0, 100)
-                # like_percentage des Users in der Datenbank neu setzen
                 mood.set_mood(user, like_percentage)
 
                 last_update_id = update.update_id + 1
