@@ -17,6 +17,7 @@ def __query(query_string):
         cursor.execute('SET NAMES utf8;')
         cursor.execute('SET CHARACTER SET utf8;')
         cursor.execute('SET character_set_connection=utf8;')
+
         start = time.time()
         cursor.execute(query_string)
         end = time.time()
