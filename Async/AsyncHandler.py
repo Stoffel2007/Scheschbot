@@ -1,6 +1,5 @@
 from Async.Event import Event
 import threading
-import time
 
 
 class AsyncHandler:
@@ -35,16 +34,6 @@ class AsyncHandler:
             t = threading.Timer(event.getnexttask().time, lambda x=event: self.__timout(x))
             t.start()
 
-    # def getnextevent(self): # obsolet
-    #     if len(self.__events) < 1:
-    #         return None
-    #     nextevent = self.__events[0]
-    #     for event in self.__events:
-    #         if event.getcurrenttask().time < nextevent.getcurrenttask().time:
-    #             nextevent = event
-    #     return nextevent
-    #
-
 
 if __name__ == '__main__':
     event1 = Event(1, [[10, "MsG"],
@@ -53,18 +42,3 @@ if __name__ == '__main__':
                      [59, lambda: print("asdfasdf")]])
     handler = AsyncHandler()
     handler.addevent(event1)
-
-    while 1:
-        print(handler.getupdate())
-        time.sleep(1)
-
-
-
-    # handler.addevent(test)
-    # test = handler.getnextevent().showcurrenttask().content()
-    #
-    # eieruhr = threading.Timer(7, lambda: print("Fieff"))
-    # eieruhr.start()
-    # while 1:
-    #     print("fief")
-    #     time.sleep(5)

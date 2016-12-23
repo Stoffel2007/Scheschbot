@@ -1,5 +1,5 @@
-import Util.ListUtils as LiUt
 from Async.Task import Task as Task
+
 
 class Event:
     """Klasse für zeitgesteuerte Events"""
@@ -67,5 +67,3 @@ if __name__ == '__main__':
     if test.getnexttask() is not None:
         pass
     print(test.getcurrenttask().time)
-
-    #newtask.action()
