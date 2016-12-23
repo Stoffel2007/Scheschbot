@@ -65,10 +65,6 @@ def get_user(update):
         return update.edited_message.from_user
     if update.inline_query:  # wenn eine Inline Query bearbeitet wurde
         return update.inline_query.from_user
-    if update.channel_post:  # wenn eine Kanalnachricht gesendet wurde
-        return update.channel_post.from_user
-    if update.edited_channel_post:  # wenn eine Kanalnachricht bearbeitet wurde
-        return update.edited_channel_post.from_user
 
 
 if __name__ == '__main__':
