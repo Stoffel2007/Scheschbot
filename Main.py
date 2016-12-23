@@ -46,6 +46,9 @@ def main():
                 mood.set_mood(user, like_percentage)
 
                 last_update_id = update.update_id + 1
+            if ahandler.updateavailable():
+                for eventupdate in ahandler.getupdate():
+                    bot.send_message(eventupdate[0], eventupdate[1])
             if temp is not last_update_id:
                 print("last_update_id =", last_update_id)
             time.sleep(3)
