@@ -8,7 +8,7 @@ def get_mood(telegram_id):
     # bei Fehlschlagen der Datenbankanfrage würde False zurückgeliefert werden
     if result is not False:
         # zurückgeliefertes Array enthält einen Wert
-        if result:
+        if len(result) == 0:
             return result[0][0]  # select() liefert ein 2D-Array (auch wenn nur ein Wert enthalten ist)
         else:  # Abfrage lieferte kein Ergebnis
             return -1
@@ -25,7 +25,7 @@ def set_mood(user, like_percentage):
     # bei Fehlschlagen der Datenbankanfrage würde False zurückgeliefert werden
     if user_result is not False:
         # zurückgeliefertes Array enthält einen Wert
-        if user_result:  # like_percentage (und andere User-Attribute) aktualisieren
+        if len(user_result) == 0:  # like_percentage (und andere User-Attribute) aktualisieren
             db_connect.update('users',
                               ['like_percentage', 'first_name', 'last_name', 'username'],
                               [like_percentage, user.first_name, user.last_name, user.username],
