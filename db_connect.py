@@ -51,7 +51,7 @@ def __query(query_string):
 
 
 # SELECT-Abfrage auf der Datenbank
-def select(table, column, where_expression):
+def select(table, column="*", where_expression="1 = 1"):
     query_string = 'SELECT ' + column + ' ' +\
                    'FROM ' + table + ' ' +\
                    'WHERE ' + where_expression

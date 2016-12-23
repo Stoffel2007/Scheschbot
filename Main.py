@@ -8,7 +8,7 @@ import random
 
 def main():
     # Beispiel-Query
-    result = db_connect.select('users', '*', '1 = 1')
+    result = db_connect.select('users')
     if result:
         for line in result:
             for value in line:
