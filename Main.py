@@ -4,7 +4,9 @@ import telegram
 import time
 import constants
 import db_connect
-
+from Async.AsyncHandler import *
+from Async.Event import Event
+from Async.Task import Task
 
 def main():
     # Beispiel-Query
@@ -18,6 +20,7 @@ def main():
     bot = telegram.Bot(constants.scheschkey)
 
     # ID des letzten unverarbeiteten Updates holen
+    handler = AsyncHandler()
     try:
         last_update_id = bot.getUpdates()[-1].update_id
     except IndexError:  # falls keine Updates
@@ -34,6 +37,9 @@ def main():
                 if update.message.text == "/kochnudeln":
                     bot.send_message(update.message.chat_id, "Ok, wird gemacht....")
                     koch_nudeln()
+                if handler.updateavailable():
+                    for eventupdate in handler.getupdate():
+                        bot.send_message(eventupdate[0], eventupdate[1])
             last_update_id = update.update_id + 1
 
         if temp is not last_update_id:
@@ -43,8 +49,6 @@ def main():
 
 
 def koch_nudeln():
-    eieruhr = threading.Timer(10, set_event)
-    eieruhr.start()
 
 
 def set_event():
