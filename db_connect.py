@@ -3,51 +3,43 @@ import time
 
 
 def __query(query_string):
-    # maximal 10 mal versuchen, Verbindung zur Datenbank herstellen
-    # ansonsten False zurückliefern
-    try_counter = 0
-    while try_counter < 10:
-        try:
-            # Connection herstellen
-            connection = pymysql.connect(host='localhost',
-                                         port=3306,
-                                         user='root',
-                                         passwd='',
-                                         db='scheschbot')
+    try:
+        # Connection herstellen
+        connection = pymysql.connect(host='localhost',
+                                     port=3306,
+                                     user='root',
+                                     passwd='',
+                                     db='scheschbot')
 
-            # Verbindungsart Cursor
-            cursor = connection.cursor()
-            connection.set_charset('utf8')
-            cursor.execute('SET NAMES utf8;')
-            cursor.execute('SET CHARACTER SET utf8;')
-            cursor.execute('SET character_set_connection=utf8;')
-            start = time.time()
-            cursor.execute(query_string)
-            end = time.time()
-            delta = end - start
-            print("Abfrage dauerte " + delta.__str__() + " Sekunden")
-            connection.commit()
+        # Verbindungsart Cursor
+        cursor = connection.cursor()
+        connection.set_charset('utf8')
+        cursor.execute('SET NAMES utf8;')
+        cursor.execute('SET CHARACTER SET utf8;')
+        cursor.execute('SET character_set_connection=utf8;')
+        start = time.time()
+        cursor.execute(query_string)
+        end = time.time()
+        delta = end - start
+        print("Abfrage dauerte " + delta.__str__() + " Sekunden")
+        connection.commit()
 
-            # Ergebnis in Array speichern
-            result = []
-            for line in cursor:
-                line_array = []
-                for value in line:
-                    line_array.append(value)
-                result.append(line_array)
+        # Ergebnis in Array speichern
+        result = []
+        for line in cursor:
+            line_array = []
+            for value in line:
+                line_array.append(value)
+            result.append(line_array)
 
-            # Cursor und Connection schließen
-            cursor.close()
-            connection.close()
+        # Cursor und Connection schließen
+        cursor.close()
+        connection.close()
 
-            return result
-        except pymysql.err.OperationalError:
-            print("Verbindung zur Datenbank fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
-            # hochzählen
-            try_counter += 1
-            time.sleep(10)
-    print("10 Fehlversuche beim Verbinden zur Datenbank => return False")
-    return False
+        return result
+    except pymysql.err.OperationalError:
+        print("Verbindung zur Datenbank fehlgeschlagen")
+        return False
 
 
 # SELECT-Abfrage auf der Datenbank
