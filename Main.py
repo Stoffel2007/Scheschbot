@@ -30,7 +30,7 @@ def main():
         except telegram.error.NetworkError:
             print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
             time.sleep(10)
-    print("last_update_id = ", last_update_id)
+    print("last_update_id =", last_update_id)
 
     while True:
         temp = last_update_id
@@ -48,7 +48,7 @@ def main():
                 # like_percentage des Users neu setzen in der Datenbank
                 last_update_id = update.update_id + 1
             if temp is not last_update_id:
-                print("last_update_id", last_update_id)
+                print("last_update_id =", last_update_id)
             time.sleep(3)
         except telegram.error.NetworkError:
             print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
