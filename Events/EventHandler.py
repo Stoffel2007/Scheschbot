@@ -41,7 +41,7 @@ class EventHandler:
         :param event:
         :return:
         """
-        self.__update += [[event.get_chat_id(), event.get_message_id(), event.get_current_task().content]]
+        self.__update += [[event.get_message(), event.get_current_task().content]]
         if event.check_next_task():
             t = threading.Timer(event.get_next_task().time, lambda x=event: self.__timout(x))
             t.start()

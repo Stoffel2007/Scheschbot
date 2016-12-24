@@ -33,7 +33,7 @@ def main():
         # alle Updates seit letztem Update holen
         try:
             for update in bot.getUpdates(offset=last_update_id):
-                # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben
+                # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben (core.telegram.org/bots/api#update)
                 print("update =", update)
 
                 # Inline-Query abfragen
@@ -43,7 +43,8 @@ def main():
                 # Nachricht abfragen
                 if update.message and update.message.text == "/kochnudeln":
                         bot.send_message(update.message.chat_id, "Ok, wird gemacht....")
-                        event_handler.add_event(koch_nudeln(update.message.chat_id, update.message.message_id))
+                        event = koch_nudeln(update.message)
+                        event_handler.add_event(event)
 
                 # like_percentage des Users zufällig neu setzen
                 user = get_user(update)
@@ -55,9 +56,10 @@ def main():
 
             # Events abfragem
             # if event_handler.update_available():
-            for eventupdate in event_handler.get_update():
-                print("eventupdate =", eventupdate)
-                bot.send_message(eventupdate[0], eventupdate[2], reply_to_message_id=eventupdate[1])
+            for event_update in event_handler.get_update():
+                message = event_update[0]
+                text = event_update[1]
+                bot.send_message(message.chat_id, text)
 
             if temp is not last_update_id:
                 print("last_update_id =", last_update_id)
@@ -98,9 +100,11 @@ def answer_inline(inline_query):
     return [telegram.InlineQueryResultArticle('test_inline_query', "Mederer", input_text)]
 
 
-def koch_nudeln(chat_id, message_id):
-    kochnudeln = Event(chat_id, message_id, [[5, "backe Mandarinen...."],
-                                             [5, "esse Stoffel...."]])
+def koch_nudeln(message):
+    name = message.from_user.first_name
+    kochnudeln = Event(message, [[5, "koche Wass0 für " + name + "...."],
+                                 [5, "koche Nudeln für " + name + "...."],
+                                 [5, "Nudeln für " + name + " sind fertig! :3"]])
     return kochnudeln
 
 
