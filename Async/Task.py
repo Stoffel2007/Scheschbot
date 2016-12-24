@@ -1,4 +1,3 @@
-
 class Task:
     def __init__(self, time, content):
         self.time = time

@@ -4,7 +4,7 @@ import db_connect
 import mood
 import time
 import random
-from Async.AsyncHandler import *
+from Async.EventHandler import *
 from Async.Event import Event
 
 
@@ -22,7 +22,7 @@ def main():
     bot = telegram.Bot(constants.scheschkey)
 
     # ID des letzten unverarbeiteten Updates holen
-    ahandler = AsyncHandler()
+    ahandler = EventHandler()
 
     last_update_id = get_last_update_id(bot)
     print("last_update_id =", last_update_id)
@@ -81,9 +81,9 @@ def get_user(update):
 
 
 def koch_nudeln(eventid):
-    kochennudeln = Event(eventid, [[5, "backe Mandarinen"],
+    kochnudeln = Event(eventid, [[5, "backe Mandarinen"],
                                    [5, "esse SToffel"]])
-    return kochennudeln
+    return kochnudeln
 
 
 if __name__ == '__main__':

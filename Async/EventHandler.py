@@ -2,7 +2,7 @@ from Async.Event import Event
 import threading
 
 
-class AsyncHandler:
+class EventHandler:
     def __init__(self):
         """
         Constroctor
@@ -52,5 +52,5 @@ if __name__ == '__main__':
                        [10, 2]])
     test = Event(2, [[60, lambda: print("0")],
                      [59, lambda: print("asdfasdf")]])
-    handler = AsyncHandler()
+    handler = EventHandler()
     handler.addevent(event1)
