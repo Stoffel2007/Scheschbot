@@ -117,7 +117,6 @@ def koch_nudeln(message):
 
 def send_reaction(bot, action, params_dict):
         if action == 'text':
-            print(params_dict.get('message_id', None))
             bot.send_message(chat_id=params_dict['chat_id'],
                              text=params_dict['text'],
                              reply_to_message_id=params_dict.get('message_id', None))
