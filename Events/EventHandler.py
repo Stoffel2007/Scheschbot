@@ -9,7 +9,7 @@ class EventHandler:
         """
         self.__update = []
 
-    def getupdate(self):
+    def get_update(self):
         """
         :return: returns the Handleroutput, delets the update
         """
@@ -17,7 +17,7 @@ class EventHandler:
         self.__update = []
         return re
 
-    def updateavailable(self):
+    def update_available(self):
         """
         Checks if a update is available
         :return:
@@ -26,13 +26,13 @@ class EventHandler:
             return True
         return False
 
-    def addevent(self, event):
+    def add_event(self, event):
         """
         Adds event to an timer
         :param event:
         :return:
         """
-        t = threading.Timer(event.getcurrenttask().time, lambda x=event: self.__timout(x))
+        t = threading.Timer(event.get_current_task().time, lambda x=event: self.__timout(x))
         t.start()
 
     def __timout(self, event):
@@ -41,9 +41,9 @@ class EventHandler:
         :param event:
         :return:
         """
-        self.__update += [[event.getmsgid(), event.getcurrenttask().content]]
-        if event.checknexttask():
-            t = threading.Timer(event.getnexttask().time, lambda x=event: self.__timout(x))
+        self.__update += [[event.getmsgid(), event.get_current_task().content]]
+        if event.check_next_task():
+            t = threading.Timer(event.get_next_task().time, lambda x=event: self.__timout(x))
             t.start()
 
 
@@ -53,4 +53,4 @@ if __name__ == '__main__':
     test = Event(2, [[60, lambda: print("0")],
                      [59, lambda: print("asdfasdf")]])
     handler = EventHandler()
-    handler.addevent(event1)
+    handler.add_event(event1)

@@ -22,7 +22,7 @@ def main():
     bot = telegram.Bot(constants.scheschkey)
 
     # ID des letzten unverarbeiteten Updates holen
-    ahandler = EventHandler()
+    event_handler = EventHandler()
 
     last_update_id = get_last_update_id(bot)
     print("last_update_id =", last_update_id)
@@ -43,7 +43,7 @@ def main():
                 if update.message:
                     if update.message.text == "/kochnudeln":
                         bot.send_message(update.message.chat_id, "Ok, wird gemacht....")
-                        ahandler.addevent(koch_nudeln(update.message.chat_id))
+                        event_handler.add_event(koch_nudeln(update.message.chat_id))
 
                 # like_percentage des Users zufällig neu setzen
                 user = get_user(update)
@@ -53,8 +53,8 @@ def main():
                 last_update_id = update.update_id + 1
 
             # Events abfragem
-            if ahandler.updateavailable():
-                for eventupdate in ahandler.getupdate():
+            if event_handler.update_available():
+                for eventupdate in event_handler.get_update():
                     bot.send_message(eventupdate[0], eventupdate[1])
 
             if temp is not last_update_id:

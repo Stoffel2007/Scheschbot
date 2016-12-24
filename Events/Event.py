@@ -3,67 +3,67 @@ from Events.Task import Task as Task
 
 class Event:
     """Klasse für zeitgesteuerte Events"""
-    def __init__(self, msgid, tasks=None):
+    def __init__(self, message_id, tasks=None):
         """
         Constructor
-        :param msgid:
+        :param message_id:
         :param tasks: Entweder [Task, Task, Task, ...] oder [[t in s, action], ...]
         """
-        self.__taskcounter = 0
-        self.__tasklist = []
-        self.__msgid = msgid
+        self.__task_counter = 0
+        self.__task_list = []
+        self.__message_id = message_id
         if type(tasks) == list:
             for task in tasks:
                 try:
-                    newtask = Task(task[0], task[1])
-                    self.__tasklist += [newtask]
+                    new_task = Task(task[0], task[1])
+                    self.__task_list += [new_task]
                 except TypeError:
-                    self.__tasklist += [task]
+                    self.__task_list += [task]
         else:
             print(Event.__init__.__doc__)
 
-    def checknexttask(self):
+    def check_next_task(self):
         """
         Checks for next task
         :return: false if the current task is the last one
         """
-        if self.__taskcounter + 1 < len(self.__tasklist):
+        if self.__task_counter + 1 < len(self.__task_list):
             return True
         return False
 
-    def getnexttask(self):
+    def get_next_task(self):
         """
 
         :return: Current Task or None
         """
-        self.__taskcounter += 1
-        if self.__taskcounter < len(self.__tasklist):
-            task = self.__tasklist[self.__taskcounter]
+        self.__task_counter += 1
+        if self.__task_counter < len(self.__task_list):
+            task = self.__task_list[self.__task_counter]
             return task
         return None
 
-    def getcurrenttask(self):
+    def get_current_task(self):
         """
         This method returns the current task
         :return: Current Task or None
         """
-        if self.__taskcounter < len(self.__tasklist):
-            task = self.__tasklist[self.__taskcounter]
+        if self.__task_counter < len(self.__task_list):
+            task = self.__task_list[self.__task_counter]
             return task
         return None
 
     def getmsgid(self):
-        return self.__msgid
+        return self.__message_id
 
 
 if __name__ == '__main__':
-    def testmethod():
+    def test_method():
         print("schesch")
 
     test = Event([[60, lambda: print("0")],
                   [59, lambda: print("asdfasdf")]])
-    print(test.getcurrenttask().time)
+    print(test.get_current_task().time)
 
-    if test.getnexttask() is not None:
+    if test.get_next_task() is not None:
         pass
-    print(test.getcurrenttask().time)
+    print(test.get_current_task().time)
