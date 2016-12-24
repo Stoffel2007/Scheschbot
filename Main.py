@@ -64,11 +64,16 @@ def main():
             print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
             time.sleep(10)
 
-
-def answer_inline(inline_query):
-    text = "Oh, hallo, Herr " + inline_query.query + "!"
-    input_text = telegram.InputTextMessageContent(text)
-    return [telegram.InlineQueryResultArticle('test_inline_query', "Mederer", input_text)]
+# ID des letzten unverarbeiteten Updates holen
+def get_last_update_id(bot):
+    while True:
+        try:
+            return bot.getUpdates()[-1].update_id
+        except IndexError:  # falls keine Updates
+            return None
+        except telegram.error.NetworkError:
+            print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
+            time.sleep(10)
 
 
 # User-Objekt aus dem Update-Objekt holen
@@ -80,6 +85,12 @@ def get_user(update):
         return update.edited_message.from_user
     if update.inline_query:  # wenn eine Inline Query bearbeitet wurde
         return update.inline_query.from_user
+
+
+def answer_inline(inline_query):
+    text = "Oh, hallo, Herr " + inline_query.query + "!"
+    input_text = telegram.InputTextMessageContent(text)
+    return [telegram.InlineQueryResultArticle('test_inline_query', "Mederer", input_text)]
 
 
 def koch_nudeln(eventid):
