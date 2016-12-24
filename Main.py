@@ -4,8 +4,8 @@ import db_connect
 import mood
 import time
 import random
-from Async.EventHandler import *
-from Async.Event import Event
+from Events.EventHandler import *
+from Events.Event import Event
 
 
 def main():

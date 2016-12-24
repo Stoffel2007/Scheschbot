@@ -1,4 +1,4 @@
-from Async.Task import Task as Task
+from Events.Task import Task as Task
 
 
 class Event:

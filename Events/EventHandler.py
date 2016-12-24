@@ -1,4 +1,4 @@
-from Async.Event import Event
+from Events.Event import Event
 import threading
 
 
