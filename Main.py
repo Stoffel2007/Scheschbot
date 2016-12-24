@@ -35,6 +35,11 @@ def main():
                 # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben
                 print("update =", update)
 
+                # Inline-Query abfragen
+                if update.inline_query and update.inline_query.query:
+                    bot.answer_inline_query(update.inline_query.id, answer_inline(update.inline_query))
+
+                # Nachricht abfragen
                 if update.message:
                     if update.message.text == "/kochnudeln":
                         bot.send_message(update.message.chat_id, "Ok, wird gemacht....")
@@ -46,9 +51,12 @@ def main():
                 mood.set_mood(user, like_percentage)
 
                 last_update_id = update.update_id + 1
+
+            # Events abfragem
             if ahandler.updateavailable():
                 for eventupdate in ahandler.getupdate():
                     bot.send_message(eventupdate[0], eventupdate[1])
+
             if temp is not last_update_id:
                 print("last_update_id =", last_update_id)
             time.sleep(3)
@@ -57,16 +65,10 @@ def main():
             time.sleep(10)
 
 
-# ID des letzten unverarbeiteten Updates holen
-def get_last_update_id(bot):
-    while True:
-        try:
-            return bot.getUpdates()[-1].update_id
-        except IndexError:  # falls keine Updates
-            return None
-        except telegram.error.NetworkError:
-            print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
-            time.sleep(10)
+def answer_inline(inline_query):
+    text = "Oh, hallo, Herr " + inline_query.query + "!"
+    input_text = telegram.InputTextMessageContent(text)
+    return [telegram.InlineQueryResultArticle('test_inline_query', "Mederer", input_text)]
 
 
 # User-Objekt aus dem Update-Objekt holen
