@@ -3,6 +3,7 @@ from itertools import chain, count
 
 
 def maxdepth(seq):  # http://stackoverflow.com/a/6040217 Do not use this method with strings!
+    level = 0
     seq = iter(seq)
     try:
         for level in count():
