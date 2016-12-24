@@ -21,9 +21,10 @@ def main():
     # Bot-Objekt erstellen
     bot = telegram.Bot(constants.scheschkey)
 
-    # ID des letzten unverarbeiteten Updates holen
+    # EventHandler für zeitbasierte Events
     event_handler = EventHandler()
 
+    # ID des letzten unverarbeiteten Updates holen
     last_update_id = get_last_update_id(bot)
     print("last_update_id =", last_update_id)
 
@@ -50,6 +51,7 @@ def main():
                 like_percentage = random.randint(0, 100)
                 mood.set_mood(user, like_percentage)
 
+                # Update-ID hochzählen
                 last_update_id = update.update_id + 1
 
             # Events abfragem
