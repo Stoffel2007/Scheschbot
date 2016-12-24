@@ -41,10 +41,9 @@ def main():
                     bot.answer_inline_query(update.inline_query.id, answer_inline(update.inline_query))
 
                 # Nachricht abfragen
-                if update.message:
-                    if update.message.text == "/kochnudeln":
+                if update.message and update.message.text == "/kochnudeln":
                         bot.send_message(update.message.chat_id, "Ok, wird gemacht....")
-                        event_handler.add_event(koch_nudeln(update.message.chat_id))
+                        event_handler.add_event(koch_nudeln(update.message.chat_id, update.message.message_id))
 
                 # like_percentage des Users zufällig neu setzen
                 user = get_user(update)
@@ -55,14 +54,16 @@ def main():
                 last_update_id = update.update_id + 1
 
             # Events abfragem
-            if event_handler.update_available():
-                for eventupdate in event_handler.get_update():
-                    bot.send_message(eventupdate[0], eventupdate[1])
+            # if event_handler.update_available():
+            for eventupdate in event_handler.get_update():
+                print("eventupdate =", eventupdate)
+                bot.send_message(eventupdate[0], eventupdate[2], reply_to_message_id=eventupdate[1])
 
             if temp is not last_update_id:
                 print("last_update_id =", last_update_id)
             time.sleep(3)
-        except telegram.error.NetworkError:
+        except telegram.error.NetworkError as error:
+            print(error)
             print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
             time.sleep(10)
 
@@ -74,7 +75,8 @@ def get_last_update_id(bot):
             return bot.getUpdates()[-1].update_id
         except IndexError:  # falls keine Updates
             return None
-        except telegram.error.NetworkError:
+        except telegram.error.NetworkError as error:
+            print(error)
             print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
             time.sleep(10)
 
@@ -96,9 +98,9 @@ def answer_inline(inline_query):
     return [telegram.InlineQueryResultArticle('test_inline_query', "Mederer", input_text)]
 
 
-def koch_nudeln(chat_id):
-    kochnudeln = Event(chat_id, [[5, "backe Mandarinen"],
-                                 [5, "esse SToffel"]])
+def koch_nudeln(chat_id, message_id):
+    kochnudeln = Event(chat_id, message_id, [[5, "backe Mandarinen...."],
+                                             [5, "esse Stoffel...."]])
     return kochnudeln
 
 
