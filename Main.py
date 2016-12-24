@@ -59,7 +59,7 @@ def main():
             for event_update in event_handler.get_update():
                 message = event_update[0]
                 text = event_update[1]
-                bot.send_message(message.chat_id, text)
+                bot.send_message(message.chat_id, text, reply_to_message_id=message.message_id)
 
             if temp is not last_update_id:
                 print("last_update_id =", last_update_id)
