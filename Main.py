@@ -63,7 +63,7 @@ def main():
 
             if temp is not last_update_id:
                 print("last_update_id =", last_update_id)
-            time.sleep(3)
+            time.sleep(1)
         except telegram.error.NetworkError as error:
             print(error)
             print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
