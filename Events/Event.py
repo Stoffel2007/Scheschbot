@@ -3,15 +3,15 @@ from Events.Task import Task as Task
 
 class Event:
     """Klasse für zeitgesteuerte Events"""
-    def __init__(self, message_id, tasks=None):
+    def __init__(self, chat_id, tasks=None):
         """
         Constructor
-        :param message_id:
+        :param chat_id: ID des Chats, aus dem die Nachricht kam
         :param tasks: Entweder [Task, Task, Task, ...] oder [[t in s, action], ...]
         """
         self.__task_counter = 0
         self.__task_list = []
-        self.__message_id = message_id
+        self.__message_id = chat_id
         if type(tasks) == list:
             for task in tasks:
                 try:

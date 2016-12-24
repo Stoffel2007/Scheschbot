@@ -96,8 +96,8 @@ def answer_inline(inline_query):
     return [telegram.InlineQueryResultArticle('test_inline_query', "Mederer", input_text)]
 
 
-def koch_nudeln(eventid):
-    kochnudeln = Event(eventid, [[5, "backe Mandarinen"],
+def koch_nudeln(chat_id):
+    kochnudeln = Event(chat_id, [[5, "backe Mandarinen"],
                                  [5, "esse SToffel"]])
     return kochnudeln
 
