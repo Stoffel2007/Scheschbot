@@ -64,6 +64,7 @@ def main():
             print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
             time.sleep(10)
 
+
 # ID des letzten unverarbeiteten Updates holen
 def get_last_update_id(bot):
     while True:
@@ -95,7 +96,7 @@ def answer_inline(inline_query):
 
 def koch_nudeln(eventid):
     kochnudeln = Event(eventid, [[5, "backe Mandarinen"],
-                                   [5, "esse SToffel"]])
+                                 [5, "esse SToffel"]])
     return kochnudeln
 
 
