@@ -53,6 +53,33 @@ def insert_words(params):
         return False
 
 
+# Votes in der Datenbank hochzählen
+# nur Wörter mit 2 Votes werden benutzt
+def increment_vote(word):
+    result = db_connect.select('aggronymes',
+                               'votes',
+                               'word = "' + word + '"')
+
+    if result is not False:
+        if len(result) > 0:
+            votes = result[0][0]
+            print("votes =", votes)
+
+            if votes < 3:
+                # hochzählen
+                votes += 1
+
+                result = db_connect.update('aggronymes',
+                                           ['votes'],
+                                           [votes], 'word = "' + word + '"')
+                if result is not False:
+                    return True
+                return False
+            return False
+        return False
+    return False
+
+
 def __get_words(command_text):
     arr_noun = []
     arr_adj_temp = []
