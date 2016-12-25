@@ -63,7 +63,6 @@ def increment_vote(word):
     if result is not False:
         if len(result) > 0:
             votes = result[0][0]
-            print("votes =", votes)
 
             if votes < 3:
                 # hochzählen
