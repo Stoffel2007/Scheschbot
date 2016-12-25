@@ -74,7 +74,11 @@ def update(table, column_array, value_array, where_expression):
                    'SET ' + set_string + ' ' +\
                    'WHERE ' + where_expression
 
-    __query(query_string)
+    result = __query(query_string)
+
+    if result is not False:
+        return True
+    return False
 
 
 # INSERT-Abfrage auf der Datenbank
@@ -107,7 +111,11 @@ def insert(table, column_array, value_array):
                    '(' + column_string + ') ' +\
                    'VALUES (' + value_string + ')'
 
-    __query(query_string)
+    result = __query(query_string)
+
+    if result is not False:
+        return True
+    return False
 
 
 # Wert für die SQL-Query vorbereiten
