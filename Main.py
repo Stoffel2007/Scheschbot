@@ -1,4 +1,5 @@
 import telegram
+import aggronyme
 import constants
 import db_connect
 import mood
@@ -53,7 +54,10 @@ def main():
                 # Nachricht abfragen
                 if update.message and update.message.text.startswith("/aggro "):
                     params = update.message.text.split(' ', 1)[1]
-                    bot.send_message(update.message.chat_id, params)
+                    message = aggronyme.aggro(params)
+                    params_dict = {'chat_id': update.message.chat_id,
+                                   'text': message}
+                    send_reaction(bot, 'text', params_dict)
 
                 # like_percentage des Users zufällig neu setzen
                 user = get_user(update)
