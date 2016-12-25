@@ -36,15 +36,21 @@ def insert_words(params):
 
     if genus_id:  # Nomen einfügen
         noun = params.split(' ', 1)[1]
-        result = db_connect.insert('aggronymes',
-                                   ['word', 'type_id', 'genus_id'],
-                                   [noun, 2, genus_id])
-        return result
+        result = db_connect.select('aggronymes', where_expression="word = '" + noun + "'")
+        if len(result) == 0:  # Wort noch nicht vorhanden
+            result = db_connect.insert('aggronymes',
+                                       ['word', 'type_id', 'genus_id'],
+                                       [noun, 2, genus_id])
+            return result
+        return False
     else:  # Adjektiv einfügen
-        result = db_connect.insert('aggronymes',
-                                   ['word', 'type_id'],
-                                   [params, 1])
-        return result
+        result = db_connect.select('aggronymes', where_expression="word = '" + params + "'")
+        if len(result) == 0:  # Wort noch nicht vorhanden
+            result = db_connect.insert('aggronymes',
+                                       ['word', 'type_id'],
+                                       [params, 1])
+            return result
+        return False
 
 
 def __get_words(command_text):
