@@ -94,8 +94,6 @@ def __get_words(command_text):
 
     # prüft ob leere Elemente vorhanden sind
     # gibt permit, sowie error_message
-    err_mess_adj = ""
-    err_mess_noun = ""
     err_mess = []
     for dim in arr_adj:
         if not dim:
