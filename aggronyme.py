@@ -74,7 +74,7 @@ def __get_words(command_text):
                 adj_puffer = db_connect.select("aggronymes",
                                                "word",
                                                "type_id = 1 AND word LIKE '" + item_letters + "%'")
-                if not adj_puffer:
+                if adj_puffer is False:
                     permit = False
                     err_mess = 'Verbindung zur Datenbank fehlgeschlagen'
                     break
