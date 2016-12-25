@@ -44,7 +44,7 @@ def main():
                     send_reaction(bot, 'inline', params_dict)
 
                 # Nachricht abfragen
-                if update.message and update.message.text == "/kochnudeln":
+                if update.message and update.message.text.startswith("/kochnudeln"):
                     params_dict = {'chat_id': update.message.chat_id,
                                    'text': 'Ok, wird gemacht....'}
                     send_reaction(bot, 'text', params_dict)
