@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS scheschbot.aggronymes
     word CHAR(64) NOT NULL,
     type_id INT NOT NULL,
     genus_id INT,
+    votes INT NOT NULL DEFAULT 0,
     FOREIGN KEY (type_id) REFERENCES scheschbot.word_types (id),
     FOREIGN KEY (genus_id) REFERENCES scheschbot.genus (id)
 )

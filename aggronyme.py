@@ -73,7 +73,7 @@ def __get_words(command_text):
                 # x-dimensionales Array, zu jedem Buchstabe eine Dimension
                 adj_puffer = db_connect.select("aggronymes",
                                                "word",
-                                               "type_id = 1 AND word LIKE '" + item_letters + "%'")
+                                               "type_id = 1 AND word LIKE '" + item_letters + "%' AND votes >= 2")
                 if adj_puffer is False:
                     permit = False
                     err_mess = 'Verbindung zur Datenbank fehlgeschlagen'
@@ -86,7 +86,7 @@ def __get_words(command_text):
                 # hole Nomen aus DB mit dazu gehörigem Artikel/Genus
                 noun_puffer = db_connect.select("aggronymes AS agg JOIN genus ON agg.genus_id = genus.id",
                                                 "agg.word, genus.article",
-                                                "word LIKE '" + item_letters + "%'")
+                                                "word LIKE '" + item_letters + "%' AND votes >= 2")
                 # Anzahl Adjektive pro Wort
                 count_letters_adj.append(index)
                 # Kopiere Puffer, wenn nicht, geht er kaputt beim iterieren --> nicht weiter verwendbar
