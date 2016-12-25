@@ -59,6 +59,19 @@ def main():
                                    'text': message}
                     send_reaction(bot, 'text', params_dict)
 
+                # Nachricht abfragen
+                if update.message and update.message.text.startswith("/feed "):
+                    params = update.message.text.split(' ', 1)[1]
+
+                    params_dict = {'chat_id': update.message.chat_id}
+
+                    if aggronyme.insert_words(params) is True:
+                        params_dict['text'] = 'Wort erfolgreich zur Datenbank hinzugefügt'
+                    else:
+                        params_dict['text'] = 'Wort konnte nicht zur Datenbank hinzugefügt werden'
+
+                    send_reaction(bot, 'text', params_dict)
+
                 # like_percentage des Users zufällig neu setzen
                 user = get_user(update)
                 like_percentage = random.randint(0, 100)
