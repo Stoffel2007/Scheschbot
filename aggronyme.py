@@ -22,21 +22,26 @@ def aggro(command_text):
 # für Nomen /feedme {Artikel} {Nomen}
 # diese Funktion soll erst aufgerufen werden, wenn ein Admin das Futter bestätigt hat
 # Der Bot sendet eine persönliche Nachricht an Admin, mit einem Button kann er das Futter bestätigen oder ablehnen
-def insert_words(command_text):
-    if len(command_text.split()) == 1:
-        db_connect.insert('aggronymes', ['word', 'type_id'], [command_text, '1'])
-    else:
-        futter_nomen = command_text.split()
-        if futter_nomen[0] == 'der':
-            futter_nomen[0] = 1
-        elif futter_nomen[0] == 'die':
-            futter_nomen[0] = 2
-        elif futter_nomen[0] == 'das':
-            futter_nomen[0] = 3
-        else:  # fehlerhafte Eingabe (kein der/die/das am Anfang)
-            return False
-        db_connect.insert('aggronymes', ['word', 'type_id', 'genus_id'], [futter_nomen[1], '2', futter_nomen[0]])
-    return True
+def insert_words(params):
+    genus_id = None
+    if params.startswith('der '):
+        genus_id = 1
+    elif params.startswith('die '):
+        genus_id = 2
+    elif params.startswith('das '):
+        genus_id = 3
+
+    if genus_id:  # Nomen einfügen
+        noun = params.split(' ', 1)[1]
+        result = db_connect.insert('aggronymes',
+                                   ['word', 'type_id', 'genus_id'],
+                                   [noun, 2, genus_id])
+        return result
+    else:  # Adjektiv einfügen
+        result = db_connect.insert('aggronymes',
+                                   ['word', 'type_id'],
+                                   [params, 1])
+        return result
 
 
 def __get_words(command_text):
