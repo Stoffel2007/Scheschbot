@@ -27,12 +27,14 @@ def insert_words(command_text):
         db_connect.insert('aggronymes', ['word', 'type_id'], [command_text, '1'])
     else:
         futter_nomen = command_text.split()
-        if 'der' in futter_nomen:
+        if futter_nomen[0] == 'der':
             futter_nomen[0] = 1
-        if 'die' in futter_nomen:
+        elif futter_nomen[0] == 'die':
             futter_nomen[0] = 2
-        if 'das' in futter_nomen:
+        elif futter_nomen[0] == 'das':
             futter_nomen[0] = 3
+        else:  # fehlerhafte Eingabe (kein der/die/das am Anfang)
+            return False
         db_connect.insert('aggronymes', ['word', 'type_id', 'genus_id'], [futter_nomen[1], '2', futter_nomen[0]])
     return True
 
