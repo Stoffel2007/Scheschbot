@@ -79,10 +79,9 @@ def __get_words(command_text):
             # letzter Buchstabe --> hole Nomen
             else:
                 # hole Nomen aus DB mit dazu gehörigem Artikel/Genus
-                noun_puffer = db_connect.__query("SELECT agg.word, genus.article " +
-                                                 "FROM aggronymes AS agg " +
-                                                 "JOIN genus ON agg.genus_id = genus.id " +
-                                                 "WHERE word LIKE '" + item_letters + "%'")
+                noun_puffer = db_connect.select("aggronymes AS agg JOIN genus ON agg.genus_id = genus.id",
+                                                "agg.word, genus.article",
+                                                "word LIKE '" + item_letters + "%'")
                 # Anzahl Adjektive pro Wort
                 count_letters_adj.append(index)
                 # Kopiere Puffer, wenn nicht, geht er kaputt beim iterieren --> nicht weiter verwendbar
