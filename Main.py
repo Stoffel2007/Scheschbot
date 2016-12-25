@@ -164,6 +164,7 @@ def koch_nudeln(message):
 
 
 def send_reaction(bot, action, params_dict):
+    try:
         if action == 'text':
             bot.send_message(chat_id=params_dict['chat_id'],
                              text=params_dict['text'],
@@ -192,7 +193,10 @@ def send_reaction(bot, action, params_dict):
                                   message_id=params_dict['message_id'],
                                   text=params_dict['text'])
         else:
-            print("falsche action-Variabl (" + action + ")")
+            print("falsche action-Variable (" + action + ")")
+    except KeyError:
+        print("Fehler im Parameter-Array:")
+        print(params_dict)
 
 
 if __name__ == '__main__':
