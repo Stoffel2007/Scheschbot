@@ -194,26 +194,5 @@ def __build_string(command_text, one_adj, one_noun):
             send_message = send_message + prep_message + '\n'
     return send_message
 
-
-# Kommando um Wörter hinzuzufügen
-# für Adjektive /feedme {Adjektiv}
-# für Nomen /feedme {Artikel} {Nomen}
-# diese Funktion soll erst aufgerufen werden, wenn ein Admin das Futter bestätigt hat
-# Der Bot sendet eine persönliche Nachricht an Admin, mit einem Button kann er das Futter bestätigen oder ablehnen
-def fütter_mich(command_text):
-    if len(command_text.split()) == 1:
-        db_connect.insert('aggronymes', ['word', 'type_id'], [command_text, '1'])
-    else:
-        futter_nomen = command_text.split()
-        if 'der' in futter_nomen:
-            futter_nomen[0] = 1
-        if 'die' in futter_nomen:
-            futter_nomen[0] = 2
-        if 'das' in futter_nomen:
-            futter_nomen[0] = 3
-        db_connect.insert('aggronymes', ['word', 'type_id', 'genus_id'], [futter_nomen[1], '2', futter_nomen[0]])
-    send_message = 'legg0 :3'
-    return send_message
-
 if __name__ == '__main__':
     pass

@@ -60,13 +60,13 @@ def main():
                     send_reaction(bot, 'text', params_dict)
 
                 # Nachricht abfragen
-                if update.message and update.message.text.startswith("/feed "):
+                if update.message and update.message.text.startswith("/feedme "):
                     params = update.message.text.split(' ', 1)[1]
 
                     params_dict = {'chat_id': update.message.chat_id}
 
                     if aggronyme.insert_words(params) is True:
-                        params_dict['text'] = 'Wort erfolgreich zur Datenbank hinzugefügt'
+                        params_dict['text'] = 'legg0 :3 \nWort erfolgreich zur Datenbank hinzugefügt'
                     else:
                         params_dict['text'] = 'Wort konnte nicht zur Datenbank hinzugefügt werden'
 
