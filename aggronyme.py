@@ -58,8 +58,9 @@ def __get_words(command_text):
     arr_adj_temp = []
     count_adj_pl = []
     count_letters_adj = []
-    arr_words = command_text.split()
+    err_mess = []
     permit = True
+    arr_words = command_text.split()
     for word in arr_words:  # iteriere über x-Wörter
         # list() macht Array von Buchstaben aus einem Wort
         arr_letters = list(word)
@@ -73,6 +74,10 @@ def __get_words(command_text):
                 adj_puffer = db_connect.select("aggronymes",
                                                "word",
                                                "type_id = 1 AND word LIKE '" + item_letters + "%'")
+                if not adj_puffer:
+                    permit = False
+                    err_mess = 'Verbindung zur Datenbank fehlgeschlagen'
+                    break
                 arr_adj_temp.append(adj_puffer)
                 # Anzahl an Ajektive für 1 Buchstaben, benötig um davon random ein Wort auszusuchen
                 count_adj_pl.append(len(adj_puffer))
@@ -90,29 +95,29 @@ def __get_words(command_text):
                 arr_noun.append(noun_puffer_copy)
 
     arr_adj = []
-    for i in range(len(arr_adj_temp)):
-        arr_adj.append([])
-    print("arr_adj =", arr_adj)
+    if permit:
+        for i in range(len(arr_adj_temp)):
+            arr_adj.append([])
+        print("arr_adj =", arr_adj)
 
-    # arr_adj in schönere Form formatieren
-    for cnt_dim, dim in enumerate(arr_adj_temp):
-        for cnt_block, block in enumerate(dim):
-            arr_adj[cnt_dim].append(arr_adj_temp[cnt_dim][cnt_block][0])
+        # arr_adj in schönere Form formatieren
+        for cnt_dim, dim in enumerate(arr_adj_temp):
+            for cnt_block, block in enumerate(dim):
+                arr_adj[cnt_dim].append(arr_adj_temp[cnt_dim][cnt_block][0])
 
-    # prüft ob leere Elemente vorhanden sind
-    # gibt permit, sowie error_message
-    err_mess = []
-    for dim in arr_adj:
-        if not dim:
-            err_mess.append('für mindestens einen Buchstaben kein Adjektiv in der Datenbank')
-            permit = False
-            break
-    for dim in arr_noun:
-        if not dim:
-            err_mess.append('für mindestens einen Buchstaben kein Nomen in der Datenbank')
-            permit = False
-            break
-    err_mess = ', '.join(err_mess)
+        # prüft ob leere Elemente vorhanden sind
+        # gibt permit, sowie error_message
+        for dim in arr_adj:
+            if not dim:
+                err_mess.append('für mindestens einen Buchstaben kein Adjektiv in der Datenbank')
+                permit = False
+                break
+        for dim in arr_noun:
+            if not dim:
+                err_mess.append('für mindestens einen Buchstaben kein Nomen in der Datenbank')
+                permit = False
+                break
+        err_mess = ', '.join(err_mess)
     return permit, arr_adj, arr_noun, err_mess
 
 
@@ -188,3 +193,27 @@ def __build_string(command_text, one_adj, one_noun):
                 prep_message += ' SOWIE'
             send_message = send_message + prep_message + '\n'
     return send_message
+
+
+# Kommando um Wörter hinzuzufügen
+# für Adjektive /feedme {Adjektiv}
+# für Nomen /feedme {Artikel} {Nomen}
+# diese Funktion soll erst aufgerufen werden, wenn ein Admin das Futter bestätigt hat
+# Der Bot sendet eine persönliche Nachricht an Admin, mit einem Button kann er das Futter bestätigen oder ablehnen
+def fütter_mich(command_text):
+    if len(command_text.split()) == 1:
+        db_connect.insert('aggronymes', ['word', 'type_id'], [command_text, '1'])
+    else:
+        futter_nomen = command_text.split()
+        if 'der' in futter_nomen:
+            futter_nomen[0] = 1
+        if 'die' in futter_nomen:
+            futter_nomen[0] = 2
+        if 'das' in futter_nomen:
+            futter_nomen[0] = 3
+        db_connect.insert('aggronymes', ['word', 'type_id', 'genus_id'], [futter_nomen[1], '2', futter_nomen[0]])
+    send_message = 'legg0 :3'
+    return send_message
+
+if __name__ == '__main__':
+    pass
