@@ -3,6 +3,9 @@ import random
 
 
 def aggro(command_text):
+    if len(command_text) < 2:
+        return 'Text muss mindestens 2 Buchstaben enthalten'
+
     permit, arr_adj, arr_noun, error_message = __get_words(command_text)
 
     one_noun = __random_nouns(permit, arr_noun)
@@ -93,17 +96,18 @@ def __get_words(command_text):
     # gibt permit, sowie error_message
     err_mess_adj = ""
     err_mess_noun = ""
+    err_mess = []
     for dim in arr_adj:
         if not dim:
-            err_mess_adj = 'für mindestens einen Buchstanben kein Adjektiv'
+            err_mess.append('für mindestens einen Buchstanben kein Adjektiv')
             permit = False
             break
     for dim in arr_noun:
         if not dim:
-            err_mess_noun = 'für mindestens einen Buchstaben kein Nomen'
+            err_mess.append('für mindestens einen Buchstaben kein Nomen')
             permit = False
             break
-    err_mess = err_mess_adj + ', ' + err_mess_noun
+    err_mess = ', '.join(err_mess)
     return permit, arr_adj, arr_noun, err_mess
 
 
