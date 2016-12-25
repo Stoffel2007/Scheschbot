@@ -84,7 +84,9 @@ def __get_words(command_text):
                 # Liste, mit der gearbeitet wird
                 arr_noun.append(noun_puffer_copy)
 
-    arr_adj = [[] for i in range(len(arr_adj_temp))]
+    arr_adj = []
+    for i in range(len(arr_adj_temp)):
+        arr_adj.append([])
     print("arr_adj =", arr_adj)
 
     # arr_adj in schönere Form formatieren
@@ -97,12 +99,12 @@ def __get_words(command_text):
     err_mess = []
     for dim in arr_adj:
         if not dim:
-            err_mess.append('für mindestens einen Buchstanben kein Adjektiv')
+            err_mess.append('für mindestens einen Buchstaben kein Adjektiv in der Datenbank')
             permit = False
             break
     for dim in arr_noun:
         if not dim:
-            err_mess.append('für mindestens einen Buchstaben kein Nomen')
+            err_mess.append('für mindestens einen Buchstaben kein Nomen in der Datenbank')
             permit = False
             break
     err_mess = ', '.join(err_mess)
@@ -116,7 +118,7 @@ def __random_nouns(permit, arr_noun):
         for count, dim in enumerate(arr_noun):
             count_noun = len(arr_noun[count])
             rnd_noun = random.choice(dim)
-            for row in one_noun:
+            for i in range(len(one_noun)):
                 count_while = 0
                 while rnd_noun in one_noun:
                     rnd_noun = random.choice(dim)
