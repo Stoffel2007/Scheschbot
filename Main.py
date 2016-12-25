@@ -191,6 +191,8 @@ def send_reaction(bot, action, params_dict):
             bot.edit_message_text(chat_id=params_dict['chat_id'],
                                   message_id=params_dict['message_id'],
                                   text=params_dict['text'])
+        else:
+            print("falsche action-Variabl (" + action + ")")
 
 
 if __name__ == '__main__':
