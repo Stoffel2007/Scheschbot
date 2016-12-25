@@ -5,19 +5,21 @@ CREATE TABLE IF NOT EXISTS scheschbot.users
     like_percentage INT NOT NULL DEFAULT 50,
     first_name CHAR(64) NOT NULL,
     last_name CHAR(64),
-    username CHAR(64)
+    username CHAR(64),
+    is_admin BOOLEAN NOT NULL DEFAULT 0
 )
 DEFAULT CHARACTER SET = 'utf16'
 
 INSERT INTO scheschbot.users
-(telegram_id, like_percentage, first_name, last_name, username)
+(telegram_id, like_percentage, first_name, last_name, username, is_admin)
 VALUES
-(105131864, 60, 'Joschi', NULL, NULL),
-(54185905, 48, 'Alex', 'Ey', NULL),
-(44867338, 10, 'Fredi', 'B', 'Oenner'),
-(213190902, 28, 'Pascal', 'Rögner', NULL),
-(82613330, 69, 'Wilhelmina', 'Fuchs', NULL),
-(72111412, 88, 'Stoffel', 'Zink', 'Stuffla')
+(105131864, 60, 'Joschi', NULL, NULL, 0),
+(54185905, 48, 'Alex', 'Ey', NULL, 1),
+(44867338, 10, 'Fredi', 'B', 'Oenner', 0),
+(213190902, 28, 'Pascal', 'Rögner', NULL, 0),
+(82613330, 69, 'Wilhelmina', 'Fuchs', NULL, 0),
+(72111412, 88, 'Stoffel', 'Zink', 'Stuffla', 1),
+(33545033, 88, 'Andi', NULL, 'Der_Batman', 1)
 
 
 CREATE TABLE IF NOT EXISTS scheschbot.word_types
