@@ -52,7 +52,7 @@ def main():
                     event_handler.add_event(event)
 
                 # Nachricht abfragen
-                if update.message and update.message.text.startswith("/aggro "):
+                if update.message and update.message.text.startswith("/aggro"):
                     params = update.message.text.split(' ', 1)[1]
                     message = aggronyme.aggro(params)
                     params_dict = {'chat_id': update.message.chat_id,
@@ -60,17 +60,42 @@ def main():
                     send_reaction(bot, 'text', params_dict)
 
                 # Nachricht abfragen
-                if update.message and update.message.text.startswith("/feedme "):
+                if update.callback_query:
+                    params_dict = {'chat_id': update.callback_query.message.chat_id,
+                                   'message_id': update.callback_query.message.message_id}
+
+                    data_array = update.callback_query.data.split(' ', 1)
+                    params = data_array[1]
+                    if data_array[0] == 'yes':
+                        if aggronyme.insert_words(params) is True:
+                            params_dict['text'] = 'legg0 :3\n' \
+                                                  '"' + params + '" erfolgreich zur Datenbank hinzugefügt'
+                        else:
+                            params_dict['text'] = '"' + params + '"  konnte nicht zur Datenbank hinzugefügt werden\n' +\
+                                                  'Eventuell ist es bereits vorhanden'
+                    elif data_array[0] == 'no':
+                        params_dict['text'] = '"' + params + '" abgelehnt'
+
+                    send_reaction(bot, 'edit_message', params_dict)
+
+                # Nachricht abfragen
+                if update.message and update.message.text.startswith("/feedme"):
                     params = update.message.text.split(' ', 1)[1]
+                    button1 = telegram.InlineKeyboardButton('Akzeptieren', callback_data='yes ' + params)
+                    button2 = telegram.InlineKeyboardButton('Ablehnen', callback_data='no ' + params)
+                    keyboard = telegram.InlineKeyboardMarkup([[button1, button2]])
 
-                    params_dict = {'chat_id': update.message.chat_id}
+                    # User-IDs von Alexey, Andi, Stoffel
+                    admin_ids = db_connect.select('users', 'telegram_id', where_expression='is_admin = 1')
 
-                    if aggronyme.insert_words(params) is True:
-                        params_dict['text'] = 'legg0 :3 \nWort erfolgreich zur Datenbank hinzugefügt'
-                    else:
-                        params_dict['text'] = 'Wort konnte nicht zur Datenbank hinzugefügt werden'
-
-                    send_reaction(bot, 'text', params_dict)
+                    for i in range(len(admin_ids)):
+                        params_dict = {'chat_id': admin_ids[i][0],
+                                       'text': '"' + params + '" akzeptieren oder ablehnen?',
+                                       'reply_markup': keyboard}
+                        try:
+                            send_reaction(bot, 'text', params_dict)
+                        except telegram.error.Unauthorized:
+                            print("Benutzer " + admin_ids[i][0].__str__() + " hat den Bot nicht gestartet")
 
                 # like_percentage des Users zufällig neu setzen
                 user = get_user(update)
@@ -93,8 +118,7 @@ def main():
             if temp is not last_update_id:
                 print("last_update_id =", last_update_id)
             time.sleep(1)
-        except telegram.error.NetworkError as error:
-            print(error)
+        except telegram.error.NetworkError:
             print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
             time.sleep(10)
 
@@ -121,6 +145,8 @@ def get_user(update):
         return update.edited_message.from_user
     if update.inline_query:  # wenn eine Inline Query bearbeitet wurde
         return update.inline_query.from_user
+    if update.callback_query:  # wenn eine Inline Query bearbeitet wurde
+        return update.callback_query.from_user
 
 
 def get_inline_results(query_string):
@@ -141,7 +167,8 @@ def send_reaction(bot, action, params_dict):
         if action == 'text':
             bot.send_message(chat_id=params_dict['chat_id'],
                              text=params_dict['text'],
-                             reply_to_message_id=params_dict.get('message_id', None))
+                             reply_to_message_id=params_dict.get('message_id', None),
+                             reply_markup=params_dict.get('reply_markup', None))
         elif action == 'photo':
             bot.send_photo(chat_id=params_dict['chat_id'],
                            text=params_dict['photo'],
@@ -160,6 +187,10 @@ def send_reaction(bot, action, params_dict):
         elif action == 'inline':
             bot.answer_inline_query(inline_query_id=params_dict['inline_query_id'],
                                     results=params_dict['results'])
+        elif action == 'edit_message':
+            bot.edit_message_text(chat_id=params_dict['chat_id'],
+                                  message_id=params_dict['message_id'],
+                                  text=params_dict['text'])
 
 
 if __name__ == '__main__':
