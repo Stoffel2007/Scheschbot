@@ -176,40 +176,40 @@ def koch_nudeln(message):
 
 
 def send_reaction(bot, action, params_dict):
-    # try:
-    if action == 'text':
-        bot.send_message(chat_id=params_dict['chat_id'],
-                         text=params_dict['text'],
-                         reply_to_message_id=params_dict.get('message_id', None),
-                         reply_markup=params_dict.get('reply_markup', None))
-    elif action == 'photo':
-        bot.send_photo(chat_id=params_dict['chat_id'],
-                       text=params_dict['photo'],
-                       caption=params_dict['caption'],
-                       reply_to_message_id=params_dict.get('message_id', None))
-    elif action == 'gif':
-        bot.send_document(chat_id=params_dict['chat_id'],
-                          text=params_dict['gif'],
-                          caption=params_dict['caption'],
-                          reply_to_message_id=params_dict.get('message_id', None))
-    elif action == 'video':
-        bot.send_video(chat_id=params_dict['chat_id'],
-                       text=params_dict['gif'],
-                       caption=params_dict['caption'],
-                       reply_to_message_id=params_dict.get('message_id', None))
-    elif action == 'inline':
-        bot.answer_inline_query(inline_query_id=params_dict['inline_query_id'],
-                                results=params_dict['results'])
-    elif action == 'edit_message':
-        bot.edit_message_text(chat_id=params_dict['chat_id'],
-                              message_id=params_dict['message_id'],
-                              text=params_dict['text'])
-    else:
-        print("falsche action-Variable (" + action + ")")
-    # except KeyError as error:
-    #    print("error =", error)
-    #    print("Fehler im Parameter-Array:")
-    #    print(params_dict)
+    try:
+        if action == 'text':
+            bot.send_message(chat_id=params_dict['chat_id'],
+                             text=params_dict['text'],
+                             reply_to_message_id=params_dict.get('message_id', None),
+                             reply_markup=params_dict.get('reply_markup', None))
+        elif action == 'photo':
+            bot.send_photo(chat_id=params_dict['chat_id'],
+                           text=params_dict['photo'],
+                           caption=params_dict['caption'],
+                           reply_to_message_id=params_dict.get('message_id', None))
+        elif action == 'gif':
+            bot.send_document(chat_id=params_dict['chat_id'],
+                              text=params_dict['gif'],
+                              caption=params_dict['caption'],
+                              reply_to_message_id=params_dict.get('message_id', None))
+        elif action == 'video':
+            bot.send_video(chat_id=params_dict['chat_id'],
+                           text=params_dict['gif'],
+                           caption=params_dict['caption'],
+                           reply_to_message_id=params_dict.get('message_id', None))
+        elif action == 'inline':
+            bot.answer_inline_query(inline_query_id=params_dict['inline_query_id'],
+                                    results=params_dict['results'])
+        elif action == 'edit_message':
+            bot.edit_message_text(chat_id=params_dict['chat_id'],
+                                  message_id=params_dict['message_id'],
+                                  text=params_dict['text'])
+        else:
+            print("falsche action-Variable (" + action + ")")
+    except KeyError as error:
+        print("error =", error)
+        print("Fehler im Parameter-Array:")
+        print(params_dict)
 
 
 if __name__ == '__main__':
