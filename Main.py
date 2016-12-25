@@ -50,6 +50,11 @@ def main():
                     event = koch_nudeln(update.message)
                     event_handler.add_event(event)
 
+                # Nachricht abfragen
+                if update.message and update.message.text.startswith("/aggro "):
+                    params = update.message.text.split(' ', 1)[1]
+                    bot.send_message(update.message.chat_id, params)
+
                 # like_percentage des Users zufällig neu setzen
                 user = get_user(update)
                 like_percentage = random.randint(0, 100)

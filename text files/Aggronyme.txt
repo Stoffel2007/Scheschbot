@@ -1,31 +1,31 @@
 Buchstb Adjektiv                        Nomen
-A       abartig, assozial
+A       abartig, assozial               (die)Arschkuh, (die)Annegrett,
 Ä       ägglhaft,
-B       balanzelos,
+B       balanzelos,                     (der)Blödman
 C       charismatisch,
-D       deppert
-E       egglhaft, ersetzbar,
+D       deppert, dumm
+E       egglhaft, ersetzbar,            (der)Exmatrikulator
 F       frauenfeindlich
 H       hochnäsig
 I       idiotisch, ignorant
 J       joggend
-K       kannibalistisch
+K       kannibalistisch                 (der)Kevin, (der)Klaun
 L       lieblos,
-M       mickrig,                        (das)Monokel
+M       mickrig,                        das Monokel
 N       nebulös,
-O       oval,                           (der)Obatzn, (die)Orange, (das)Omen
-Ö       öde,
+O       oval,                           der Obatzn, die Orange, das Omen, (der)Oachkotzenschwoaf
+Ö       öde,                            (der)Önner, (der)Öter,
 P       phasenverschoben,
 Q       qualifiziert,
 R       respektlos
-S       scheiß,                         (die)Sauklau
+S       scheiß, schwach, schlecht       (die)Sauklau, (der)Schwachkupf, (der)Schmock, (der)Massakermanfred
 T       transatlantisch,                (der)Taliban
 U       unterirdisch
 Ü       überlebenswichtig,
-V       verflucht,
+V       verflucht,                      (das)Versuchskaninchen
 W       weißer,
-X
-Y       yuppi verachtend
+X       x-beliebig                      (der)Xenomorph, (der)Xeroxpapierfresser
+Y       yuppi verachtend                (der)Yuppie
 Z
 
 
@@ -43,11 +43,13 @@ Z
 
     funktionen:
 
-    - count_words(command_text) - wandelt die Wörter/(Anzahl der Namen) im Text in x-dimens Array um
+
+    - detect_words(command_text) - wandelt die Wörter/(Anzahl der Namen) im Text in x-dimens Array um
         return arr_words ([Timo]
                           [Schmidt])
+    ### nicht mehr benötig, income_string.split() --> Array ein einzelnen Wörtern
 
-    - count_letter(arr_words) - wandelt arr_words in Array von Buchstaben um
+    - detect_letters(arr_words) - wandelt arr_words in Array von Buchstaben um
         return arr_letters ([t,i,m,o]
                             [s,c,h,m,i,d,t])
 
@@ -71,3 +73,21 @@ Z
 HINT:
 numrows = len(input)    # 3 rows in your example
 numcols = len(input[0]) # 2 columns in your example
+
+
+DB-Struktur:
+
+CREATE TABLE IF NOT EXISTS scheschbot.aggronyme
+(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    letter char(1) NOT NULL,
+    adjective char(255) NOT NULL,
+    noun CHAR(255) NOT NULL
+)
+
+DEFAULT CHARACTER SET = 'utf16';
+
+INSERT INTO scheschbot.aggronyme
+(letter, adjective, noun)
+VALUES
+('a', 'assozial, anarchistisch', '(der)Amputateur')
