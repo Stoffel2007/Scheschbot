@@ -47,11 +47,9 @@ muss man wissen                             => Weiß wieder keiner....
 wer weiß das                                => Wieder keiner....
 wochenende                                  => SAAAAAAAAAAAAAUFEEEEEEEEEN!
 witzig                                      => :D
-<Frage>                                     => Nein! => doch => Oh! :O
 wann                                        => wo / Uhrzeit / Etz ned! / Irgendwann / Nie!
 wo                                          => Ralf Kullig / Koordinate
 :3                                          => :3
-:<x>                                        => :<x-1>
 .... Frage                                  => SAUFGELAGE!
 :v / :V / v: / V:                           => :v / :V / v: / V:
 D:                                          => Oh Gott! :O
@@ -65,6 +63,10 @@ was ....?                                   => Nix / Alles
 wieso / weshalb / warum / weswegen ....?    => Das Universum will es so! / Aus Gründen / Warum denn nicht?! / Unterbewusste Steinzeitgründe ¯\_(ツ)_/¯ / Weil halt / Ist halt so! Find dich damit ab! / Darum / Woher soll ich das wissen?! / Das wüsstest du wohl gern, was?! / Weil deine Mutter so dumm ist!
 wozu ....?                                  =>
 welche(s/r/n/m) ....?                       =>
-x oder y oder z?                            => x / y / z / Das sind doch bürgerliche Kategorien
+<Frage>                                     => Nein! => doch => Oh! :O
 <Frage>                                     => Nein! / Gwiss ned! / Wie kommst du denn da drauf?! Spinnst gwiss a weng?! / Uuuuuh! Neeeein! / Natürlich nicht! So ein Bach! /
                                                Ja / idT / Offensichtlich?! Denken sie nicht mit? / Natürlich! Was denn sonst?! / Gwiss!
+
+Sonderfälle:
+:<x>                                        => :<x-1>
+x oder y oder z?                            => x / y / z / Das sind doch bürgerliche Kategorien
