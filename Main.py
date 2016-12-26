@@ -25,7 +25,7 @@ def main():
 
     # ID des letzten unverarbeiteten Updates holen
     last_update_id = get_last_update_id(bot)
-    print("last_update_id =", last_update_id, '\n')
+    print("\nlast_update_id =", last_update_id)
 
     while True:
         temp = last_update_id
@@ -57,7 +57,7 @@ def main():
                 send_reaction(bot, 'text', params_dict)
 
             if temp is not last_update_id:
-                print('last_update_id =', last_update_id, '\n')
+                print('\nlast_update_id =', last_update_id)
 
             # 1 Sekunde warten (Überlastung des Servers vorbeugen)
             time.sleep(1)
