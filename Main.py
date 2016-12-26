@@ -31,8 +31,12 @@ def main():
         temp = last_update_id
         # alle Updates seit letztem Update holen
         try:
+            # neueste Updates von Telegram holen
             for update in bot.getUpdates(offset=last_update_id):
+                # Update verarbeiten
                 message_list = process_update.get_messages(update, event_handler)
+
+                # erhaltene Nachrichten abschicken
                 for message in message_list:
                     try:
                         send_reaction(bot, message['action'], message['params_dict'])
@@ -43,8 +47,7 @@ def main():
                 # Update-ID hochzählen
                 last_update_id = update.update_id + 1
 
-            # Events abfragem
-            # if event_handler.update_available():
+            # nach neuen Events fragem
             for event_update in event_handler.get_update():
                 message = event_update[0]
                 text = event_update[1]
@@ -55,6 +58,8 @@ def main():
 
             if temp is not last_update_id:
                 print('last_update_id =', last_update_id, '\n')
+
+            # 1 Sekunde warten (Überlastung des Servers vorbeugen)
             time.sleep(1)
         except telegram.error.NetworkError:
             print('\tVerbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....')
@@ -73,32 +78,33 @@ def get_last_update_id(bot):
             time.sleep(10)
 
 
+# Nachricht verschiedener Art absenden
 def send_reaction(bot, action, params_dict):
     try:
-        if action == 'text':
+        if action == 'text':  # Textnachricht senden
             bot.send_message(chat_id=params_dict['chat_id'],
                              text=params_dict['text'],
                              reply_to_message_id=params_dict.get('message_id', None),
                              reply_markup=params_dict.get('reply_markup', None))
-        elif action == 'photo':
+        elif action == 'photo':  # Foto senden
             bot.send_photo(chat_id=params_dict['chat_id'],
                            text=params_dict['photo'],
                            caption=params_dict['caption'],
                            reply_to_message_id=params_dict.get('message_id', None))
-        elif action == 'gif':
+        elif action == 'gif':  # GIF senden
             bot.send_document(chat_id=params_dict['chat_id'],
                               text=params_dict['gif'],
                               caption=params_dict['caption'],
                               reply_to_message_id=params_dict.get('message_id', None))
-        elif action == 'video':
+        elif action == 'video':  # Video senden
             bot.send_video(chat_id=params_dict['chat_id'],
                            text=params_dict['gif'],
                            caption=params_dict['caption'],
                            reply_to_message_id=params_dict.get('message_id', None))
-        elif action == 'inline':
+        elif action == 'inline':  # Inline-Menü senden
             bot.answer_inline_query(inline_query_id=params_dict['inline_query_id'],
                                     results=params_dict['results'])
-        elif action == 'edit_message':
+        elif action == 'edit_message':  # Textnachricht verändern
             bot.edit_message_text(chat_id=params_dict['chat_id'],
                                   message_id=params_dict['message_id'],
                                   text=params_dict['text'])
