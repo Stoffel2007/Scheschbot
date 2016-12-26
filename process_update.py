@@ -8,7 +8,27 @@ from Events.Event import Event
 
 def get_messages(update, event_handler):
     # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben (core.telegram.org/bots/api#update)
-    print("\tupdate =", update)
+    print("\n\tupdate =", update)
+
+    # Array mit zurückzuliefernden Nachrichten
+    # jede message ist ein dictionary
+    message_list = []
+
+    # Update je nach Typ anders verarbeiten
+    if update.message:
+        message_list = __process_message(update.message)
+    elif update.edited_message:
+        message_list = __process_edited_message(update.edited_message)
+    elif update.edited_message:
+        message_list = __process_edited_message(update.edited_message)
+    elif update.inline_query and update.inline_query.query:
+        message_list = __process_inline_query(update.inline_query)
+    elif update.callback_query:
+        message_list = __process_callback_query(update.callback_query)
+
+    print('\tmessage_list:\n\t', end='')
+    for message in message_list:
+        print(message)
 
     # like_percentage des Users zufällig neu setzen
     user = get_user(update)
@@ -39,7 +59,7 @@ def get_messages(update, event_handler):
 
     # Inline-Button wurde gedrückt
     if update.callback_query:
-        params_dict = {'chat_id': update.callback_query.message.chat_id,
+        params_dict = {'chat_id': update.callback_query.message.chat.id,
                        'message_id': update.callback_query.message.message_id}
 
         data_array = update.callback_query.data.split(' ', 1)
@@ -86,6 +106,30 @@ def get_messages(update, event_handler):
         return message_list
 
     return []
+
+
+def __process_message(message):
+    params_dict = {'chat_id': message.chat_id,
+                   'text': 'Funktion __process_message()'}
+    return [{'action': 'text', 'params_dict': params_dict}]
+
+
+def __process_edited_message(edited_message):
+    params_dict = {'chat_id': edited_message.chat_id,
+                   'text': 'Funktion __process_edited_message()'}
+    return [{'action': 'text', 'params_dict': params_dict}]
+
+
+def __process_inline_query(inline_query):
+    params_dict = {'inline_query_id': inline_query.id,
+                   'results': get_inline_results(inline_query.query)}
+    return [{'action': 'inline', 'params_dict': params_dict}]
+
+
+def __process_callback_query(callback_query):
+    params_dict = {'chat_id': callback_query.message.chat.id,
+                   'text': 'Funktion __process_callback_query()'}
+    return [{'action': 'text', 'params_dict': params_dict}]
 
 
 # User-Objekt aus dem Update-Objekt holen
