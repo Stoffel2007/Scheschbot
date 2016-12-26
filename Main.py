@@ -15,6 +15,7 @@ def main():
     # beim Fehlschlagen der Datenbankabfrage wird False zurückgeliefert
     if result:
         for line in result:
+            print('\t', end='')
             for value in line:
                 print(value, end="\t")
             print()
@@ -27,7 +28,7 @@ def main():
 
     # ID des letzten unverarbeiteten Updates holen
     last_update_id = get_last_update_id(bot)
-    print("last_update_id =", last_update_id)
+    print("last_update_id =", last_update_id, '\n')
 
     while True:
         temp = last_update_id
@@ -35,7 +36,7 @@ def main():
         try:
             for update in bot.getUpdates(offset=last_update_id):
                 # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben (core.telegram.org/bots/api#update)
-                print("update =", update)
+                print("\tupdate =", update)
 
                 # Inline-Query abfragen
                 if update.inline_query and update.inline_query.query:
@@ -76,17 +77,14 @@ def main():
                                 word = params.split(' ', 1)[1]
                             else:
                                 word = params
-                            print("word =", word)
 
                             vote_incremented = aggronyme.increment_vote(word)
                             if not vote_incremented:
-                                print("konnte Votes nicht inkrementieren")
+                                print('\tkonnte Votes von ' + word + ' nicht inkrementieren')
                             params_dict['text'] = '"' + params + '"  konnte nicht zur Datenbank hinzugefügt werden\n' +\
                                                   'Eventuell ist dieses Wort bereits vorhanden'
                     elif data_array[0] == 'no':
                         params_dict['text'] = '"' + params + '" abgelehnt'
-
-                    print(params_dict)
 
                     send_reaction(bot, 'edit_message', params_dict)
 
@@ -98,7 +96,7 @@ def main():
                     keyboard = telegram.InlineKeyboardMarkup([[button1, button2]])
 
                     # User-IDs von Alexey, Andi, Stoffel
-                    admin_ids = db_connect.select('users', 'telegram_id', where_expression='is_admin = 1')
+                    admin_ids = db_connect.select('users', 'telegram_id, first_name', where_expression='is_admin = 1')
 
                     for i in range(len(admin_ids)):
                         params_dict = {'chat_id': admin_ids[i][0],
@@ -107,7 +105,7 @@ def main():
                         try:
                             send_reaction(bot, 'text', params_dict)
                         except telegram.error.Unauthorized:
-                            print("Benutzer " + admin_ids[i][0].__str__() + " hat den Bot nicht gestartet")
+                            print('\t' + admin_ids[i][1].__str__() + ' hat den Bot nicht gestartet')
 
                 # like_percentage des Users zufällig neu setzen
                 user = get_user(update)
@@ -128,10 +126,10 @@ def main():
                 send_reaction(bot, 'text', params_dict)
 
             if temp is not last_update_id:
-                print("last_update_id =", last_update_id)
+                print('last_update_id =', last_update_id, '\n')
             time.sleep(1)
         except telegram.error.NetworkError:
-            print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
+            print('\tVerbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....')
             time.sleep(10)
 
 
@@ -143,8 +141,7 @@ def get_last_update_id(bot):
         except IndexError:  # falls keine Updates
             return None
         except telegram.error.NetworkError as error:
-            print(error)
-            print("Verbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....")
+            print('\tVerbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....')
             time.sleep(10)
 
 
@@ -205,10 +202,10 @@ def send_reaction(bot, action, params_dict):
                                   message_id=params_dict['message_id'],
                                   text=params_dict['text'])
         else:
-            print("falsche action-Variable (" + action + ")")
+            print('\tfalsche action-Variable (' + action + ')')
     except KeyError as error:
-        print("error =", error)
-        print("Fehler im Parameter-Array:")
+        print('\tFehler im Parameter-Array:')
+        print('\t', end='')
         print(params_dict)
 
 

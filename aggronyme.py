@@ -124,7 +124,6 @@ def __get_words(command_text):
     if permit:
         for i in range(len(arr_adj_temp)):
             arr_adj.append([])
-        print("arr_adj =", arr_adj)
 
         # arr_adj in schönere Form formatieren
         for cnt_dim, dim in enumerate(arr_adj_temp):
