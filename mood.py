@@ -20,6 +20,11 @@ def get_mood(telegram_id):
 # falls User nicht existiert, neuen Eintrag in Tabelle erzeugen
 # andere User-Attribute (first_name, last_name, username) werden ebenfalls gesetzt
 def set_mood(user, like_percentage):
+    if like_percentage > 100:
+        like_percentage = 100
+    elif like_percentage < 0:
+        like_percentage = 0
+
     user_result = db_connect.select('users', where_expression='telegram_id = ' + user.id.__str__())
 
     # bei Fehlschlagen der Datenbankanfrage würde False zurückgeliefert werden
