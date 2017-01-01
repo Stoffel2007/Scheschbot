@@ -160,9 +160,9 @@ def __get_message_args(message_text):
             if '@' in command_part:
                 command_part = command_part.split('@', 1)
                 command = command_part[0]
-                command = command.lowercase
+                command = command.lower()
                 botname = command_part[1]
-                botname = botname.lowercase
+                botname = botname.lower()
             else:
                 command = command_part
 
