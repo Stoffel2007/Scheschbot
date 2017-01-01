@@ -34,7 +34,7 @@ def main():
             # neueste Updates von Telegram holen
             for update in bot.getUpdates(offset=last_update_id):
                 # Update verarbeiten
-                message_list = process_update.get_messages(update, event_handler)
+                message_list = process_update.get_message_list(update, event_handler)
 
                 # erhaltene Nachrichten abschicken
                 for message in message_list:
