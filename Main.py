@@ -47,7 +47,7 @@ def main():
                 # Update-ID hochzählen
                 last_update_id = update.update_id + 1
 
-            # nach neuen Events fragem
+            # nach neuen Events fragen
             for event_update in event_handler.get_update():
                 message = event_update[0]
                 text = event_update[1]
