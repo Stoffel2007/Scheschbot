@@ -26,9 +26,9 @@ def get_messages(update, event_handler):
     elif update.callback_query:
         message_list = __process_callback_query(update.callback_query)
 
-    print('\tmessage_list:\n\t', end='')
-    for message in message_list:
-        print(message)
+    #print('\tmessage_list:\n\t', end='')
+    #for message in message_list:
+        #print(message)
 
     # like_percentage des Users zufällig neu setzen
     user = get_user(update)
@@ -109,6 +109,10 @@ def get_messages(update, event_handler):
 
 
 def __process_message(message):
+    command, botname, param = __get_message_args(message.text)
+    print('command =', command)
+    print('botname =', botname)
+    print('param =', param)
     params_dict = {'chat_id': message.chat_id,
                    'text': 'Funktion __process_message()'}
     return [{'action': 'text', 'params_dict': params_dict}]
@@ -130,6 +134,43 @@ def __process_callback_query(callback_query):
     params_dict = {'chat_id': callback_query.message.chat.id,
                    'text': 'Funktion __process_callback_query()'}
     return [{'action': 'text', 'params_dict': params_dict}]
+
+
+# Kommando, Botname und Parameter aus einer Nachricht herausfiltern und zurückliefern
+def __get_message_args(message_text):
+    command = ''
+    botname = 'scheschbot'
+    if message_text.startswith('/'):
+        message_text = message_text[1:]  # Backslash wegschneiden
+        if ' ' in message_text:
+            message_split = message_text.split(' ', 1)
+            command_part = message_split[0]
+            if '@' in command_part:
+                command_part = command_part.split('@', 1)
+                command = command_part[0]
+                command = command.lower()
+                botname = command_part[1]
+                botname = botname.lower()
+            else:
+                command = command_part
+
+            param = message_split[1]
+        else:
+            command_part = message_text
+            if '@' in command_part:
+                command_part = command_part.split('@', 1)
+                command = command_part[0]
+                command = command.lowercase
+                botname = command_part[1]
+                botname = botname.lowercase
+            else:
+                command = command_part
+
+            param = ''
+    else:
+        param = message_text
+
+    return command, botname, param
 
 
 # User-Objekt aus dem Update-Objekt holen
