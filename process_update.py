@@ -2,6 +2,7 @@ import random
 import telegram
 import aggronyme
 import db_connect
+import inline_results
 import koch
 import mood
 
@@ -82,7 +83,7 @@ def __process_edited_message(edited_message):
 
 def __process_inline_query(inline_query,):
     params_dict = {'inline_query_id': inline_query.id,
-                   'results': __get_inline_results(inline_query.query)}
+                   'results': inline_results.get_inline_results(inline_query.query)}
     return [{'action': 'inline', 'params_dict': params_dict}]
 
 
@@ -157,9 +158,3 @@ def __get_user(update):
         return update.inline_query.from_user
     if update.callback_query:  # wenn eine Inline Query bearbeitet wurde
         return update.callback_query.from_user
-
-
-def __get_inline_results(query_string):
-    text = "Oh, hallo, Herr " + query_string + "!"
-    input_text = telegram.InputTextMessageContent(text)
-    return [telegram.InlineQueryResultArticle('test_inline_query', "Mederer", input_text)]
