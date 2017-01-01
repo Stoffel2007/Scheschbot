@@ -111,19 +111,25 @@ def get_messages(update, event_handler):
 def __process_message(message):
     # Nachricht in Einzelteile zerlegen
     command, botname, param = __get_message_args(message.text)
-    print('command =', command)
-    print('botname =', botname)
-    print('param =', param)
 
-    params_dict = {'chat_id': message.chat_id,
-                   'text': 'Funktion __process_message()'}
-    return [{'action': 'text', 'params_dict': params_dict}]
+    if botname == 'scheschbot':
+        params_dict = {'chat_id': message.chat_id,
+                       'text': 'Funktion __process_message()'}
+        return [{'action': 'text', 'params_dict': params_dict}]
+    else:  # Kommando ging an anderen Bot
+        return []
 
 
 def __process_edited_message(edited_message):
-    params_dict = {'chat_id': edited_message.chat_id,
-                   'text': 'Funktion __process_edited_message()'}
-    return [{'action': 'text', 'params_dict': params_dict}]
+    # Nachricht in Einzelteile zerlegen
+    command, botname, param = __get_message_args(edited_message.text)
+
+    if botname == 'scheschbot':
+        params_dict = {'chat_id': edited_message.chat_id,
+                       'text': 'Funktion __process_edited_message()'}
+        return [{'action': 'text', 'params_dict': params_dict}]
+    else:
+        return []
 
 
 def __process_inline_query(inline_query):
