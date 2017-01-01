@@ -109,10 +109,12 @@ def get_messages(update, event_handler):
 
 
 def __process_message(message):
+    # Nachricht in Einzelteile zerlegen
     command, botname, param = __get_message_args(message.text)
     print('command =', command)
     print('botname =', botname)
     print('param =', param)
+
     params_dict = {'chat_id': message.chat_id,
                    'text': 'Funktion __process_message()'}
     return [{'action': 'text', 'params_dict': params_dict}]
@@ -138,36 +140,24 @@ def __process_callback_query(callback_query):
 
 # Kommando, Botname und Parameter aus einer Nachricht herausfiltern und zurückliefern
 def __get_message_args(message_text):
+    # Default-Werte
     command = ''
     botname = 'scheschbot'
-    if message_text.startswith('/'):
-        message_text = message_text[1:]  # Backslash wegschneiden
-        if ' ' in message_text:
-            message_split = message_text.split(' ', 1)
-            command_part = message_split[0]
-            if '@' in command_part:
-                command_part = command_part.split('@', 1)
-                command = command_part[0]
-                command = command.lower()
-                botname = command_part[1]
-                botname = botname.lower()
-            else:
-                command = command_part
+    param = ''
 
-            param = message_split[1]
-        else:
-            command_part = message_text
-            if '@' in command_part:
-                command_part = command_part.split('@', 1)
-                command = command_part[0]
-                command = command.lower()
-                botname = command_part[1]
-                botname = botname.lower()
-            else:
-                command = command_part
+    if message_text.startswith('/'):  # Kommando
+        if ' ' in message_text:  # Kommando mit Parametern
+            param = message_text.split(' ', 1)[1]
 
-            param = ''
-    else:
+        command_string = message_text.split(' ', 1)[0]
+        if '@' in command_string:  # Botname in Kommando enthalten (@Scheschbot)
+            # Kommando-String in Kommando und Botname aufteilen
+            command_string = command_string.split('@')
+            command = command_string[0].lower()
+            botname = command_string[1].lower()
+        else:  # Kommando ohne Botname
+            command = command_string
+    else:  # kein Kommando
         param = message_text
 
     return command, botname, param
