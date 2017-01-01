@@ -18,12 +18,12 @@ def __query(query_string):
         cursor.execute('SET CHARACTER SET utf8;')
         cursor.execute('SET character_set_connection=utf8;')
 
-        print('\t' + query_string)
+        #print('\t' + query_string)
         start = time.time()
         cursor.execute(query_string)
         end = time.time()
         delta = end - start
-        print('\tAbfrage dauerte ' + delta.__str__() + ' Sekunden')
+        #print('\tAbfrage dauerte ' + delta.__str__() + ' Sekunden')
         connection.commit()
 
         # Ergebnis in Array speichern
