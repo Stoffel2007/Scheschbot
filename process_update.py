@@ -76,7 +76,8 @@ def __process_edited_message(edited_message):
 
     if botname == 'scheschbot':  # Kommando war an den Scheschbot gerichtet
         params_dict = {'chat_id': edited_message.chat_id,
-                       'text': 'Funktion __process_edited_message()'}
+                       'text': 'bearbeitete Nachricht',
+                       'message_id': edited_message.message_id}
         return [{'action': 'text', 'params_dict': params_dict}]
     return []  # Kommando ging an anderen Bot
 
