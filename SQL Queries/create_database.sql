@@ -42,3 +42,35 @@ CREATE TABLE IF NOT EXISTS scheschbot.aggronymes
     FOREIGN KEY (genus_id) REFERENCES scheschbot.genus (id)
 )
 DEFAULT CHARACTER SET = 'utf16'
+
+
+CREATE TABLE IF NOT EXISTS scheschbot.answer_input
+(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    input CHAR(64) NOT NULL,
+    text_before BOOLEAN NOT NULL DEFAULT 0,
+    text_after BOOLEAN NOT NULL DEFAULT 0,
+    is_question BOOLEAN NOT NULL DEFAULT 0,
+    previous_answer_id INT NOT NULL,
+    FOREIGN KEY (predecessor_id) REFERENCES scheschbot.answer_input (id)
+)
+DEFAULT CHARACTER SET = 'utf16'
+
+
+CREATE TABLE IF NOT EXISTS scheschbot.answer_output
+(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    output CHAR(64) NOT NULL
+)
+DEFAULT CHARACTER SET = 'utf16'
+
+
+CREATE TABLE IF NOT EXISTS scheschbot.answer_relations
+(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    input_id INT NOT NULL,
+    output_id INT NOT NULL,
+    FOREIGN KEY (input_id) REFERENCES scheschbot.answer_input (id),
+    FOREIGN KEY (output_id) REFERENCES scheschbot.answer_output (id)
+)
+DEFAULT CHARACTER SET = 'utf16'
