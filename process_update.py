@@ -1,11 +1,9 @@
 import random
-
 import telegram
-
 import constants
 import db_connect
 import inline_results
-from Functions import aggronyme, mood, koch
+from Functions import aggronyme, cook, mood
 
 
 def get_message_list(update, event_handler):
@@ -42,7 +40,7 @@ def __process_message(message, event_handler):
         # passendes Kommando suchen
         # TODO: Kommandos generisch in Datenbank ablegen
         if command == 'koch':
-            text = koch.kochen(message, param, event_handler)
+            text = cook.cook(message, param, event_handler)
             params_dict = {'chat_id': message.chat_id,
                            'text': text}
             return [{'action': 'text', 'params_dict': params_dict}]

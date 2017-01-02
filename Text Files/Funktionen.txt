@@ -6,7 +6,7 @@
 Kommando-Funktionen:
     - help:
         gibt einen Überblick über verfügbare Aktionen
-    - kochen:
+    - cook:
         verschiedene Gerichte stehen zur Auswahl, wenn man Pech hat, isst der Scheschbot einem alles weg
     - pr0:
         ein Bild wird aus pr0gramm geholt, entweder per Zufall, Suchbegriff, ID oder das neueste

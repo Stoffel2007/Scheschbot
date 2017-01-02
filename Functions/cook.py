@@ -1,7 +1,7 @@
 from Events.Event import Event
 
 
-def kochen(message, food, event_handler):
+def cook(message, food, event_handler):
     name = message.from_user.first_name
     food = food.title()  # auf Großschreibung achten
     events = Event(message, [[5, 'koche Wass0 für ' + name + '....'],
