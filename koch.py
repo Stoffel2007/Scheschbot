@@ -9,6 +9,4 @@ def kochen(message, food, event_handler):
                              [5, food + ' für ' + name + ' sind fertig! :3']])
     event_handler.add_event(events)
 
-    params_dict = {'chat_id': message.chat_id,
-                   'text': 'Ok, wird gemacht....'}
-    return params_dict
+    return 'Ok, wird gemacht....'

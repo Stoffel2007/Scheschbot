@@ -42,7 +42,9 @@ def __process_message(message, event_handler):
         # passendes Kommando suchen
         # TODO: Kommandos generisch in Datenbank ablegen
         if command == 'koch':
-            params_dict = koch.kochen(message, param, event_handler)
+            text = koch.kochen(message, param, event_handler)
+            params_dict = {'chat_id': message.chat_id,
+                           'text': text}
             return [{'action': 'text', 'params_dict': params_dict}]
         if command == 'aggro':
             text = aggronyme.aggro(param)
