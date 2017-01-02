@@ -25,11 +25,11 @@ def get_answer(message):
                 input_id = line[0]
                 break
         elif text_before:
-            if message.startswith(required_input):
+            if message.endswith(required_input):
                 input_id = line[0]
                 break
         elif text_after:
-            if message.endswith(required_input):
+            if message.startswith(required_input):
                 input_id = line[0]
                 break
         else:
