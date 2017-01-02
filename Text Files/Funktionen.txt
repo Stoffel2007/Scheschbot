@@ -16,6 +16,7 @@ Kommando-Funktionen:
         ein Video wird aus pr0gramm geholt, entweder per Zufall, Suchbegriff, ID oder das neueste
     - Aggronyme:
         Bot beschreibt einen Namen anhand der einzelnen Buchstaben
+    - translate
 
 Inline-Funktionen:
     - randomize:
