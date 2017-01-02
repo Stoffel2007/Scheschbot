@@ -44,6 +44,14 @@ CREATE TABLE IF NOT EXISTS scheschbot.aggronymes
 DEFAULT CHARACTER SET = 'utf16'
 
 
+CREATE TABLE IF NOT EXISTS scheschbot.answer_output
+(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    output CHAR(64) NOT NULL
+)
+DEFAULT CHARACTER SET = 'utf16'
+
+
 CREATE TABLE IF NOT EXISTS scheschbot.answer_input
 (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -51,16 +59,9 @@ CREATE TABLE IF NOT EXISTS scheschbot.answer_input
     text_before BOOLEAN NOT NULL DEFAULT 0,
     text_after BOOLEAN NOT NULL DEFAULT 0,
     is_question BOOLEAN NOT NULL DEFAULT 0,
-    previous_answer_id INT NOT NULL,
-    FOREIGN KEY (predecessor_id) REFERENCES scheschbot.answer_input (id)
-)
-DEFAULT CHARACTER SET = 'utf16'
-
-
-CREATE TABLE IF NOT EXISTS scheschbot.answer_output
-(
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    output CHAR(64) NOT NULL
+    contains_specialchars BOOLEAN NOT NULL DEFAULT 0,
+    previous_output_id INT DEFAULT NULL,
+    FOREIGN KEY (previous_output_id) REFERENCES scheschbot.answer_output (id)
 )
 DEFAULT CHARACTER SET = 'utf16'
 
