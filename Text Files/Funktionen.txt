@@ -8,10 +8,12 @@ Kommando-Funktionen:
         gibt einen Überblick über verfügbare Aktionen
     - kochen:
         verschiedene Gerichte stehen zur Auswahl, wenn man Pech hat, isst der Scheschbot einem alles weg
-        zeitbasierte Events müssen implementiert werden
-    - pr0gramm:
-        ein Bild, GIF oder Video wird aus pr0gramm geholt, entweder per Zufall, Suchbegriff, ID oder das neueste
-
+    - pr0:
+        ein Bild wird aus pr0gramm geholt, entweder per Zufall, Suchbegriff, ID oder das neueste
+    - pr0gif:
+        ein GIF wird aus pr0gramm geholt, entweder per Zufall, Suchbegriff, ID oder das neueste
+    - pr0vid:
+        ein Video wird aus pr0gramm geholt, entweder per Zufall, Suchbegriff, ID oder das neueste
     - Aggronyme:
         Bot beschreibt einen Namen anhand der einzelnen Buchstaben
 
