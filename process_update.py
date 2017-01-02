@@ -1,11 +1,11 @@
 import random
+
 import telegram
-import aggronyme
+
+import constants
 import db_connect
 import inline_results
-import koch
-import mood
-import constants
+from Functions import aggronyme, mood, koch
 
 
 def get_message_list(update, event_handler):
