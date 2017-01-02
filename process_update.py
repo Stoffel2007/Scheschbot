@@ -5,6 +5,7 @@ import db_connect
 import inline_results
 import koch
 import mood
+import constants
 
 
 def get_message_list(update, event_handler):
@@ -37,7 +38,7 @@ def __process_message(message, event_handler):
     # Nachricht in Einzelteile zerlegen
     command, botname, param = __get_message_args(message.text)
 
-    if botname == 'scheschbot':  # Kommando war an den Scheschbot gerichtet
+    if botname == constants.botname:  # Kommando war an den Scheschbot gerichtet
         # passendes Kommando suchen
         # TODO: Kommandos generisch in Datenbank ablegen
         if command == 'koch':
@@ -74,7 +75,7 @@ def __process_edited_message(edited_message):
     # Nachricht in Einzelteile zerlegen
     command, botname, param = __get_message_args(edited_message.text)
 
-    if botname == 'scheschbot':  # Kommando war an den Scheschbot gerichtet
+    if botname == constants.botname:  # Kommando war an den Scheschbot gerichtet
         params_dict = {'chat_id': edited_message.chat_id,
                        'text': 'bearbeitete Nachricht',
                        'message_id': edited_message.message_id}
@@ -120,7 +121,7 @@ def __process_callback_query(callback_query,):
 def __get_message_args(message_text):
     # Default-Werte
     command = ''
-    botname = 'scheschbot'
+    botname = constants.botname
     param = ''
 
     if message_text.startswith('/'):  # Kommando
