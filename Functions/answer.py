@@ -6,9 +6,11 @@ def get_answer(message):
     output = ''
     input_id = None
     input_table = db_connect.select('answer_input')
-    print('input_table =', input_table)
+
+    print('input_table =')
 
     for line in input_table:
+        print("\t", line)
         required_input = line[1]
 
         # boolsche Werte setzen (0: False, 1: True)
@@ -17,8 +19,13 @@ def get_answer(message):
         is_question = line[4] == 1
         contains_specialchars = line[5] == 1
 
+        # Sonderzeichen entfernen (außer der gesuchte String enthält ebenfalls Sonderzeichen)
         if not contains_specialchars:
-            message = StringUtils.cut_spaces(message)
+            message = StringUtils.cut_specialchars(message)
+
+        # Leerzeichen am Anfang und Ende entfernen
+        # doppelte Leerzeichen kürzen
+        message = StringUtils.cut_spaces(message)
 
         # Fall 1: gesuchter Text kann an beliebiger Stelle in der Nachricht sein
         # Fall 2: gesuchter Text muss am Ende der Nachricht sein
@@ -43,4 +50,4 @@ def get_answer(message):
 
 
 if __name__ == '__main__':
-    print('answer =', get_answer('bot'))
+    print('answer =', get_answer('!schnauze bot!'))
