@@ -4,7 +4,7 @@ from Util import StringUtils
 
 def get_answer(message):
     output = ''
-    input_id = None
+    input_ids = []
     input_table = db_connect.select('answer_input')
 
     print('input_table =')
@@ -16,7 +16,7 @@ def get_answer(message):
         # boolsche Werte setzen (0: False, 1: True)
         text_before = line[2] == 1
         text_after = line[3] == 1
-        is_question = line[4] == 1
+        # is_question = line[4] == 1
         contains_specialchars = line[5] == 1
 
         # Sonderzeichen entfernen (außer der gesuchte String enthält ebenfalls Sonderzeichen)
@@ -36,18 +36,20 @@ def get_answer(message):
                 or (text_after and message.startswith(required_input))\
                 or message == required_input:
             # Übereinstimmung mit der Nachricht gefunden
-            input_id = line[0]
-            break
+            input_ids.append(line[0])
 
-    if input_id is not None:  # falls Übereinstimmung mit der Nachricht gefunden wurde
+    if len(input_ids) > 0:  # falls Übereinstimmungen mit der Nachricht gefunden wurden
+        # Input-IDs durch Komma trennen (für SQL-Abfrage)
+        input_ids_string = ', '.join(str(input_id) for input_id in input_ids)
+
         possible_outputs = db_connect.select('answer_relations AS rel '
                                              'JOIN answer_output AS output ON rel.output_id = output.id',
                                              'output',
-                                             'input_id = "' + input_id.__str__() + '"')
+                                             'input_id IN (' + input_ids_string + ')')
         print('possible_outputs =', possible_outputs)
 
     return output
 
 
 if __name__ == '__main__':
-    print('answer =', get_answer('!schnauze bot!'))
+    print('answer =', get_answer('lustig lustig'))
