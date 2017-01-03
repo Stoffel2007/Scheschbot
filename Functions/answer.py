@@ -59,3 +59,6 @@ if __name__ == '__main__':
     print('answer =', get_answer('lustig    LuStig'))
     print('answer =', get_answer('lustig lustig'))
     print('answer =', get_answer('schnauze ANDI!'))
+    print('answer =', get_answer('der nusch geht um!!!!'))
+    print('answer =', get_answer('...so ein KASCHBER!!!!'))
+    print('answer =', get_answer('...so ein KASCHB0!!!!'))
