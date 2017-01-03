@@ -6,59 +6,52 @@
 bot                                         => JOOOOOOOU
 lustig lustig                               => Herr Paschulke! => lustig lustig => Hehehehekekekekek!
 schnauze ....                               => Selber Schnauze, du blöder Önn0!
-freiwild ....                               => Aschwass0!
+.... freiwild ....                          => Aschwass0!
 .... ingwer ....                            => Igitt, Ingwer!
 .... nusch / joschi / janosch / josch ....  => Heil dem Kaiser!
-subb0                                       => Sybb0!
+.... subb0 ....                             => Sybb0!
 .... kaschber / kaschb0                     => Selber!
-.... der önner / önn0                       => Der Önn0!
-legg0                                       => Sehr :3
-diese hier                                  => Rügenwalder
+.... der önner / der önn0                   => Der Önn0!
+.... legg0 ....                             => Sehr :3
+diese hier / ja bitte                       => Rügenwalder
 danke ....                                  => Gern geschehen
-ja bitte                                    => Rügenwalder
+dankek                                      => Bittekek
 die mit der mühle                           => 'türlich
 genau                                       => *wurstbeiß* (Sticker?)
-sgeht                                       => sgeht
+.... sgeht ....                             => sgeht
 hey hey / heyhey                            => Ja ja    => hey hey / heyhey => Ja ich sitz in der Sonne und burn mein Gras  => jou / jo => usw.
 ja ja / jaja                                => Hey hey  => ja ja / jaja     => Ja ich sitz in der Sonne und burn mein Gras  => jou / jo => usw.
-schesch                                     => Sehr :3
-offensichtlich (nicht)                      => Denken sie nicht mit?
+.... schesch ....                           => Sehr :3
+.... offensichtlich (nicht) ....            => Denken sie nicht mit?
 denken sie nicht mit                        => Nein, nie! Haben sie nicht zugehört?
 wer hat uns verraten                        => Sozialdemokraten! => wer hat uns verraten => Verraten und verkauft!
-mess0                                       => G0bl!
-clean                                       => & lean :3
+.... mess0 ....                             => G0bl!
+.... clean                                  => & lean :3
 so true / sotrue                            => AMENAKOI!
 kek                                         => Äußerst :3
 schade                                      => :(
-essen / sn / usw                            => Appetit
+.... essen / sn / uwe ....                  => Appetit
 bist du dumm                                => Dumm ist der, der Dummes tut (hat meine Mama gesagt).
-du isst wie ein schwein                     => Nein, DU isst wie ein Schwein!
-dankek                                      => Bittekek
-feierabend / feieramd                       => Wie das duftet! => heftig deftig => würzig, gut :3
-naise                                       => Scho
-unsinn                                      => Schwachsinn! => blö(öööö)dsinn! => :3
-hoch die hände                              => WOCHENENDE!
+.... du isst wie ein schwein                => Nein, DU isst wie ein Schwein!
+.... feierabend / feieramd ....             => Wie das duftet! => heftig deftig => würzig, gut :3
+.... naise ....                             => Scho
+.... unsinn ....                            => Schwachsinn! => blödsinn! => :3
+.... hoch die hände ....                    => WOCHENENDE!
 linke hand                                  => LINKE HAND! => rechte hand => DEUTSCHLAND! => linkes bein => LINKES BEIN! => rechtes bein => WOLFJANG!
-önnen / nacht / n8                          => guuuute Nacht
+(.... önnen) / nacht / n8 / gn8             => guuuute Nacht
 nein                                        => Doch! => oh => :O
-moin (bot)                                  => Moin, du Önn0 :3 (je Nach Uhrzeit auch andere Antworten)
 huff                                        => Billigerbilligerbilliger! (Sticker?)
-muss man wissen                             => Weiß wieder keiner....
-wer weiß das                                => Wieder keiner....
-wochenende                                  => SAAAAAAAAAAAAAUFEEEEEEEEEN!
-witzig                                      => :D
-wann                                        => wo / Uhrzeit / Etz ned! / Irgendwann / Nie!
-wo                                          => Ralf Kullig / Koordinate
-:3                                          => :3
-.... Frage                                  => SAUFGELAGE!
+.... muss man wissen                        => Weiß wieder keiner....
+.... wer weiß das                           => Wieder keiner....
+.... wochenende ....                        => SAAAAAAAAAAAAAUFEEEEEEEEEN!
+.... witzig ....                            => :D
+.... :3                                     => :3
+.... frage                                  => SAUFGELAGE!
 :v / :V / v: / V:                           => :v / :V / v: / V:
 D:                                          => Oh Gott! :O
 wie viele ....?                             => Alle!
 wie viel ....?                              => Alles!
-(seit / ab / bis) wann ....?                => Uhrzeit
-wo / wohin / woher ....?                    => Koordinate
 wie ....?                                   => Irgendwie / Keine Ahnung / Weiß ich doch nicht, du Kaschb0! / Gar nicht! / Mit Hass :3
-wer / wen / wessen / wem ....?              => (zufälliger User) / Rainer Mederer / Axel Stoll, muss man wissen! / Niemand / Dr. Adolf Klenk / Harald Lesch / Hitler, kann das sein? / Alle! / Das weiß niemand so genau.... / Verrat ich dir doch nicht, du Önn0! / Niemand / I! Sicher! Neeeeed! / Ich natürlich! Wer sonst?!
 was ....?                                   => Nix / Alles
 wieso / weshalb / warum / weswegen ....?    => Das Universum will es so! / Aus Gründen / Warum denn nicht?! / Unterbewusste Steinzeitgründe ¯\_(ツ)_/¯ / Weil halt / Ist halt so! Find dich damit ab! / Darum / Woher soll ich das wissen?! / Das wüsstest du wohl gern, was?! / Weil deine Mutter so dumm ist!
 wozu ....?                                  =>
@@ -68,5 +61,11 @@ welche(s/r/n/m) ....?                       =>
                                                Ja / idT / Offensichtlich?! Denken sie nicht mit? / Natürlich! Was denn sonst?! / Gwiss!
 
 Sonderfälle:
+wer / wen / wessen / wem ....?              => (zufälliger User) / Rainer Mederer / Axel Stoll, muss man wissen! / Niemand / Dr. Adolf Klenk / Harald Lesch / Hitler, kann das sein? / Alle! / Das weiß niemand so genau.... / Verrat ich dir doch nicht, du Önn0! / Niemand / I! Sicher! Neeeeed! / Ich natürlich! Wer sonst?!
+wo / wohin / woher ....?                    => Koordinate
+(seit / ab / bis) wann ....?                => Uhrzeit
+wo                                          => Ralf Kullig / Koordinate
+wann                                        => wo / Uhrzeit / Etz ned! / Irgendwann / Nie!
+moin ....                                   => Moin, du Önn0 :3 (je Nach Uhrzeit auch andere Antworten)
 :<x>                                        => :<x-1>
 x oder y oder z?                            => x / y / z / Das sind doch bürgerliche Kategorien
