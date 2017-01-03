@@ -10,6 +10,7 @@ schnauze ....                               => Selber Schnauze, du blöder Önn0
 .... ingwer ....                            => Igitt, Ingwer!
 .... nusch / joschi / janosch / josch ....  => Heil dem Kaiser!
 .... subb0 ....                             => Sybb0!
+.... sybb0 ....                             => Oh ja!
 .... kaschber / kaschb0                     => Selber!
 .... der önner / der önn0                   => Der Önn0!
 .... legg0 ....                             => Sehr :3
