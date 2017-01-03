@@ -20,24 +20,19 @@ def get_answer(message):
         if not contains_specialchars:
             message = StringUtils.cut_spaces(message)
 
-        if text_before and text_after:
-            if required_input in message:
-                input_id = line[0]
-                break
-        elif text_before:
-            if message.endswith(required_input):
-                input_id = line[0]
-                break
-        elif text_after:
-            if message.startswith(required_input):
-                input_id = line[0]
-                break
-        else:
-            if message == required_input:
-                input_id = line[0]
-                break
+        # Fall 1: gesuchter Text kann an beliebiger Stelle in der Nachricht sein
+        # Fall 2: gesuchter Text muss am Ende der Nachricht sein
+        # Fall 3: gesuchter Text muss am Anfang der Nachricht sein
+        # Fall 3: gesuchter Text muss mit der Nachricht identisch sein
+        if (text_before and text_after and required_input in message)\
+                or (text_before and message.endswith(required_input))\
+                or (text_after and message.startswith(required_input))\
+                or message == required_input:
+            # Übereinstimmung mit der Nachricht gefunden
+            input_id = line[0]
+            break
 
-    if input_id is not None:
+    if input_id is not None:  # falls Übereinstimmung mit der Nachricht gefunden wurde
         possible_outputs = db_connect.select('answer_relations AS rel '
                                              'JOIN answer_output AS output ON rel.output_id = output.id',
                                              'output',
