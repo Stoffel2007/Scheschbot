@@ -60,11 +60,18 @@ def __process_message(message, event_handler):
 
             message_list = []
 
+            # Nachricht an die Admins
             for i in range(len(admin_ids)):
                 params_dict = {'chat_id': admin_ids[i][0],
                                'text': '"' + param + '" akzeptieren oder ablehnen?',
                                'reply_markup': keyboard}
                 message_list.append({'action': 'text', 'params_dict': params_dict})
+
+            # Nachricht an den Absender des feedme-Befehls
+            params_dict = {'chat_id': message.chat_id,
+                           'text': 'Die Admins werden zuerst überprüfen, ob "' + param +
+                                   '" akzeptiert oder abgelehnt wird'}
+            message_list.append({'action': 'text', 'params_dict': params_dict})
 
             return message_list
         return []  # kein passendes Kommando gefunden
