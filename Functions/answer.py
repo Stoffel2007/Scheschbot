@@ -3,14 +3,13 @@ from Util import StringUtils
 
 
 def get_answer(message):
+    print('input =', message)
+
     output = ''
     input_ids = []
     input_table = db_connect.select('answer_input')
 
-    print('input_table =')
-
     for line in input_table:
-        print("\t", line)
         required_input = line[1]
 
         # boolsche Werte setzen (0: False, 1: True)
@@ -21,9 +20,11 @@ def get_answer(message):
 
         # falls Frage gesucht wird: hat die Nachricht ein Fragezeichen am Ende?
         if not is_question or (is_question and message.endswith('?')):
-            # Sonderzeichen entfernen (außer der gesuchte String enthält ebenfalls Sonderzeichen)
+            # Sonderzeichen entfernen und alles klein schreiben
+            # (außer der gesuchte String enthält ebenfalls Sonderzeichen)
             if not contains_specialchars:
                 message = StringUtils.cut_specialchars(message)
+                message = message.lower()
 
             # Leerzeichen am Anfang und Ende entfernen
             # doppelte Leerzeichen kürzen
@@ -54,4 +55,7 @@ def get_answer(message):
 
 
 if __name__ == '__main__':
+    print('answer =', get_answer('bot?!?'))
+    print('answer =', get_answer('lustig    LuStig'))
     print('answer =', get_answer('lustig lustig'))
+    print('answer =', get_answer('schnauze ANDI!'))
