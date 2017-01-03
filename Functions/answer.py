@@ -16,27 +16,29 @@ def get_answer(message):
         # boolsche Werte setzen (0: False, 1: True)
         text_before = line[2] == 1
         text_after = line[3] == 1
-        # is_question = line[4] == 1
+        is_question = line[4] == 1
         contains_specialchars = line[5] == 1
 
-        # Sonderzeichen entfernen (außer der gesuchte String enthält ebenfalls Sonderzeichen)
-        if not contains_specialchars:
-            message = StringUtils.cut_specialchars(message)
+        # falls Frage gesucht wird: hat die Nachricht ein Fragezeichen am Ende?
+        if not is_question or (is_question and message.endswith('?')):
+            # Sonderzeichen entfernen (außer der gesuchte String enthält ebenfalls Sonderzeichen)
+            if not contains_specialchars:
+                message = StringUtils.cut_specialchars(message)
 
-        # Leerzeichen am Anfang und Ende entfernen
-        # doppelte Leerzeichen kürzen
-        message = StringUtils.cut_spaces(message)
+            # Leerzeichen am Anfang und Ende entfernen
+            # doppelte Leerzeichen kürzen
+            message = StringUtils.cut_spaces(message)
 
-        # Fall 1: gesuchter Text kann an beliebiger Stelle in der Nachricht sein
-        # Fall 2: gesuchter Text muss am Ende der Nachricht sein
-        # Fall 3: gesuchter Text muss am Anfang der Nachricht sein
-        # Fall 3: gesuchter Text muss mit der Nachricht identisch sein
-        if (text_before and text_after and required_input in message)\
-                or (text_before and message.endswith(required_input))\
-                or (text_after and message.startswith(required_input))\
-                or message == required_input:
-            # Übereinstimmung mit der Nachricht gefunden
-            input_ids.append(line[0])
+            # Fall 1: gesuchter Text kann an beliebiger Stelle in der Nachricht sein
+            # Fall 2: gesuchter Text muss am Ende der Nachricht sein
+            # Fall 3: gesuchter Text muss am Anfang der Nachricht sein
+            # Fall 3: gesuchter Text muss mit der Nachricht identisch sein
+            if (text_before and text_after and required_input in message)\
+                    or (text_before and message.endswith(required_input))\
+                    or (text_after and message.startswith(required_input))\
+                    or message == required_input:
+                # Übereinstimmung mit der Nachricht gefunden
+                input_ids.append(line[0])
 
     if len(input_ids) > 0:  # falls Übereinstimmungen mit der Nachricht gefunden wurden
         # Input-IDs durch Komma trennen (für SQL-Abfrage)
