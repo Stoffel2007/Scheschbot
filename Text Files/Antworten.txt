@@ -1,62 +1,7 @@
 #########################################################################
-# Diese Datei liefert einen Überblick über die Antworten,               #
+# Diese Datei liefert einen Überblick über die Sonder-Antworten,        #
 # die der Bot auf bestimmte Nachrichten sendet                          #
 #########################################################################
-
-bot                                         => JOOOOOOOU
-lustig lustig                               => Herr Paschulke! => lustig lustig => Hehehehekekekekek!
-schnauze ....                               => Selber Schnauze, du blöder Önn0!
-.... freiwild ....                          => Aschwass0!
-.... ingwer ....                            => Igitt, Ingwer!
-.... nusch / joschi / janosch / josch ....  => Heil dem Kaiser!
-.... subb0 ....                             => Sybb0!
-.... sybb0 ....                             => Oh ja!
-.... kaschber / kaschb0                     => Selber!
-.... der önner / der önn0                   => Der Önn0!
-.... legg0 ....                             => Sehr :3
-diese hier / ja bitte                       => Rügenwalder
-danke ....                                  => Gern geschehen
-dankek                                      => Bittekek
-die mit der mühle                           => 'türlich
-genau                                       => *wurstbeiß* (Sticker?)
-.... sgeht ....                             => sgeht
-hey hey / heyhey                            => Ja ja
-ja ja / jaja                                => Hey hey
-.... schesch ....                           => Sehr :3
-.... offensichtlich (nicht) ....            => Denken sie nicht mit?
-denken sie nicht mit                        => Nein, nie! Haben sie nicht zugehört?
-wer hat uns verraten                        => Sozialdemokraten! => wer hat uns verraten => Verraten und verkauft!
-wer hat uns verraten                        => Sozialdemokraten! => wer war mit dabei => Die grüne Partei!
-.... mess0 ....                             => G0bl
-.... clean                                  => & lean :3
-so true / sotrue                            => AMENAKOI!
-kek                                         => Äußerst :3
-schade                                      => :(
-.... essen / sn / uwe ....                  => Appetit / Einen Appetit / Einen Appetit wünsche ich / 1 n1en Appetit wünsche ich
-bist du dumm                                => Dumm ist der, der Dummes tut (hat meine Mama gesagt).
-.... du isst wie ein schwein                => Nein, DU isst wie ein Schwein!
-.... feierabend / feieramd ....             => Wie das duftet! => heftig deftig => würzig, gut :3
-.... naise ....                             => Scho
-.... unsinn ....                            => Schwachsinn! => blödsinn! => :3
-.... hoch die hände ....                    => WOCHENENDE!
-linke hand                                  => LINKE HAND! => rechte hand => DEUTSCHLAND! => linkes bein => LINKES BEIN! => rechtes bein => WOLFJANG!
-(.... önnen) / nacht / n8 / gn8             => guuuute Nacht
-nein                                        => Doch! => oh => :O
-huff                                        => Billigerbilligerbilliger! (Sticker?)
-.... muss man wissen                        => Weiß wieder keiner....
-.... wer weiß das                           => Wieder keiner....
-.... wochenende ....                        => SAAAAAAAAAAAAAUFEEEEEEEEEN!
-.... witzig ....                            => :D
-.... :3                                     => :3
-.... frage                                  => SAUFGELAGE!
-:v / :V / v: / V:                           => :v / :V / v: / V:
-D:                                          => Oh Gott! :O
-wie viele ....?                             => Alle!
-wie viel ....?                              => Alles!
-wie ....?                                   => Irgendwie / Keine Ahnung / Weiß ich doch nicht, du Kaschb0! / Gar nicht! / Mit Hass :3
-was ....?                                   => Nix / Alles
-wieso / weshalb / warum / weswegen ....?    => Weils mir so gefällt! / Das Universum will es so! / Aus Gründen / Warum denn nicht?! / Unterbewusste Steinzeitgründe ¯\_(ツ)_/¯ / Weil halt / Ist halt so! Find dich damit ab! / Darum! / Woher soll ich das wissen?! / Das wüsstest du wohl gern, was?! / Weil deine Mutter so dumm ist!
-wozu / wofür ....?                          => Einfach so / Damit ich Spaß habe / Um den Papst zu ärgern
 
 Sonderfälle:
 .... welche(s/r/n/m) ....?                  => Keine(s/r/n/m)
