@@ -1,5 +1,5 @@
 # Botdaten
-botkey = '149056495:AAEMFbT7Y3YS7jlkkdZG0JSm_fXBqcj-Epw'  # Scheschbot
+botkey = '149056495:AAEMFbT7Y3YS7jlkkdZG0JSm_fXBqcj-Epw'
 botname = 'scheschbot'
 
 # Datenbankverbindung
