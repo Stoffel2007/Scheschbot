@@ -1,15 +1,16 @@
 import pymysql
 import time
+import constants
 
 
 def __query(query_string):
     try:
         # Connection herstellen
-        connection = pymysql.connect(host='localhost',
-                                     port=3306,
-                                     user='root',
-                                     passwd='',
-                                     db='scheschbot')
+        connection = pymysql.connect(host=constants.host,
+                                     port=constants.port,
+                                     user=constants.user,
+                                     passwd=constants.passwd,
+                                     db=constants.db)
 
         # Verbindungsart Cursor
         cursor = connection.cursor()
