@@ -18,7 +18,7 @@ def main():
             print()
 
     # Bot-Objekt erstellen
-    bot = telegram.Bot(constants.scheschkey)
+    bot = telegram.Bot(constants.botkey)
 
     # EventHandler für zeitbasierte Events
     event_handler = EventHandler()
