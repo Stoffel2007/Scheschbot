@@ -20,18 +20,19 @@ dankek                                      => Bittekek
 die mit der mühle                           => 'türlich
 genau                                       => *wurstbeiß* (Sticker?)
 .... sgeht ....                             => sgeht
-hey hey / heyhey                            => Ja ja    => hey hey / heyhey => Ja ich sitz in der Sonne und burn mein Gras  => jou / jo => usw.
-ja ja / jaja                                => Hey hey  => ja ja / jaja     => Ja ich sitz in der Sonne und burn mein Gras  => jou / jo => usw.
+hey hey / heyhey                            => Ja ja
+ja ja / jaja                                => Hey hey
 .... schesch ....                           => Sehr :3
 .... offensichtlich (nicht) ....            => Denken sie nicht mit?
 denken sie nicht mit                        => Nein, nie! Haben sie nicht zugehört?
 wer hat uns verraten                        => Sozialdemokraten! => wer hat uns verraten => Verraten und verkauft!
-.... mess0 ....                             => G0bl!
+wer hat uns verraten                        => Sozialdemokraten! => wer war mit dabei => Die grüne Partei!
+.... mess0 ....                             => G0bl
 .... clean                                  => & lean :3
 so true / sotrue                            => AMENAKOI!
 kek                                         => Äußerst :3
 schade                                      => :(
-.... essen / sn / uwe ....                  => Appetit
+.... essen / sn / uwe ....                  => Appetit / Einen Appetit / Einen Appetit wünsche ich / 1 n1en Appetit wünsche ich
 bist du dumm                                => Dumm ist der, der Dummes tut (hat meine Mama gesagt).
 .... du isst wie ein schwein                => Nein, DU isst wie ein Schwein!
 .... feierabend / feieramd ....             => Wie das duftet! => heftig deftig => würzig, gut :3
@@ -54,19 +55,19 @@ wie viele ....?                             => Alle!
 wie viel ....?                              => Alles!
 wie ....?                                   => Irgendwie / Keine Ahnung / Weiß ich doch nicht, du Kaschb0! / Gar nicht! / Mit Hass :3
 was ....?                                   => Nix / Alles
-wieso / weshalb / warum / weswegen ....?    => Das Universum will es so! / Aus Gründen / Warum denn nicht?! / Unterbewusste Steinzeitgründe ¯\_(ツ)_/¯ / Weil halt / Ist halt so! Find dich damit ab! / Darum / Woher soll ich das wissen?! / Das wüsstest du wohl gern, was?! / Weil deine Mutter so dumm ist!
-wozu ....?                                  =>
-welche(s/r/n/m) ....?                       =>
-<Frage>                                     => Nein! => doch => Oh! :O
-<Frage>                                     => Nein! / Gwiss ned! / Wie kommst du denn da drauf?! Spinnst gwiss a weng?! / Uuuuuh! Neeeein! / Natürlich nicht! So ein Bach! /
-                                               Ja / idT / Offensichtlich?! Denken sie nicht mit? / Natürlich! Was denn sonst?! / Gwiss!
+wieso / weshalb / warum / weswegen ....?    => Weils mir so gefällt! / Das Universum will es so! / Aus Gründen / Warum denn nicht?! / Unterbewusste Steinzeitgründe ¯\_(ツ)_/¯ / Weil halt / Ist halt so! Find dich damit ab! / Darum! / Woher soll ich das wissen?! / Das wüsstest du wohl gern, was?! / Weil deine Mutter so dumm ist!
+wozu / wofür ....?                          => Einfach so / Damit ich Spaß habe / Um den Papst zu ärgern
 
 Sonderfälle:
-wer / wen / wessen / wem ....?              => (zufälliger User) / Rainer Mederer / Axel Stoll, muss man wissen! / Niemand / Dr. Adolf Klenk / Harald Lesch / Hitler, kann das sein? / Alle! / Das weiß niemand so genau.... / Verrat ich dir doch nicht, du Önn0! / Niemand / I! Sicher! Neeeeed! / Ich natürlich! Wer sonst?!
-wo / wohin / woher ....?                    => Koordinate
+.... welche(s/r/n/m) ....?                  => Keine(s/r/n/m)
+.... wer / wen / wessen / wem ....?         => (zufälliger User) / Rainer Mederer / Axel Stoll, muss man wissen! / Niemand / Dr. Adolf Klenk / Harald Lesch / Hitler, kann das sein? / Alle! / Das weiß niemand so genau.... / Verrat ich dir doch nicht, du Önn0! / Niemand / I! Sicher! Neeeeed! / Ich natürlich! Wer sonst?!
+(von) wo / wohin / woher ....?              => Koordinate
 (seit / ab / bis) wann ....?                => Uhrzeit
 wo                                          => Ralf Kullig / Koordinate
 wann                                        => wo / Uhrzeit / Etz ned! / Irgendwann / Nie!
 moin ....                                   => Moin, du Önn0 :3 (je Nach Uhrzeit auch andere Antworten)
 :<x>                                        => :<x-1>
 x oder y oder z?                            => x / y / z / Das sind doch bürgerliche Kategorien
+<Frage>                                     => Nein! => doch => Oh! :O
+<Frage>                                     => Nein! / Gwiss ned! / Wie kommst du denn da drauf?! Spinnst gwiss a weng?! / Uuuuuh! Neeeein! / Natürlich nicht! So ein Bach! /
+                                               Ja / idT / Offensichtlich?! Denken sie nicht mit? / Natürlich! Was denn sonst?! / Gwiss!
