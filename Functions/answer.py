@@ -58,12 +58,12 @@ def get_answer(message):
 
         last_output_id = __get_last_output_id(message.chat.id)
 
-        for output in possible_outputs:
-            if output[2] is not None:
-                if output[2] == last_output_id:
-                    possible_outputs_with_pre.append(output)
+        for output_line in possible_outputs:
+            if output_line[2] is not None:
+                if output_line[2] == last_output_id:
+                    possible_outputs_with_pre.append(output_line)
             else:
-                possible_outputs_without_pre.append(output)
+                possible_outputs_without_pre.append(output_line)
 
         if len(possible_outputs_with_pre) > 0:
             possible_outputs = possible_outputs_with_pre
@@ -73,6 +73,7 @@ def get_answer(message):
         print('possible_outputs =', possible_outputs)
 
         if len(possible_outputs) > 0:
+            print(1)
             # aus den möglichen Antworten eine zufällig wählen
             output_index = random.randint(0, len(possible_outputs) - 1)
             output = possible_outputs[output_index][0]
