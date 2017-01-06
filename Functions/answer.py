@@ -1,3 +1,4 @@
+import random
 import db_connect
 from Util import StringUtils
 
@@ -51,6 +52,10 @@ def get_answer(message):
                                              'input_id IN (' + input_ids_string + ')')
         print('possible_outputs =', possible_outputs)
 
+        # aus den möglichen Antworten eine zufällig wählen
+        output_index = random.randint(0, len(possible_outputs) - 1)
+        output = possible_outputs[output_index][0]
+
     return output
 
 
@@ -62,3 +67,4 @@ if __name__ == '__main__':
     print('answer =', get_answer('der nusch geht um!!!!'))
     print('answer =', get_answer('...so ein KASCHBER!!!!'))
     print('answer =', get_answer('...so ein KASCHB0!!!!'))
+    print('answer =', get_answer('kek'))
