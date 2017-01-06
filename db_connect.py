@@ -1,5 +1,5 @@
 import pymysql
-import time
+# import time
 
 
 def __query(query_string):

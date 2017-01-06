@@ -7,10 +7,11 @@ def get_answer(message):
     output = ''
     input_id = __get_input_id(message.text)
 
-    if input_id is not None:  # falls eine Übereinstimmung mit der Nachricht gefunden wurden
+    if input_id is not None:  # falls eine Übereinstimmung mit der Nachricht gefunden wurde
+        # 2D-Array in der Form [[output, output_id, previous_output_id], ....]
         possible_outputs = __get_possible_outputs(input_id, message.chat.id)
 
-        if len(possible_outputs) > 0:  # passende Outputs gefunden
+        if len(possible_outputs) > 0:  # passender Output gefunden
             # aus den möglichen Antworten eine zufällig wählen
             output_index = random.randint(0, len(possible_outputs) - 1)
             output = possible_outputs[output_index][0]
