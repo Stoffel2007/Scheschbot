@@ -118,6 +118,18 @@ def insert(table, column_array, value_array):
     return False
 
 
+# INSERT-Abfrage auf der Datenbank
+def delete(table, where_expression):
+    query_string = 'DELETE FROM ' + table + ' ' +\
+                   'WHERE ' + where_expression
+
+    result = __query(query_string)
+
+    if result is not False:
+        return True
+    return False
+
+
 # Wert für die SQL-Query vorbereiten
 def __prepare_for_query(value):
     # überprüft, ob ein Objekt ein Integer ist
