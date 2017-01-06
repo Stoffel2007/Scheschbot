@@ -4,10 +4,25 @@ from Util import StringUtils
 
 
 def get_answer(message):
-    original_input = message.text
-
     output = ''
-    input_id = None
+    input_id = __get_input_id(message.text)
+
+    if input_id is not None:  # falls eine Übereinstimmung mit der Nachricht gefunden wurden
+        possible_outputs = __get_possible_outputs(input_id, message.chat.id)
+
+        if len(possible_outputs) > 0:  # passende Outputs gefunden
+            # aus den möglichen Antworten eine zufällig wählen
+            output_index = random.randint(0, len(possible_outputs) - 1)
+            output = possible_outputs[output_index][0]
+
+            # ID des letzten Outputs in Datenbank ablegen
+            __set_last_output_id(possible_outputs[output_index][1], message.chat.id)
+
+    return output
+
+
+# sucht zu einer Nachricht den passenden Eintrag in der Datenbank und liefert dessen ID zurück
+def __get_input_id(original_input):
     input_table = db_connect.select('answer_input')
 
     # Input-Tabelle nach einem passenden Eintrag durchsuchen
@@ -40,46 +55,39 @@ def get_answer(message):
             # Fall 2: gesuchter Text muss am Ende der Nachricht sein
             # Fall 3: gesuchter Text muss am Anfang der Nachricht sein
             # Fall 3: gesuchter Text muss mit der Nachricht identisch sein
-            if (text_before and text_after and required_input in temp_input)\
-                    or (text_before and temp_input.endswith(required_input))\
-                    or (text_after and temp_input.startswith(required_input))\
+            if (text_before and text_after and required_input in temp_input) \
+                    or (text_before and temp_input.endswith(required_input)) \
+                    or (text_after and temp_input.startswith(required_input)) \
                     or temp_input == required_input:
                 # Übereinstimmung mit der Nachricht gefunden
-                input_id = line[0]
-                break
+                return line[0]
+    return None
 
-    if input_id is not None:  # falls eine Übereinstimmung mit der Nachricht gefunden wurden
-        possible_outputs = db_connect.select('answer_relations AS rel '
-                                             'JOIN answer_output AS output ON rel.output_id = output.id',
-                                             'output, output.id, previous_output_id',
-                                             'input_id = ' + input_id.__str__())
 
-        possible_outputs_with_pre = []
-        possible_outputs_without_pre = []
+# liefert zu einer Input-ID die möglichen Outputs zurück
+# Output mit erfülltr Vorbedingung haben Vorrang
+def __get_possible_outputs(input_id, chat_id):
+    possible_outputs = db_connect.select('answer_relations AS rel '
+                                         'JOIN answer_output AS output ON rel.output_id = output.id',
+                                         'output, output.id, previous_output_id',
+                                         'input_id = ' + input_id.__str__())
 
-        last_output_id = __get_last_output_id(message.chat.id)
+    possible_outputs_with_pre = []
+    possible_outputs_without_pre = []
 
-        for output_line in possible_outputs:
-            if output_line[2] is not None:
-                if output_line[2] == last_output_id:
-                    possible_outputs_with_pre.append(output_line)
-            else:
-                possible_outputs_without_pre.append(output_line)
+    last_output_id = __get_last_output_id(chat_id)
 
-        if len(possible_outputs_with_pre) > 0:
-            possible_outputs = possible_outputs_with_pre
+    for output_line in possible_outputs:
+        if output_line[2] is not None:
+            if output_line[2] == last_output_id:
+                possible_outputs_with_pre.append(output_line)  # Vorbedingung ist erfüllt
         else:
-            possible_outputs = possible_outputs_without_pre
+            possible_outputs_without_pre.append(output_line)  # Vorbedingung ist nicht erfüllt
 
-        if len(possible_outputs) > 0:
-            # aus den möglichen Antworten eine zufällig wählen
-            output_index = random.randint(0, len(possible_outputs) - 1)
-            output = possible_outputs[output_index][0]
-
-            # ID des letzten Outputs merken
-            __set_last_output_id(possible_outputs[output_index][1], message.chat.id)
-
-    return output
+    if len(possible_outputs_with_pre) > 0:  # mindestens ein Output mit erfüllter Vorbedingung wurde gefunden
+        return possible_outputs_with_pre
+    else:  # kein Output mit erfüllter Vorbedingung wurde gefunden
+        return possible_outputs_without_pre
 
 
 # ID des letzten Outputs aus dem Chat holen
