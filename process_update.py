@@ -3,7 +3,7 @@ import telegram
 import constants
 import db_connect
 import inline_results
-from Functions import aggronyme, cook, mood
+from Functions import aggronyme, cook, mood, answer
 
 
 def get_message_list(update, event_handler):
@@ -67,6 +67,14 @@ def __process_message(message, event_handler):
                 message_list.append({'action': 'text', 'params_dict': params_dict})
 
             return message_list
+
+        output = answer.get_answer(message.text)
+        print('output =', output)
+        if output != '':
+            params_dict = {'chat_id': message.chat_id,
+                           'text': output}
+            return [{'action': 'text', 'params_dict': params_dict}]
+
         return []  # kein passendes Kommando gefunden
     return []  # Kommando ging an anderen Bot
 
