@@ -38,8 +38,8 @@ CREATE TABLE IF NOT EXISTS scheschbot.aggronymes
     type_id INT NOT NULL,
     genus_id INT,
     votes INT NOT NULL DEFAULT 1,
-    FOREIGN KEY (type_id) REFERENCES scheschbot.word_types (id) ON DELETE CASCADE,
-    FOREIGN KEY (genus_id) REFERENCES scheschbot.genus (id) ON DELETE CASCADE
+    FOREIGN KEY (type_id) REFERENCES scheschbot.word_types (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (genus_id) REFERENCES scheschbot.genus (id) ON DELETE CASCADE ON UPDATE CASCADE
 )
 DEFAULT CHARACTER SET = 'utf16'
 
@@ -70,8 +70,8 @@ CREATE TABLE IF NOT EXISTS scheschbot.answer_relations
     input_id INT NOT NULL,
     output_id INT NOT NULL,
     previous_output_id INT DEFAULT NULL,
-    FOREIGN KEY (input_id) REFERENCES scheschbot.answer_input (id) ON DELETE CASCADE,
-    FOREIGN KEY (output_id) REFERENCES scheschbot.answer_output (id) ON DELETE CASCADE,
-    FOREIGN KEY (previous_output_id) REFERENCES scheschbot.answer_output (id) ON DELETE CASCADE
+    FOREIGN KEY (input_id) REFERENCES scheschbot.answer_input (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (output_id) REFERENCES scheschbot.answer_output (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (previous_output_id) REFERENCES scheschbot.answer_output (id) ON DELETE CASCADE ON UPDATE CASCADE
 )
 DEFAULT CHARACTER SET = 'utf16'
