@@ -4,10 +4,11 @@ from Util import StringUtils
 
 
 def get_answer(message):
-    print('input =', message)
+    original_input = message.text
+    print('input =', original_input)
 
     output = ''
-    input_ids = []
+    input_id = None
     input_table = db_connect.select('answer_input')
 
     for line in input_table:
@@ -19,52 +20,92 @@ def get_answer(message):
         is_question = line[4] == 1
         contains_specialchars = line[5] == 1
 
+        # verhindert, dass Modifikationen im ersten Durchlauf nicht mehr rückgängig gemacht werden können
+        temp_input = original_input
+
         # falls Frage gesucht wird: hat die Nachricht ein Fragezeichen am Ende?
-        if not is_question or (is_question and message.endswith('?')):
+        if not is_question or (is_question and temp_input.endswith('?')):
             # Sonderzeichen entfernen und alles klein schreiben
             # (außer der gesuchte String enthält ebenfalls Sonderzeichen)
             if not contains_specialchars:
-                message = StringUtils.cut_specialchars(message)
-                message = message.lower()
+                temp_input = StringUtils.cut_specialchars(temp_input)
+                temp_input = temp_input.lower()
 
             # Leerzeichen am Anfang und Ende entfernen
             # doppelte Leerzeichen kürzen
-            message = StringUtils.cut_spaces(message)
+            temp_input = StringUtils.cut_spaces(temp_input)
 
             # Fall 1: gesuchter Text kann an beliebiger Stelle in der Nachricht sein
             # Fall 2: gesuchter Text muss am Ende der Nachricht sein
             # Fall 3: gesuchter Text muss am Anfang der Nachricht sein
             # Fall 3: gesuchter Text muss mit der Nachricht identisch sein
-            if (text_before and text_after and required_input in message)\
-                    or (text_before and message.endswith(required_input))\
-                    or (text_after and message.startswith(required_input))\
-                    or message == required_input:
+            if (text_before and text_after and required_input in temp_input)\
+                    or (text_before and temp_input.endswith(required_input))\
+                    or (text_after and temp_input.startswith(required_input))\
+                    or temp_input == required_input:
                 # Übereinstimmung mit der Nachricht gefunden
-                input_ids.append(line[0])
+                input_id = line[0]
+                break
 
-    if len(input_ids) > 0:  # falls Übereinstimmungen mit der Nachricht gefunden wurden
-        # Input-IDs durch Komma trennen (für SQL-Abfrage)
-        input_ids_string = ', '.join(str(input_id) for input_id in input_ids)
-
+    if input_id is not None:  # falls Übereinstimmungen mit der Nachricht gefunden wurden
         possible_outputs = db_connect.select('answer_relations AS rel '
                                              'JOIN answer_output AS output ON rel.output_id = output.id',
-                                             'output',
-                                             'input_id IN (' + input_ids_string + ')')
+                                             'output, output.id, previous_output_id',
+                                             'input_id = ' + input_id.__str__())
+
+        possible_outputs_with_pre = []
+        possible_outputs_without_pre = []
+
+        last_output_id = __get_last_output_id(message.chat.id)
+
+        for output in possible_outputs:
+            if output[2] is not None:
+                if output[2] == last_output_id:
+                    possible_outputs_with_pre.append(output)
+            else:
+                possible_outputs_without_pre.append(output)
+
+        if len(possible_outputs_with_pre) > 0:
+            possible_outputs = possible_outputs_with_pre
+        else:
+            possible_outputs = possible_outputs_without_pre
+
         print('possible_outputs =', possible_outputs)
 
-        # aus den möglichen Antworten eine zufällig wählen
-        output_index = random.randint(0, len(possible_outputs) - 1)
-        output = possible_outputs[output_index][0]
+        if len(possible_outputs) > 0:
+            # aus den möglichen Antworten eine zufällig wählen
+            output_index = random.randint(0, len(possible_outputs) - 1)
+            output = possible_outputs[output_index][0]
+
+            # ID ds letzten Outputs merken
+            __set_last_output_id(possible_outputs[output_index][1], message.chat.id)
 
     return output
 
 
-if __name__ == '__main__':
-    print('answer =', get_answer('bot?!?'))
-    print('answer =', get_answer('lustig    LuStig'))
-    print('answer =', get_answer('lustig lustig'))
-    print('answer =', get_answer('schnauze ANDI!'))
-    print('answer =', get_answer('der nusch geht um!!!!'))
-    print('answer =', get_answer('...so ein KASCHBER!!!!'))
-    print('answer =', get_answer('...so ein KASCHB0!!!!'))
-    print('answer =', get_answer('kek'))
+def __get_last_output_id(chat_id):
+    last_update_id = None
+
+    result = db_connect.select('answer_last_output',
+                               'last_output_id',
+                               'chat_id = ' + chat_id.__str__())
+
+    if len(result) > 0:
+        last_update_id = result[0][0]
+
+    return last_update_id
+
+
+def __set_last_output_id(last_output_id, chat_id):
+    # überprüfen, ob zu diesem Chat bereits ein Eintrag existiert
+    old_output_id = __get_last_output_id(chat_id)
+
+    if old_output_id is not None:
+        db_connect.update('answer_last_output',
+                          ['last_output_id'],
+                          [last_output_id],
+                          'chat_id = ' + chat_id.__str__())
+    else:
+        db_connect.insert('answer_last_output',
+                          ['chat_id', 'last_output_id'],
+                          [chat_id, last_output_id])

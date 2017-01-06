@@ -68,7 +68,7 @@ def __process_message(message, event_handler):
 
             return message_list
 
-        output = answer.get_answer(message.text)
+        output = answer.get_answer(message)
         print('output =', output)
         if output != '':
             params_dict = {'chat_id': message.chat_id,
