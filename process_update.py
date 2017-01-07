@@ -50,28 +50,33 @@ def __process_message(message, event_handler):
                            'text': text}
             return [{'action': 'text', 'params_dict': params_dict}]
         if command == 'feedme':
-            # Buttons zum akzeptieren und ablehnen in  Keyboard ablegen
-            button1 = telegram.InlineKeyboardButton('Akzeptieren', callback_data='yes ' + param)
-            button2 = telegram.InlineKeyboardButton('Ablehnen', callback_data='no ' + param)
-            keyboard = telegram.InlineKeyboardMarkup([[button1, button2]])
-
-            # User-IDs der Admins aus der Datenbank holen
-            admin_ids = db_connect.select('users', 'telegram_id', where_expression='is_admin = 1')
-
             message_list = []
 
-            # Nachricht an die Admins
-            for i in range(len(admin_ids)):
-                params_dict = {'chat_id': admin_ids[i][0],
-                               'text': '"' + param + '" akzeptieren oder ablehnen?',
-                               'reply_markup': keyboard}
-                message_list.append({'action': 'text', 'params_dict': params_dict})
+            if param != '':
+                # Buttons zum akzeptieren und ablehnen in  Keyboard ablegen
+                button1 = telegram.InlineKeyboardButton('Akzeptieren', callback_data='yes ' + param)
+                button2 = telegram.InlineKeyboardButton('Ablehnen', callback_data='no ' + param)
+                keyboard = telegram.InlineKeyboardMarkup([[button1, button2]])
 
-            # Nachricht an den Absender des feedme-Befehls
-            params_dict = {'chat_id': message.chat_id,
-                           'text': 'Die Admins werden zuerst überprüfen, ob "' + param +
-                                   '" akzeptiert oder abgelehnt wird'}
-            message_list.append({'action': 'text', 'params_dict': params_dict})
+                # User-IDs der Admins aus der Datenbank holen
+                admin_ids = db_connect.select('users', 'telegram_id', where_expression='is_admin = 1')
+
+                # Nachricht an die Admins
+                for i in range(len(admin_ids)):
+                    params_dict = {'chat_id': admin_ids[i][0],
+                                   'text': '"' + param + '" akzeptieren oder ablehnen?',
+                                   'reply_markup': keyboard}
+                    message_list.append({'action': 'text', 'params_dict': params_dict})
+
+                # Nachricht an den Absender des feedme-Befehls
+                params_dict = {'chat_id': message.chat_id,
+                               'text': 'Die Admins werden zuerst überprüfen, ob "' + param +
+                                       '" akzeptiert oder abgelehnt wird'}
+                message_list.append({'action': 'text', 'params_dict': params_dict})
+            else:  # falls kein Parameter angegeben wurde
+                params_dict = {'chat_id': message.chat_id,
+                               'text': 'Du musst schon auch ein Wort dazuschreiben, du Depp....'}
+                message_list.append({'action': 'text', 'params_dict': params_dict})
 
             return message_list
         return []  # kein passendes Kommando gefunden
