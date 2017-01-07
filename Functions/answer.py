@@ -1,5 +1,6 @@
 import random
 import db_connect
+from Functions import answer_special
 from Util import StringUtils
 
 
@@ -36,7 +37,8 @@ def __get_output(message, chat_id):
             return possible_outputs[output_index]
 
     # keine passende Antwort gefunden
-    return ''
+    # in den Sonderfällen nach einer Antwort suchen
+    return answer_special.get_answer(message)
 
 
 # teilt eine Nachricht in einzelne Sätze auf (anhand von Satzzeichen)
