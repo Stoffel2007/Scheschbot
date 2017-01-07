@@ -22,7 +22,6 @@ def get_answer(message):
 
 # sucht zu einem bestimmten Input den passenden Output aus der Datenbank
 def __get_output(message, chat_id):
-    output = ''
     input_id = __get_input_id(message)
 
     if input_id is not None:  # falls eine Übereinstimmung mit der Nachricht gefunden wurde
@@ -32,12 +31,13 @@ def __get_output(message, chat_id):
         if len(possible_outputs) > 0:  # passender Output gefunden
             # aus den möglichen Antworten eine zufällig wählen
             output_index = random.randint(0, len(possible_outputs) - 1)
-            output = possible_outputs[output_index][0]
 
             # ID des letzten Outputs in Datenbank ablegen
             __set_last_output_id(possible_outputs[output_index][1], chat_id)
 
-    return output
+            return possible_outputs[output_index][0]
+
+    return ''
 
 
 # teilt eine Nachricht in einzelne Sätze auf (anhand von Satzzeichen)
