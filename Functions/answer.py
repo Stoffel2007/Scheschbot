@@ -81,8 +81,10 @@ def __get_input_id(original_input):
         # verhindert, dass Modifikationen im ersten Durchlauf nicht mehr rückgängig gemacht werden können
         temp_input = original_input
 
+        # falls keine Frage gesucht wird, darf auch keine Fragezeichen am Ende sein (sonst Ja/Nein-Frage)
         # falls Frage gesucht wird: hat die Nachricht ein Fragezeichen am Ende?
-        if not is_question or (is_question and temp_input.endswith('?')):
+        if (not is_question and not temp_input.endswith('?'))\
+                or (is_question and temp_input.endswith('?')):
             # Sonderzeichen entfernen und alles klein schreiben
             # (außer der gesuchte String enthält ebenfalls Sonderzeichen)
             if not contains_specialchars:
