@@ -9,8 +9,6 @@ def get_answer(message):
     # Nachricht anhand von Satzzeichen in einzelne Sätze aufteilen
     sentence_array = __split_message(message.text)
 
-    print(sentence_array)
-
     for sentence in sentence_array:
         # auf jeden Satz einzeln reagieren
         output = __get_output(sentence, message.chat.id)
@@ -33,10 +31,11 @@ def __get_output(message, chat_id):
             output_index = random.randint(0, len(possible_outputs) - 1)
 
             # ID des letzten Outputs in Datenbank ablegen
-            __set_last_output_id(possible_outputs[output_index][1], chat_id)
+            __set_last_output(possible_outputs[output_index], chat_id)
 
-            return possible_outputs[output_index][0]
+            return possible_outputs[output_index]
 
+    # keine passende Antwort gefunden
     return ''
 
 
@@ -120,21 +119,22 @@ def __get_input_id(original_input):
 # Output mit erfülltr Vorbedingung haben Vorrang
 def __get_possible_outputs(input_id, chat_id):
     possible_outputs = db_connect.select('answer_relations AS rel '
-                                         'JOIN answer_output AS output ON rel.output_id = output.id',
-                                         'output, output.id, previous_output_id',
+                                         'JOIN answer_output AS output ON rel.output_id = output.id '
+                                         'LEFT JOIN answer_output AS pre ON rel.previous_output_id = pre.id',
+                                         'output.output, pre.output',
                                          'input_id = ' + input_id.__str__())
 
     possible_outputs_with_pre = []
     possible_outputs_without_pre = []
 
-    last_output_id = __get_last_output_id(chat_id)
+    last_output = __get_last_output(chat_id)
 
     for output_line in possible_outputs:
-        if output_line[2] is not None:
-            if output_line[2] == last_output_id:
-                possible_outputs_with_pre.append(output_line)  # Vorbedingung ist erfüllt
+        if output_line[1] is not None:
+            if output_line[1] == last_output:
+                possible_outputs_with_pre.append(output_line[0])  # Vorbedingung ist erfüllt
         else:
-            possible_outputs_without_pre.append(output_line)  # Vorbedingung ist nicht erfüllt
+            possible_outputs_without_pre.append(output_line[0])  # Vorbedingung ist nicht erfüllt
 
     if len(possible_outputs_with_pre) > 0:  # mindestens ein Output mit erfüllter Vorbedingung wurde gefunden
         return possible_outputs_with_pre
@@ -144,11 +144,11 @@ def __get_possible_outputs(input_id, chat_id):
 
 # ID des letzten Outputs aus dem Chat holen
 # liefert None, falls noch kein Eintrag zu diesem Chat existiert
-def __get_last_output_id(chat_id):
+def __get_last_output(chat_id):
     last_update_id = None
 
     result = db_connect.select('answer_last_output',
-                               'last_output_id',
+                               'last_output',
                                'chat_id = ' + chat_id.__str__())
 
     # falls Ergebnis herauskam
@@ -159,16 +159,16 @@ def __get_last_output_id(chat_id):
 
 
 # letzten Output für einen bestimmten Chat in Datenbank speichern
-def __set_last_output_id(last_output_id, chat_id):
+def __set_last_output(last_output, chat_id):
     # überprüfen, ob zu diesem Chat bereits ein Eintrag existiert
-    old_output_id = __get_last_output_id(chat_id)
+    old_output_id = __get_last_output(chat_id)
 
     if old_output_id is not None:  # Eintrag existiert bereits
         db_connect.update('answer_last_output',
-                          ['last_output_id'],
-                          [last_output_id],
+                          ['last_output'],
+                          [last_output],
                           'chat_id = ' + chat_id.__str__())
     else:  # Eintrag existiert noch nicht
         db_connect.insert('answer_last_output',
-                          ['chat_id', 'last_output_id'],
-                          [chat_id, last_output_id])
+                          ['chat_id', 'last_output'],
+                          [chat_id, last_output])

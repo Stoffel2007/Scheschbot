@@ -81,6 +81,5 @@ CREATE TABLE IF NOT EXISTS scheschbot.answer_last_output
 (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     chat_id INT NOT NULL,
-    last_output_id INT NOT NULL,
-    FOREIGN KEY (last_output_id) REFERENCES scheschbot.answer_output (id)
+    last_output TEXT NOT NULL
 )
