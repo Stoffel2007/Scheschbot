@@ -4,7 +4,6 @@
 #########################################################################
 
 Sonderfälle:
-.... welche(s/r/n/m) ....?                  => Keine(s/r/n/m)
 .... wer / wen / wessen / wem ....?         => (zufälliger User) / Rainer Mederer / Axel Stoll, muss man wissen! / Niemand / Dr. Adolf Klenk / Harald Lesch / Hitler, kann das sein? / Alle! / Das weiß niemand so genau.... / Verrat ich dir doch nicht, du Önn0! / Niemand / I! Sicher! Neeeeed! / Ich natürlich! Wer sonst?!
 (von) wo / wohin / woher ....?              => Koordinate
 (seit / ab / bis) wann ....?                => Uhrzeit
