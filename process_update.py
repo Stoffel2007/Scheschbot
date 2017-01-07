@@ -79,8 +79,7 @@ def __process_message(message, event_handler):
                 message_list.append({'action': 'text', 'params_dict': params_dict})
 
             return message_list
-        return []  # kein passendes Kommando gefunden
-    return []  # Kommando ging an anderen Bot
+    return []  # kein passendes Kommando gefunden oder Kommando ging an anderen Bot
 
 
 def __process_edited_message(edited_message):
