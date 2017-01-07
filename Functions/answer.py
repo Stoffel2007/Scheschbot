@@ -4,12 +4,30 @@ from Util import StringUtils
 
 
 def get_answer(message):
+    answer = ''
+
+    # Nachricht anhand von Satzzeichen in einzelne Sätze aufteilen
+    sentence_array = __split_message(message.text)
+
+    print(sentence_array)
+
+    for sentence in sentence_array:
+        # auf jeden Satz einzeln reagieren
+        output = __get_output(sentence, message.chat.id)
+        if output != '':
+            answer += output + '\n'
+
+    return answer
+
+
+# sucht zu einem bestimmten Input den passenden Output aus der Datenbank
+def __get_output(message, chat_id):
     output = ''
-    input_id = __get_input_id(message.text)
+    input_id = __get_input_id(message)
 
     if input_id is not None:  # falls eine Übereinstimmung mit der Nachricht gefunden wurde
         # 2D-Array in der Form [[output, output_id, previous_output_id], ....]
-        possible_outputs = __get_possible_outputs(input_id, message.chat.id)
+        possible_outputs = __get_possible_outputs(input_id, chat_id)
 
         if len(possible_outputs) > 0:  # passender Output gefunden
             # aus den möglichen Antworten eine zufällig wählen
@@ -17,9 +35,31 @@ def get_answer(message):
             output = possible_outputs[output_index][0]
 
             # ID des letzten Outputs in Datenbank ablegen
-            __set_last_output_id(possible_outputs[output_index][1], message.chat.id)
+            __set_last_output_id(possible_outputs[output_index][1], chat_id)
 
     return output
+
+
+# teilt eine Nachricht in einzelne Sätze auf (anhand von Satzzeichen)
+def __split_message(message):
+    sentence_array = []
+    delimiters = ['.', '!', '?']
+    last_index = 0
+
+    for i in range(len(message)):
+        for char in delimiters:
+            if message[i] == char:
+                sentence = message[last_index:i + 1]
+                sentence_array.append(sentence)
+                last_index = i + 1
+
+    # falls kein Satzzeichen am Ende steht
+    # letzten Satz auch noch hinzufügen
+    if last_index < len(message):
+        sentence = message[last_index:len(message)]
+        sentence_array.append(sentence)
+
+    return sentence_array
 
 
 # sucht zu einer Nachricht den passenden Eintrag in der Datenbank und liefert dessen ID zurück
