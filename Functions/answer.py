@@ -53,13 +53,15 @@ def __get_input_id(original_input):
             temp_input = StringUtils.cut_spaces(temp_input)
 
             # Fall 1: gesuchter Text kann an beliebiger Stelle in der Nachricht sein
+            case1 = text_before and text_after and required_input in temp_input
             # Fall 2: gesuchter Text muss am Ende der Nachricht sein
+            case2 = text_before and temp_input.endswith(required_input)
             # Fall 3: gesuchter Text muss am Anfang der Nachricht sein
-            # Fall 3: gesuchter Text muss mit der Nachricht identisch sein
-            if (text_before and text_after and required_input in temp_input) \
-                    or (text_before and temp_input.endswith(required_input)) \
-                    or (text_after and temp_input.startswith(required_input)) \
-                    or temp_input == required_input:
+            case3 = text_after and temp_input.startswith(required_input)
+            # Fall 4: gesuchter Text muss mit der Nachricht identisch sein
+            case4 = temp_input == required_input
+
+            if case1 or case2 or case3 or case4:
                 # Übereinstimmung mit der Nachricht gefunden
                 return line[0]
     return None
