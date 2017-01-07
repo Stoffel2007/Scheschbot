@@ -52,14 +52,23 @@ def __get_input_id(original_input):
             # doppelte Leerzeichen kürzen
             temp_input = StringUtils.cut_spaces(temp_input)
 
+            # Text ist identisch mit dem gesuchten Input
+            text_is_input = temp_input == required_input
+            # gesuchter Input ist am Anfang des Textes (mit Leerzeichen)
+            text_at_start = temp_input.startswith(required_input + ' ')
+            # gesuchter Input ist am Ende des Textes (mit Leerzeichen)
+            text_at_end = temp_input.endswith(' ' + required_input)
+            # gesuchter Input ist in der Mitte des Textes (mit Leerzeichen)
+            text_in_input = ' ' + required_input + ' ' in temp_input
+
             # Fall 1: gesuchter Text kann an beliebiger Stelle in der Nachricht sein
-            case1 = text_before and text_after and required_input in temp_input
+            case1 = text_before and text_after and (text_is_input or text_at_start or text_at_end or text_in_input)
             # Fall 2: gesuchter Text muss am Ende der Nachricht sein
-            case2 = text_before and temp_input.endswith(required_input)
+            case2 = text_before and (text_is_input or text_at_end)
             # Fall 3: gesuchter Text muss am Anfang der Nachricht sein
-            case3 = text_after and temp_input.startswith(required_input)
+            case3 = text_after and (text_is_input or text_at_start)
             # Fall 4: gesuchter Text muss mit der Nachricht identisch sein
-            case4 = temp_input == required_input
+            case4 = text_is_input
 
             if case1 or case2 or case3 or case4:
                 # Übereinstimmung mit der Nachricht gefunden
