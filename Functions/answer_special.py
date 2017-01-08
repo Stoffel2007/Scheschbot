@@ -4,15 +4,14 @@ from Util import StringUtils
 
 
 def get_answer(message):
-    answer = ''
-
     # Sonderzeichen abschneiden
     normalized_message = StringUtils.cut_specialchars(message)
 
     if normalized_message.startswith('moin ') or normalized_message == 'moin':
-        answer = __get_greeting()
+        return __get_greeting()
 
-    return answer
+    # kein Ergebnis gefunden
+    return ''
 
 
 # liefert je nach Uhrzeit eine andere Antwort zurück
