@@ -46,20 +46,34 @@ def __get_colonthree(number_string, last_output):
 # zählt eine Zahl um 1 runter (egal ob Ganzzahl oder Gleitkommazahl)
 def __countdown(number):
     # Komma durch Punkt ersetzen, damit der String als Zahl erkannt werden kann
-    contains_comma = ',' in number
+    contains_comma = ',' in str(number)
     if contains_comma:
-        number = number.replace(',', '.')
+        number = str(number).replace(',', '.')
 
     if __is_int(number):  # Ganzzahl extra runterzählen, damit kein Punkt entsteht
         number = int(number) - 1
     else:
+        # Anzahl der Nachkommastellen merken (für späteres Runden)
+        number_of_digits = __get_number_of_digits(number)
+
         number = float(number) - 1
+
+        # Nachkommastellen runden (bei Fehlern durch Floating Point Precision)
+        format_string = '{0:.' + number_of_digits.__str__() + 'f}'
+        number = format_string.format(number)
 
         # Punkt wieder durch Komma ersetzen, falls vorher ein Komma da war
         if contains_comma:
             number = str(number).replace('.', ',')
 
     return str(number)
+
+
+# liefert die Anzahl an Nachkommastellen einer Zahl
+def __get_number_of_digits(number):
+    if '.' in str(number):
+        return len(str(number).split('.')[1])
+    return 0
 
 
 # gibt an, ob ein String eine Ganzzahl ist
