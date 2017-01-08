@@ -19,28 +19,6 @@ def get_answer(message):
     return answer
 
 
-# sucht zu einem bestimmten Input den passenden Output aus der Datenbank
-def __get_output(message, chat_id):
-    input_id = __get_input_id(message)
-
-    if input_id is not None:  # falls eine Übereinstimmung mit der Nachricht gefunden wurde
-        # 2D-Array in der Form [[output, output_id, previous_output_id], ....]
-        possible_outputs = __get_possible_outputs(input_id, chat_id)
-
-        if len(possible_outputs) > 0:  # passender Output gefunden
-            # aus den möglichen Antworten eine zufällig wählen
-            output_index = random.randint(0, len(possible_outputs) - 1)
-
-            # ID des letzten Outputs in Datenbank ablegen
-            __set_last_output(possible_outputs[output_index], chat_id)
-
-            return possible_outputs[output_index]
-
-    # keine passende Antwort gefunden
-    # in den Sonderfällen nach einer Antwort suchen
-    return answer_special.get_answer(message)
-
-
 # teilt eine Nachricht in einzelne Sätze auf (anhand von Satzzeichen)
 def __split_message(message):
     sentence_array = []
@@ -61,6 +39,28 @@ def __split_message(message):
         sentence_array.append(sentence)
 
     return sentence_array
+
+
+# sucht zu einem bestimmten Input den passenden Output aus der Datenbank
+def __get_output(message, chat_id):
+    input_id = __get_input_id(message)
+
+    if input_id is not None:  # falls eine Übereinstimmung mit der Nachricht gefunden wurde
+        # 2D-Array in der Form [[output, output_id, previous_output_id], ....]
+        possible_outputs = __get_possible_outputs(input_id, chat_id)
+
+        if len(possible_outputs) > 0:  # passender Output gefunden
+            # aus den möglichen Antworten eine zufällig wählen
+            output_index = random.randint(0, len(possible_outputs) - 1)
+
+            # ID des letzten Outputs in Datenbank ablegen
+            __set_last_output(possible_outputs[output_index], chat_id)
+
+            return possible_outputs[output_index]
+
+    # keine passende Antwort gefunden
+    # in den Sonderfällen nach einer Antwort suchen
+    return answer_special.get_answer(message)
 
 
 # sucht zu einer Nachricht den passenden Eintrag in der Datenbank und liefert dessen ID zurück
