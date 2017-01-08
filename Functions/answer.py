@@ -19,28 +19,6 @@ def get_answer(message):
     return answer
 
 
-# teilt eine Nachricht in einzelne Sätze auf (anhand von Satzzeichen)
-def __split_message(message):
-    sentence_array = []
-    delimiters = ['.', '!', '?']  # Satzzeichen
-    last_index = 0  # Stelle des letzten Satzzeichens merken
-
-    for i in range(len(message)):
-        for char in delimiters:
-            if i < len(message) - 1 and message[i:i+2] == char + ' ':
-                sentence = message[last_index:i + 2]
-                sentence_array.append(sentence)
-                last_index = i + 2
-
-    # falls kein Satzzeichen am Ende steht
-    # letzten Satz auch noch hinzufügen
-    if last_index < len(message):
-        sentence = message[last_index:len(message)]
-        sentence_array.append(sentence)
-
-    return sentence_array
-
-
 # sucht zu einem bestimmten Input den passenden Output aus der Datenbank
 def __get_output(message, chat_id):
     input_id = __get_input_id(message)
@@ -61,6 +39,28 @@ def __get_output(message, chat_id):
     # keine passende Antwort gefunden
     # in den Sonderfällen nach einer Antwort suchen
     return answer_special.get_answer(message)
+
+
+# teilt eine Nachricht in einzelne Sätze auf (anhand von Satzzeichen)
+def __split_message(message):
+    sentence_array = []
+    delimiters = ['.', '!', '?']  # Satzzeichen
+    last_index = 0  # Stelle des letzten Satzzeichens merken
+
+    for i in range(len(message)):
+        for char in delimiters:
+            if i < len(message) - 1 and message[i:i+2] == char + ' ':
+                sentence = message[last_index:i + 2]
+                sentence_array.append(sentence)
+                last_index = i + 2
+
+    # falls kein Satzzeichen am Ende steht
+    # letzten Satz auch noch hinzufügen
+    if last_index < len(message):
+        sentence = message[last_index:len(message)]
+        sentence_array.append(sentence)
+
+    return sentence_array
 
 
 # sucht zu einer Nachricht den passenden Eintrag in der Datenbank und liefert dessen ID zurück
