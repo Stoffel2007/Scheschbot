@@ -39,7 +39,8 @@ def __get_colonthree(number_string, last_output):
     if number_string == '3' and last_output != ':4':
         return ':3'
     else:
-        return ':' + __countdown(number_string)
+        number_string_minus_one = __countdown(number_string)
+        return ':' + number_string_minus_one
 
 
 # zählt eine Zahl um 1 runter (egal ob Ganzzahl oder Gleitkommazahl)
