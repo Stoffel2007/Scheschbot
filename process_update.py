@@ -60,11 +60,12 @@ def __process_message(message, event_handler):
 
             message_list = []
 
-            for i in range(len(admin_ids)):
-                params_dict = {'chat_id': admin_ids[i][0],
-                               'text': '"' + param + '" akzeptieren oder ablehnen?',
-                               'reply_markup': keyboard}
-                message_list.append({'action': 'text', 'params_dict': params_dict})
+            if admin_ids is not False:  # Datenbankabfrage war erfolgreich
+                for i in range(len(admin_ids)):
+                    params_dict = {'chat_id': admin_ids[i][0],
+                                   'text': '"' + param + '" akzeptieren oder ablehnen?',
+                                   'reply_markup': keyboard}
+                    message_list.append({'action': 'text', 'params_dict': params_dict})
 
             return message_list
 
