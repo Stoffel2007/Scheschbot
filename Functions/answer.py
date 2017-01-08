@@ -58,9 +58,6 @@ def __split_message(message):
     # letzten Satz auch noch hinzufügen
     if last_index < len(message):
         sentence = message[last_index:len(message)]
-        # Leerzeichen am Anfang und Ende entfernen
-        # doppelte Leerzeichen kürzen
-        sentence = StringUtils.cut_spaces(sentence)
         sentence_array.append(sentence)
 
     return sentence_array
@@ -93,6 +90,10 @@ def __get_input_id(original_input):
             if not contains_specialchars:
                 temp_input = StringUtils.cut_specialchars(temp_input)
                 temp_input = temp_input.lower()
+
+            # Leerzeichen am Anfang und Ende entfernen
+            # doppelte Leerzeichen kürzen
+            temp_input = StringUtils.cut_spaces(temp_input)
 
             # Text ist identisch mit dem gesuchten Input
             text_is_input = temp_input == required_input
