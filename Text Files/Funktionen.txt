@@ -37,3 +37,4 @@ Ideen:
     - Schnellgericht vorschlagen (inline)
     - Zufallsfakten in randomschesch mit einbinden (evtl. erster Absatz aus Wikipedia)
     - Stupsfunktion (inline)
+    - russisch automatisch übersetzen (ohne Nachfrage)
