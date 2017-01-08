@@ -60,14 +60,16 @@ def __split_message(message):
         for char in delimiters:
             if i < len(message) - 1 and message[i:i+2] == char + ' ':
                 sentence = message[last_index:i + 2]
-                sentence_array.append(sentence)
+                for line in sentence.splitlines():
+                    sentence_array.append(line)
                 last_index = i + 2
 
     # falls kein Satzzeichen am Ende steht
     # letzten Satz auch noch hinzufügen
     if last_index < len(message):
         sentence = message[last_index:len(message)]
-        sentence_array.append(sentence)
+        for line in sentence.splitlines():
+            sentence_array.append(line)
 
     return sentence_array
 
