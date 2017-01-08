@@ -31,14 +31,23 @@ def __get_output(message, chat_id):
             # aus den möglichen Antworten eine zufällig wählen
             output_index = random.randint(0, len(possible_outputs) - 1)
 
-            # ID des letzten Outputs in Datenbank ablegen
-            __set_last_output(possible_outputs[output_index], chat_id)
+            output = possible_outputs[output_index]
 
-            return possible_outputs[output_index]
+            # ID des letzten Outputs in Datenbank ablegen
+            __set_last_output(output, chat_id)
+
+            return output
 
     # keine passende Antwort gefunden
     # in den Sonderfällen nach einer Antwort suchen
-    return answer_special.get_answer(message)
+    last_output = __get_last_output(chat_id)
+    output = answer_special.get_answer(message, last_output)
+
+    if output != '':  # falls Output gefunden, in Datenbank abspeichern
+        __set_last_output(output, chat_id)
+
+    # Output zurückliefern (evtl. auch leerer String)
+    return output
 
 
 # teilt eine Nachricht in einzelne Sätze auf (anhand von Satzzeichen)

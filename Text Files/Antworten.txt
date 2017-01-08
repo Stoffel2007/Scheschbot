@@ -5,10 +5,10 @@
 
 Sonderfälle:
 moin ....                                   => Moin, du Önn0 :3 (je Nach Uhrzeit auch andere Antworten)
+:<x>                                        => :<x-1>
 wer / wen / wessen / wem ....?              => (zufälliger User) / Rainer Mederer / Axel Stoll, muss man wissen! / Niemand / Dr. Adolf Klenk / Harald Lesch / Hitler, kann das sein? / Alle! / Das weiß niemand so genau.... / Verrat ich dir doch nicht, du Önn0! / Niemand / I! Sicher! Neeeeed! / Ich natürlich! Wer sonst?!1
 (von) wo / wohin / woher ....?              => Koordinate
 (seit / ab / bis) wann ....?                => Uhrzeit / Etz ned! / Irgendwann / Nie!
-:<x>                                        => :<x-1>
 x oder y oder z?                            => x / y / z / Das sind doch bürgerliche Kategorien
 <Frage>                                     => Nein! => doch => Oh! :O
 <Frage>                                     => Nein! / Gwiss ned! / Wie kommst du denn da drauf?! Spinnst gwiss a weng?! / Uuuuuh! Neeeein! / Natürlich nicht! So ein Bach! /
