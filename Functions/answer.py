@@ -44,15 +44,15 @@ def __get_output(message, chat_id):
 # teilt eine Nachricht in einzelne Sätze auf (anhand von Satzzeichen)
 def __split_message(message):
     sentence_array = []
-    delimiters = ['.', '!', '?']
-    last_index = 0
+    delimiters = ['.', '!', '?']  # Satzzeichen
+    last_index = 0  # Stelle des letzten Satzzeichens merken
 
     for i in range(len(message)):
         for char in delimiters:
-            if message[i] == char:
-                sentence = message[last_index:i + 1]
+            if i < len(message) - 1 and message[i:i+2] == char + ' ':
+                sentence = message[last_index:i + 2]
                 sentence_array.append(sentence)
-                last_index = i + 1
+                last_index = i + 2
 
     # falls kein Satzzeichen am Ende steht
     # letzten Satz auch noch hinzufügen
@@ -81,19 +81,19 @@ def __get_input_id(original_input):
         # verhindert, dass Modifikationen im ersten Durchlauf nicht mehr rückgängig gemacht werden können
         temp_input = original_input
 
+        # Leerzeichen am Anfang und Ende entfernen
+        # doppelte Leerzeichen kürzen
+        temp_input = StringUtils.cut_spaces(temp_input)
+
+        # Vereinfachung des logischen Ausdrucks: beide Werte müssen identisch sein (beide True oder beide False)
         # falls keine Frage gesucht wird, darf auch keine Fragezeichen am Ende sein (sonst Ja/Nein-Frage)
         # falls Frage gesucht wird: hat die Nachricht ein Fragezeichen am Ende?
-        # Vereinfachung des logischen Ausdrucks: beide Werte müssen identisch sein (beide True oder beide False)
         if is_question == temp_input.endswith('?'):
             # Sonderzeichen entfernen und alles klein schreiben
             # (außer der gesuchte String enthält ebenfalls Sonderzeichen)
             if not contains_specialchars:
                 temp_input = StringUtils.cut_specialchars(temp_input)
                 temp_input = temp_input.lower()
-
-            # Leerzeichen am Anfang und Ende entfernen
-            # doppelte Leerzeichen kürzen
-            temp_input = StringUtils.cut_spaces(temp_input)
 
             # Text ist identisch mit dem gesuchten Input
             text_is_input = temp_input == required_input
