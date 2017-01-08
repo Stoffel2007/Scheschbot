@@ -58,6 +58,9 @@ def __split_message(message):
     # letzten Satz auch noch hinzufügen
     if last_index < len(message):
         sentence = message[last_index:len(message)]
+        # Leerzeichen am Anfang und Ende entfernen
+        # doppelte Leerzeichen kürzen
+        sentence = StringUtils.cut_spaces(sentence)
         sentence_array.append(sentence)
 
     return sentence_array
@@ -80,10 +83,6 @@ def __get_input_id(original_input):
 
         # verhindert, dass Modifikationen im ersten Durchlauf nicht mehr rückgängig gemacht werden können
         temp_input = original_input
-
-        # Leerzeichen am Anfang und Ende entfernen
-        # doppelte Leerzeichen kürzen
-        temp_input = StringUtils.cut_spaces(temp_input)
 
         # Vereinfachung des logischen Ausdrucks: beide Werte müssen identisch sein (beide True oder beide False)
         # falls keine Frage gesucht wird, darf auch keine Fragezeichen am Ende sein (sonst Ja/Nein-Frage)
