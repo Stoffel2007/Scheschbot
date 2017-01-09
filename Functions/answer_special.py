@@ -25,7 +25,7 @@ def __get_greeting():
                        ['Was treibt dich denn bitte um zu dieser unchritlichen Stunde?!', 8],
                        ['Moin, du Önn0 :3', 12],
                        ['Was für "moin"?! Es ist hellichter Tag, du Langschläfer!', 16],
-                       ['Was hast du denn für einen Schlafrhythmus, dass du erst jetzt aufstehst?!', 20],
+                       ['Was ist das für 1 Schlafrhythmus, dass du erst jetzt aufstehst?!', 20],
                        ['Geh mal lieber önnen, es ist spätabends, du Depp!', 24]]
     hour = time.gmtime().tm_hour
     for greeting in greetings_array:
