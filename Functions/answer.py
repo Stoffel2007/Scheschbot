@@ -78,55 +78,56 @@ def __split_message(message):
 def __get_input_id(original_input):
     input_table = db_connect.select('answer_input')
 
-    # Input-Tabelle nach einem passenden Eintrag durchsuchen
-    # erster passender Eintrag wird genommen
-    for line in input_table:
-        required_input = line[1]  # Input dieser Zeile in der Tabelle
+    if input_table is not False:
+        # Input-Tabelle nach einem passenden Eintrag durchsuchen
+        # erster passender Eintrag wird genommen
+        for line in input_table:
+            required_input = line[1]  # Input dieser Zeile in der Tabelle
 
-        # boolsche Werte setzen (0: False, 1: True)
-        text_before = line[2] == 1
-        text_after = line[3] == 1
-        is_question = line[4] == 1
-        contains_specialchars = line[5] == 1
+            # boolsche Werte setzen (0: False, 1: True)
+            text_before = line[2] == 1
+            text_after = line[3] == 1
+            is_question = line[4] == 1
+            contains_specialchars = line[5] == 1
 
-        # verhindert, dass Modifikationen im ersten Durchlauf nicht mehr rückgängig gemacht werden können
-        temp_input = original_input
+            # verhindert, dass Modifikationen im ersten Durchlauf nicht mehr rückgängig gemacht werden können
+            temp_input = original_input
 
-        # Vereinfachung des logischen Ausdrucks: beide Werte müssen identisch sein (beide True oder beide False)
-        # falls keine Frage gesucht wird, darf auch keine Fragezeichen am Ende sein (sonst Ja/Nein-Frage)
-        # falls Frage gesucht wird: hat die Nachricht ein Fragezeichen am Ende?
-        if is_question == temp_input.endswith('?'):
-            # Sonderzeichen entfernen und alles klein schreiben
-            # (außer der gesuchte String enthält ebenfalls Sonderzeichen)
-            if not contains_specialchars:
-                temp_input = StringUtils.cut_specialchars(temp_input)
-                temp_input = temp_input.lower()
+            # Vereinfachung des logischen Ausdrucks: beide Werte müssen identisch sein (beide True oder beide False)
+            # falls keine Frage gesucht wird, darf auch keine Fragezeichen am Ende sein (sonst Ja/Nein-Frage)
+            # falls Frage gesucht wird: hat die Nachricht ein Fragezeichen am Ende?
+            if is_question == temp_input.endswith('?'):
+                # Sonderzeichen entfernen und alles klein schreiben
+                # (außer der gesuchte String enthält ebenfalls Sonderzeichen)
+                if not contains_specialchars:
+                    temp_input = StringUtils.cut_specialchars(temp_input)
+                    temp_input = temp_input.lower()
 
-            # Leerzeichen am Anfang und Ende entfernen
-            # doppelte Leerzeichen kürzen
-            temp_input = StringUtils.cut_spaces(temp_input)
+                # Leerzeichen am Anfang und Ende entfernen
+                # doppelte Leerzeichen kürzen
+                temp_input = StringUtils.cut_spaces(temp_input)
 
-            # Text ist identisch mit dem gesuchten Input
-            text_is_input = temp_input == required_input
-            # gesuchter Input ist am Anfang des Textes (mit Leerzeichen)
-            text_at_start = temp_input.startswith(required_input + ' ')
-            # gesuchter Input ist am Ende des Textes (mit Leerzeichen)
-            text_at_end = temp_input.endswith(' ' + required_input)
-            # gesuchter Input ist in der Mitte des Textes (mit Leerzeichen)
-            text_in_input = ' ' + required_input + ' ' in temp_input
+                # Text ist identisch mit dem gesuchten Input
+                text_is_input = temp_input == required_input
+                # gesuchter Input ist am Anfang des Textes (mit Leerzeichen)
+                text_at_start = temp_input.startswith(required_input + ' ')
+                # gesuchter Input ist am Ende des Textes (mit Leerzeichen)
+                text_at_end = temp_input.endswith(' ' + required_input)
+                # gesuchter Input ist in der Mitte des Textes (mit Leerzeichen)
+                text_in_input = ' ' + required_input + ' ' in temp_input
 
-            # Fall 1: gesuchter Text kann an beliebiger Stelle in der Nachricht sein
-            case1 = text_before and text_after and (text_is_input or text_at_start or text_at_end or text_in_input)
-            # Fall 2: gesuchter Text muss am Ende der Nachricht sein
-            case2 = text_before and (text_is_input or text_at_end)
-            # Fall 3: gesuchter Text muss am Anfang der Nachricht sein
-            case3 = text_after and (text_is_input or text_at_start)
-            # Fall 4: gesuchter Text muss mit der Nachricht identisch sein
-            case4 = text_is_input
+                # Fall 1: gesuchter Text kann an beliebiger Stelle in der Nachricht sein
+                case1 = text_before and text_after and (text_is_input or text_at_start or text_at_end or text_in_input)
+                # Fall 2: gesuchter Text muss am Ende der Nachricht sein
+                case2 = text_before and (text_is_input or text_at_end)
+                # Fall 3: gesuchter Text muss am Anfang der Nachricht sein
+                case3 = text_after and (text_is_input or text_at_start)
+                # Fall 4: gesuchter Text muss mit der Nachricht identisch sein
+                case4 = text_is_input
 
-            if case1 or case2 or case3 or case4:
-                # Übereinstimmung mit der Nachricht gefunden
-                return line[0]
+                if case1 or case2 or case3 or case4:
+                    # Übereinstimmung mit der Nachricht gefunden
+                    return line[0]
     return None
 
 
@@ -167,7 +168,7 @@ def __get_last_output(chat_id):
                                'chat_id = ' + chat_id.__str__())
 
     # falls Ergebnis herauskam
-    if len(result) > 0:
+    if result is not False and len(result) > 0:
         last_update_id = result[0][0]
 
     return last_update_id
