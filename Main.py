@@ -62,8 +62,9 @@ def main():
             # 1 Sekunde warten (Überlastung des Servers vorbeugen)
             time.sleep(1)
         except telegram.error.NetworkError:
-            print('\tVerbindung zum Bot fehlgeschlagen. Nächster Versuch in 10 Sekunden....')
-            time.sleep(10)
+            sleep_time = 1
+            print('\tVerbindung zum Bot fehlgeschlagen. Nächster Versuch in ' + str(sleep_time) + ' Sekunden....')
+            time.sleep(sleep_time)
 
 
 # ID des letzten unverarbeiteten Updates holen
