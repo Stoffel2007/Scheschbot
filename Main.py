@@ -63,7 +63,7 @@ def main():
             time.sleep(1)
         except telegram.error.NetworkError:
             sleep_time = 1
-            print('\tVerbindung zum Bot fehlgeschlagen. Nächster Versuch in ' + str(sleep_time) + ' Sekunden....')
+            # print('\tVerbindung zum Bot fehlgeschlagen. Nächster Versuch in ' + str(sleep_time) + ' Sekunden....')
             time.sleep(sleep_time)
 
 
