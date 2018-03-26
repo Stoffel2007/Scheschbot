@@ -36,7 +36,9 @@ def __process_message(message, event_handler):
     # Nachricht in Einzelteile zerlegen
     command, botname, param = __get_message_args(message.text)
 
-    if botname == constants.botname:  # Kommando war an den Scheschbot gerichtet
+    # Kommando war an den Scheschbot gerichtet
+    # oder Nachricht enthielt kein Kommando
+    if botname == constants.botname:
         # passendes Kommando suchen
         # TODO: Kommandos generisch in Datenbank ablegen
         if command == 'koch':
