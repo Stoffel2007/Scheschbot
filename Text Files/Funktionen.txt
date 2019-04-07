@@ -15,7 +15,8 @@ Kommando-Funktionen:
     - pr0vid:
         ein Video wird aus pr0gramm geholt, entweder per Zufall, Suchbegriff, ID oder das neueste
     - Aggronyme:
-        Bot beschreibt einen Namen anhand der einzelnen Buchstaben
+        - aggro: Bot beschreibt einen Namen anhand der einzelnen Buchstaben
+        - feedme: Bot bekommt einen Vorschlag für Aggronyme, die die Admins noch bestätigen müssen
 
 Inline-Funktionen:
     - randomize:

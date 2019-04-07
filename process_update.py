@@ -94,7 +94,7 @@ def __process_edited_message(edited_message):
     return []  # Kommando ging an anderen Bot
 
 
-def __process_inline_query(inline_query,):
+def __process_inline_query(inline_query):
     params_dict = {'inline_query_id': inline_query.id,
                    'results': inline_results.get_inline_results(inline_query.query)}
     return [{'action': 'inline', 'params_dict': params_dict}]
