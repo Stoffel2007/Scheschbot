@@ -10,10 +10,10 @@ def get_message_list(update, event_handler):
     # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben (core.telegram.org/bots/api#update)
     print("\n\tupdate =", update)
 
-    # like_percentage des Users zufällig neu setzen
+    # sympathy_percentage des Users zufällig neu setzen
     user = __get_user(update)
-    like_percentage = random.randint(0, 100)
-    mood.set_mood(user, like_percentage)
+    sympathy_percentage = random.randint(0, 100)
+    mood.set_mood(user, sympathy_percentage)
 
     # Array mit zurückzuliefernden Nachrichten
     # jede message ist ein dictionary

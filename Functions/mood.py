@@ -1,9 +1,9 @@
 import db_connect
 
 
-# liefert die like_percentage eines Users
+# liefert die sympathy_percentage eines Users
 def get_mood(telegram_id):
-    result = db_connect.select('users', 'like_percentage', 'telegram_id = ' + telegram_id.__str__())
+    result = db_connect.select('users', 'sympathy_percentage', 'telegram_id = ' + telegram_id.__str__())
 
     # bei Fehlschlagen der Datenbankanfrage würde False zurückgeliefert werden
     if result is not False:
@@ -16,27 +16,27 @@ def get_mood(telegram_id):
         return False
 
 
-# like_percentage eines bestimmten Users ändern
+# sympathy_percentage eines bestimmten Users ändern
 # falls User nicht existiert, neuen Eintrag in Tabelle erzeugen
 # andere User-Attribute (first_name, last_name, username) werden ebenfalls gesetzt
-def set_mood(user, like_percentage):
-    if like_percentage > 100:
-        like_percentage = 100
-    elif like_percentage < 0:
-        like_percentage = 0
+def set_mood(user, sympathy_percentage):
+    if sympathy_percentage > 100:
+        sympathy_percentage = 100
+    elif sympathy_percentage < 0:
+        sympathy_percentage = 0
 
     user_result = db_connect.select('users', where_expression='telegram_id = ' + user.id.__str__())
 
     # bei Fehlschlagen der Datenbankanfrage würde False zurückgeliefert werden
     if user_result is not False:
         # zurückgeliefertes Array enthält einen Wert
-        if len(user_result) > 0:  # like_percentage (und andere User-Attribute) aktualisieren
+        if len(user_result) > 0:  # sympathy_percentage (und andere User-Attribute) aktualisieren
             db_connect.update('users',
-                              ['like_percentage', 'first_name', 'last_name', 'username'],
-                              [like_percentage, user.first_name, user.last_name, user.username],
+                              ['sympathy_percentage', 'first_name', 'last_name', 'username'],
+                              [sympathy_percentage, user.first_name, user.last_name, user.username],
                               'telegram_id=' + user.id.__str__())
         # zurückgeliefertes Array enthält keinen Wert
         else:  # neuen User hinzufügen
             db_connect.insert('users',
-                              ['telegram_id', 'like_percentage', 'first_name', 'last_name', 'username'],
-                              [user.id, like_percentage, user.first_name, user.last_name, user.username])
+                              ['telegram_id', 'sympathy_percentage', 'first_name', 'last_name', 'username'],
+                              [user.id, sympathy_percentage, user.first_name, user.last_name, user.username])

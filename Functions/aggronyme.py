@@ -36,17 +36,17 @@ def insert_words(params):
 
     if genus_id:  # Nomen einfügen
         noun = params.split(' ', 1)[1]
-        result = db_connect.select('aggronymes', where_expression="word = '" + noun + "'")
+        result = db_connect.select('aggronyme_words', where_expression="word = '" + noun + "'")
         if len(result) == 0:  # Wort noch nicht vorhanden
-            result = db_connect.insert('aggronymes',
+            result = db_connect.insert('aggronyme_words',
                                        ['word', 'type_id', 'genus_id'],
                                        [noun, 2, genus_id])
             return result
         return False
     else:  # Adjektiv einfügen
-        result = db_connect.select('aggronymes', where_expression="word = '" + params + "'")
+        result = db_connect.select('aggronyme_words', where_expression="word = '" + params + "'")
         if len(result) == 0:  # Wort noch nicht vorhanden
-            result = db_connect.insert('aggronymes',
+            result = db_connect.insert('aggronyme_words',
                                        ['word', 'type_id'],
                                        [params, 1])
             return result
@@ -56,7 +56,7 @@ def insert_words(params):
 # Votes in der Datenbank hochzählen
 # nur Wörter mit 2 Votes werden benutzt
 def increment_vote(word):
-    result = db_connect.select('aggronymes',
+    result = db_connect.select('aggronyme_words',
                                'votes',
                                'word = "' + word + '"')
 
@@ -68,7 +68,7 @@ def increment_vote(word):
                 # hochzählen
                 votes += 1
 
-                result = db_connect.update('aggronymes',
+                result = db_connect.update('aggronyme_words',
                                            ['votes'],
                                            [votes], 'word = "' + word + '"')
                 if result is not False:
@@ -97,7 +97,7 @@ def __get_words(command_text):
             # solange nicht letzter Buchstabe werden Adjektive aus DB geholt
             if index < len(arr_letters) - 1:
                 # x-dimensionales Array, zu jedem Buchstabe eine Dimension
-                adj_puffer = db_connect.select("aggronymes",
+                adj_puffer = db_connect.select("aggronyme_words",
                                                "word",
                                                "type_id = 1 AND word LIKE '" + item_letters + "%' AND votes >= 2")
                 if adj_puffer is False:
@@ -110,7 +110,7 @@ def __get_words(command_text):
             # letzter Buchstabe --> hole Nomen
             else:
                 # hole Nomen aus DB mit dazu gehörigem Artikel/Genus
-                noun_puffer = db_connect.select("aggronymes AS agg JOIN genus ON agg.genus_id = genus.id",
+                noun_puffer = db_connect.select("aggronyme_words AS agg JOIN genus ON agg.genus_id = genus.id",
                                                 "agg.word, genus.article",
                                                 "word LIKE '" + item_letters + "%' AND votes >= 2")
                 # Anzahl Adjektive pro Wort

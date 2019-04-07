@@ -76,7 +76,7 @@ def __split_message(message):
 
 # sucht zu einer Nachricht den passenden Eintrag in der Datenbank und liefert dessen ID zurück
 def __get_input_id(original_input):
-    input_table = db_connect.select('answer_input')
+    input_table = db_connect.select('answer_inputs')
 
     if input_table is not False:
         # Input-Tabelle nach einem passenden Eintrag durchsuchen
@@ -85,8 +85,8 @@ def __get_input_id(original_input):
             required_input = line[1]  # Input dieser Zeile in der Tabelle
 
             # boolsche Werte setzen (0: False, 1: True)
-            text_before = line[2] == 1
-            text_after = line[3] == 1
+            has_text_before = line[2] == 1
+            has_text_after = line[3] == 1
             is_question = line[4] == 1
             contains_specialchars = line[5] == 1
 
@@ -117,11 +117,11 @@ def __get_input_id(original_input):
                 text_in_input = ' ' + required_input + ' ' in temp_input
 
                 # Fall 1: gesuchter Text kann an beliebiger Stelle in der Nachricht sein
-                case1 = text_before and text_after and (text_is_input or text_at_start or text_at_end or text_in_input)
+                case1 = has_text_before and has_text_after and (text_is_input or text_at_start or text_at_end or text_in_input)
                 # Fall 2: gesuchter Text muss am Ende der Nachricht sein
-                case2 = text_before and (text_is_input or text_at_end)
+                case2 = has_text_before and (text_is_input or text_at_end)
                 # Fall 3: gesuchter Text muss am Anfang der Nachricht sein
-                case3 = text_after and (text_is_input or text_at_start)
+                case3 = has_text_after and (text_is_input or text_at_start)
                 # Fall 4: gesuchter Text muss mit der Nachricht identisch sein
                 case4 = text_is_input
 
@@ -135,8 +135,8 @@ def __get_input_id(original_input):
 # Output mit erfülltr Vorbedingung haben Vorrang
 def __get_possible_outputs(input_id, chat_id):
     possible_outputs = db_connect.select('answer_relations AS rel '
-                                         'JOIN answer_output AS output ON rel.output_id = output.id '
-                                         'LEFT JOIN answer_output AS pre ON rel.previous_output_id = pre.id',
+                                         'JOIN answer_outputs AS output ON rel.output_id = output.id '
+                                         'LEFT JOIN answer_outputs AS pre ON rel.previous_output_id = pre.id',
                                          'output.output, pre.output',
                                          'input_id = ' + input_id.__str__())
 
@@ -163,7 +163,7 @@ def __get_possible_outputs(input_id, chat_id):
 def __get_last_output(chat_id):
     last_update_id = None
 
-    result = db_connect.select('answer_last_output',
+    result = db_connect.select('answer_last_outputs',
                                'last_output',
                                'chat_id = ' + chat_id.__str__())
 
@@ -180,11 +180,11 @@ def __set_last_output(last_output, chat_id):
     old_output_id = __get_last_output(chat_id)
 
     if old_output_id is not None:  # Eintrag existiert bereits
-        db_connect.update('answer_last_output',
+        db_connect.update('answer_last_outputs',
                           ['last_output'],
                           [last_output],
                           'chat_id = ' + chat_id.__str__())
     else:  # Eintrag existiert noch nicht
-        db_connect.insert('answer_last_output',
+        db_connect.insert('answer_last_outputs',
                           ['chat_id', 'last_output'],
                           [chat_id, last_output])
