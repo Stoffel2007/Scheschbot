@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 07. Apr 2019 um 19:35
+-- Erstellungszeit: 08. Apr 2019 um 19:05
 -- Server-Version: 10.1.38-MariaDB
 -- PHP-Version: 7.1.27
 
@@ -946,8 +946,8 @@ CREATE TABLE `answer_last_outputs` (
 --
 
 INSERT INTO `answer_last_outputs` (`id`, `chat_id`, `last_output`) VALUES
-(1, 72111412, 'Einen Appetit wünsche ich'),
-(2, -180513391, 'Hehehehekekekekek!');
+(1, 72111412, 'Äußerst :3'),
+(2, -180513391, 'Scho');
 
 -- --------------------------------------------------------
 
@@ -1236,6 +1236,19 @@ INSERT INTO `answer_relations` (`id`, `input_id`, `output_id`, `previous_output_
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `timed_messages`
+--
+
+CREATE TABLE `timed_messages` (
+  `id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `send_time` datetime NOT NULL,
+  `chat_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `users`
 --
 
@@ -1259,8 +1272,8 @@ INSERT INTO `users` (`id`, `telegram_id`, `sympathy_percentage`, `first_name`, `
 (3, 44867338, 10, 'Fredi', 'B', 'Oenner', 0),
 (4, 213190902, 28, 'Pascal', 'Rögner', NULL, 0),
 (5, 82613330, 69, 'Wilhelmina', 'Fuchs', NULL, 0),
-(6, 72111412, 92, 'Stoffel', NULL, 'Stoffel2007', 1),
-(7, 33545033, 33, 'Andi', 'N.', 'VirtualNonsense', 1);
+(6, 72111412, 46, 'Stoffel', NULL, 'Stoffel2007', 1),
+(7, 33545033, 92, 'Andi', 'N.', 'VirtualNonsense', 1);
 
 -- --------------------------------------------------------
 
@@ -1341,6 +1354,12 @@ ALTER TABLE `answer_relations`
   ADD KEY `answer_relations_ibfk_2` (`output_id`);
 
 --
+-- Indizes für die Tabelle `timed_messages`
+--
+ALTER TABLE `timed_messages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indizes für die Tabelle `users`
 --
 ALTER TABLE `users`
@@ -1366,7 +1385,7 @@ ALTER TABLE `word_types`
 -- AUTO_INCREMENT für Tabelle `aggronyme_words`
 --
 ALTER TABLE `aggronyme_words`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=799;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=798;
 
 --
 -- AUTO_INCREMENT für Tabelle `answer_inputs`
@@ -1391,6 +1410,12 @@ ALTER TABLE `answer_outputs`
 --
 ALTER TABLE `answer_relations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
+
+--
+-- AUTO_INCREMENT für Tabelle `timed_messages`
+--
+ALTER TABLE `timed_messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT für Tabelle `users`
