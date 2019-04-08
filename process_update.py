@@ -4,6 +4,7 @@ import constants
 import db_connect
 import inline_results
 from Functions import aggronyme, cook, mood, answer
+from Util import StringUtils
 
 
 def get_message_list(update):
@@ -34,10 +35,7 @@ def get_message_list(update):
 
 def __process_message(message):
     # Nachricht in Einzelteile zerlegen
-    text = message.caption
-    if not text:
-        text = message.text
-    command, botname, param = __get_message_args(text)
+    command, botname, param = __get_message_args(StringUtils.get_text_from_message(message))
 
     # Kommando war an den Scheschbot gerichtet
     # oder Nachricht enthielt kein Kommando
@@ -87,7 +85,7 @@ def __process_message(message):
 
 def __process_edited_message(edited_message):
     # Nachricht in Einzelteile zerlegen
-    command, botname, param = __get_message_args(edited_message.text)
+    command, botname, param = __get_message_args(StringUtils.get_text_from_message(edited_message))
 
     if botname == constants.botname:  # Kommando war an den Scheschbot gerichtet
         params_dict = {'chat_id': edited_message.chat_id,
