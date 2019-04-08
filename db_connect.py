@@ -1,5 +1,6 @@
 import pymysql
-# import time
+import datetime
+from Util import StringUtils
 
 
 def __query(query_string):
@@ -23,7 +24,7 @@ def __query(query_string):
         cursor.execute(query_string)
         # end = time.time()
         # delta = end - start
-        # print('\tAbfrage dauerte ' + delta.__str__() + ' Sekunden')
+        # print('\tAbfrage dauerte ' + delta.__str__() + ' Sekungeden')
         connection.commit()
 
         # Ergebnis in Array speichern
@@ -49,6 +50,7 @@ def select(table, column="*", where_expression="1 = 1"):
     query_string = 'SELECT ' + column + ' ' +\
                    'FROM ' + table + ' ' +\
                    'WHERE ' + where_expression
+
     return __query(query_string)
 
 
@@ -76,46 +78,56 @@ def update(table, column_array, value_array, where_expression):
 
     result = __query(query_string)
 
-    if result is not False:
-        return True
-    return False
+    return result is not False
 
 
 # INSERT-Abfrage auf der Datenbank
-def insert(table, column_array, value_array):
-    # Fehler werfen, wenn die Anzahl an Spalten nicht mit der Anzahl an Werten übereinstimmt
-    if len(column_array) != len(value_array):
-        raise IndexError("Anzahl an Spalten und Wertem stimmt nicht überein")
+def insert(table, column_array, value_2d_array):
+    value_string = '('
 
-    # Werte für die SQL-Query vorbereiten (Anführungszeichen, NULL)
-    for i in range(0, len(value_array)):
-        value_array[i] = __prepare_for_query(value_array[i])
+    # über Wertezeilen iterieren
+    for i in range(len(value_2d_array)):
+        # Fehler werfen, wenn die Anzahl an Spalten nicht mit der Anzahl an Werten übereinstimmt
+        if len(column_array) != len(value_2d_array[i]):
+            raise IndexError("Anzahl an Spalten und Wertem stimmt nicht überein")
 
+        # Werte für die SQL-Query vorbereiten (Anführungszeichen, NULL)
+        for j in range(len(value_2d_array[i])):
+            value_2d_array[i][j] = __prepare_for_query(value_2d_array[i][j])
+
+        # Wertezeile in String umwandeln
+        value_2d_array[i] = ','.join(str(x) for x in value_2d_array[i])
+
+    # Wertezeilen in Gesamt-String umwandeln
+    value_string += '),('.join(value_2d_array)
+    value_string += ')'
+
+    '''
     # Werte durch Kommata trennen
-    value_string = ''
-    for i in range(0, len(value_array)):
-        value_string += value_array[i].__str__()
+    for i in range(0, len(value_2d_array)):
+        value_string += value_2d_array[i].__str__()
         # bei letztem Durchlauf kein Komma mehr setzen
-        if i < len(value_array) - 1:
+        if i < len(value_2d_array) - 1:
             value_string += ', '
+    '''
 
     # Spaltennamen durch Kommata trennen
-    column_string = ''
+    column_string = ','.join(column_array)
+    '''
     for i in range(0, len(column_array)):
         column_string += column_array[i]
         # bei letztem Durchlauf kein Komma mehr setzen
         if i < len(column_array) - 1:
             column_string += ', '
+    '''
 
     query_string = 'INSERT INTO ' + table + ' ' +\
                    '(' + column_string + ') ' +\
-                   'VALUES (' + value_string + ')'
+                   'VALUES ' + value_string
 
     result = __query(query_string)
 
-    if result is not False:
-        return True
-    return False
+    return result is not False
 
 
 # INSERT-Abfrage auf der Datenbank
@@ -142,6 +154,8 @@ def __prepare_for_query(value):
 
     if value is None or value == '':  # 'None' durch NULL ersetzen
         return 'NULL'
+    if isinstance(value, datetime.datetime):  # Datetime formatieren
+        return '"' + StringUtils.convert_datetime_to_string(value) + '"'
     if not is_int(value):  # String mit Anführungszeichen versehen
-        return '"' + value + '"'
+        return '"' + str(value) + '"'
     return value  # Zahlen werden nicht verändert

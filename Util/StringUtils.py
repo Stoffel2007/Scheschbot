@@ -31,3 +31,8 @@ def cut_spaces(string):
     while string.endswith(' '):  # Leerzeichen am Ende abschneiden
         string = string[:-1]
     return string
+
+
+# konvertiert eine Datetime in einen Datenbank-kompatiblen String
+def convert_datetime_to_string(datetime):
+    return datetime.strftime('%Y-%m-%d %H:%M:%S')

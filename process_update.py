@@ -6,7 +6,7 @@ import inline_results
 from Functions import aggronyme, cook, mood, answer
 
 
-def get_message_list(update, event_handler):
+def get_message_list(update):
     # Update-Objekt mit allen Attributen wie in der Bot-API beschrieben (core.telegram.org/bots/api#update)
     print("\n\tupdate =", update)
 
@@ -21,7 +21,7 @@ def get_message_list(update, event_handler):
 
     # Update je nach Typ anders verarbeiten
     if update.message:
-        message_list = __process_message(update.message, event_handler)
+        message_list = __process_message(update.message)
     elif update.edited_message:
         message_list = __process_edited_message(update.edited_message)
     elif update.inline_query and update.inline_query.query:
@@ -32,9 +32,12 @@ def get_message_list(update, event_handler):
     return message_list
 
 
-def __process_message(message, event_handler):
+def __process_message(message):
     # Nachricht in Einzelteile zerlegen
-    command, botname, param = __get_message_args(message.text)
+    text = message.caption
+    if not text:
+        text = message.text
+    command, botname, param = __get_message_args(text)
 
     # Kommando war an den Scheschbot gerichtet
     # oder Nachricht enthielt kein Kommando
@@ -42,7 +45,7 @@ def __process_message(message, event_handler):
         # passendes Kommando suchen
         # TODO: Kommandos generisch in Datenbank ablegen
         if command == 'koch':
-            text = cook.cook(message, param, event_handler)
+            text = cook.cook(message, param)
             params_dict = {'chat_id': message.chat_id,
                            'text': text}
             return [{'action': 'text', 'params_dict': params_dict}]

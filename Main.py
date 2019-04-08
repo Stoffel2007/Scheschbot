@@ -3,7 +3,7 @@ import telegram
 import constants
 import db_connect
 import process_update
-from Events.EventHandler import *
+from Functions import timed_messages
 
 
 def main():
@@ -20,9 +20,6 @@ def main():
     # Bot-Objekt erstellen
     bot = telegram.Bot(constants.botkey)
 
-    # EventHandler für zeitbasierte Events
-    event_handler = EventHandler()
-
     # ID des letzten unverarbeiteten Updates holen
     last_update_id = get_last_update_id(bot)
     print("\nlast_update_id =", last_update_id)
@@ -34,7 +31,7 @@ def main():
             # neueste Updates von Telegram holen
             for update in bot.getUpdates(offset=last_update_id):
                 # Update verarbeiten
-                message_list = process_update.get_message_list(update, event_handler)
+                message_list = process_update.get_message_list(update)
 
                 # erhaltene Nachrichten abschicken
                 for message in message_list:
@@ -47,14 +44,12 @@ def main():
                 # Update-ID hochzählen
                 last_update_id = update.update_id + 1
 
-            # nach neuen Events fragen
-            for event_update in event_handler.get_update():
-                message = event_update[0]
-                text = event_update[1]
-                params_dict = {'chat_id': message.chat_id,
-                               'text': text,
-                               'message_id': message.message_id}
-                send_reaction(bot, 'text', params_dict)
+            # nach fälligen Nachrichten fragen
+            due_messages = timed_messages.get_due_messages()
+            if due_messages:
+                for message in due_messages:
+                    send_reaction(bot, 'text', {'chat_id': message[0],
+                                                'text': message[1]})
 
             if temp is not last_update_id:
                 print('\nlast_update_id =', last_update_id)

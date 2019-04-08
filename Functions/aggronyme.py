@@ -26,21 +26,21 @@ def aggro(command_text):
 # diese Funktion soll erst aufgerufen werden, wenn ein Admin das Futter bestätigt hat
 # Der Bot sendet eine persönliche Nachricht an Admin, mit einem Button kann er das Futter bestätigen oder ablehnen
 def insert_words(params):
-    genus_id = None
+    word_article_id = None
     if params.startswith('der '):
-        genus_id = 1
+        word_article_id = 1
     elif params.startswith('die '):
-        genus_id = 2
+        word_article_id = 2
     elif params.startswith('das '):
-        genus_id = 3
+        word_article_id = 3
 
-    if genus_id:  # Nomen einfügen
+    if word_article_id:  # Nomen einfügen
         noun = params.split(' ', 1)[1]
         result = db_connect.select('aggronyme_words', where_expression="word = '" + noun + "'")
         if len(result) == 0:  # Wort noch nicht vorhanden
             result = db_connect.insert('aggronyme_words',
-                                       ['word', 'type_id', 'genus_id'],
-                                       [noun, 2, genus_id])
+                                       ['word', 'type_id', 'word_article_id'],
+                                       [[noun, 2, word_article_id]])
             return result
         return False
     else:  # Adjektiv einfügen
@@ -48,7 +48,7 @@ def insert_words(params):
         if len(result) == 0:  # Wort noch nicht vorhanden
             result = db_connect.insert('aggronyme_words',
                                        ['word', 'type_id'],
-                                       [params, 1])
+                                       [[params, 1]])
             return result
         return False
 
@@ -110,8 +110,9 @@ def __get_words(command_text):
             # letzter Buchstabe --> hole Nomen
             else:
                 # hole Nomen aus DB mit dazu gehörigem Artikel/Genus
-                noun_puffer = db_connect.select("aggronyme_words AS agg JOIN genus ON agg.genus_id = genus.id",
-                                                "agg.word, genus.article",
+                noun_puffer = db_connect.select("aggronyme_words AS agg JOIN word_articles AS art ON "
+                                                "agg.word_article_id = art.id",
+                                                "agg.word, art.word_article",
                                                 "word LIKE '" + item_letters + "%' AND votes >= 2")
                 # Anzahl Adjektive pro Wort
                 count_letters_adj.append(index)
@@ -176,7 +177,7 @@ def __random_adj(permit, arr_adj):
                 while rnd_adj in dim:
                     rnd_adj = random.choice(arr_adj[i])
                     count_while += 1
-                    if count_while == count_adj_pl*3:
+                    if count_while == count_adj_pl * 3:
                         break
             one_adj.append(rnd_adj)
     return one_adj
@@ -190,16 +191,16 @@ def __build_string(command_text, one_adj, one_noun):
         cnt_adj_index = 0  # wievieltes Adjektiv im one_adj
         arr_words = command_text.split()
         for index, word in enumerate(arr_words):  # in arr_words ist String aus Kommando
-            add_genus = 'er'
+            add_word_article = 'er'
             if one_noun[index][1] == 'die':
-                add_genus = 'e'
+                add_word_article = 'e'
             if one_noun[index][1] == 'das':
-                add_genus = 'es'
+                add_word_article = 'es'
             prep_message = ''
-            count_letters_adj = len(word)-1  # Anzahl der Adjektive pro Wort
+            count_letters_adj = len(word) - 1  # Anzahl der Adjektive pro Wort
             for i_cnt_lt in range(count_letters_adj):
                 # fügt zu jedem Adjektiv den richtigen Genus hinzu
-                prep_mes_gen.append(one_adj[cnt_adj_index] + add_genus)
+                prep_mes_gen.append(one_adj[cnt_adj_index] + add_word_article)
 
                 # verbindet Adjektive
                 if i_cnt_lt < count_letters_adj - 2:
@@ -214,10 +215,11 @@ def __build_string(command_text, one_adj, one_noun):
 
             prep_message = prep_message + one_noun[index][0]
             # verbindet mehrere Wörter
-            if (len(arr_words) > 1) and (index < len(arr_words)-1):
+            if (len(arr_words) > 1) and (index < len(arr_words) - 1):
                 prep_message += ' SOWIE'
             send_message = send_message + prep_message + '\n'
     return send_message
+
 
 if __name__ == '__main__':
     pass

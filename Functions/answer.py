@@ -8,7 +8,10 @@ def get_answer(message):
     answer = ''
 
     # Nachricht anhand von Satzzeichen in einzelne Sätze aufteilen
-    sentence_array = __split_message(message.text)
+    text = message.caption
+    if not text:
+        text = message.text
+    sentence_array = __split_message(text)
 
     for sentence in sentence_array:
         # auf jeden Satz einzeln reagieren
@@ -117,7 +120,8 @@ def __get_input_id(original_input):
                 text_in_input = ' ' + required_input + ' ' in temp_input
 
                 # Fall 1: gesuchter Text kann an beliebiger Stelle in der Nachricht sein
-                case1 = has_text_before and has_text_after and (text_is_input or text_at_start or text_at_end or text_in_input)
+                case1 = has_text_before and has_text_after and (
+                    not (not text_is_input and not text_at_start and not text_at_end and not text_in_input))
                 # Fall 2: gesuchter Text muss am Ende der Nachricht sein
                 case2 = has_text_before and (text_is_input or text_at_end)
                 # Fall 3: gesuchter Text muss am Anfang der Nachricht sein
@@ -187,4 +191,4 @@ def __set_last_output(last_output, chat_id):
     else:  # Eintrag existiert noch nicht
         db_connect.insert('answer_last_outputs',
                           ['chat_id', 'last_output'],
-                          [chat_id, last_output])
+                          [[chat_id, last_output]])

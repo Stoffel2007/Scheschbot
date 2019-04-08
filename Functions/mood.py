@@ -39,4 +39,4 @@ def set_mood(user, sympathy_percentage):
         else:  # neuen User hinzufügen
             db_connect.insert('users',
                               ['telegram_id', 'sympathy_percentage', 'first_name', 'last_name', 'username'],
-                              [user.id, sympathy_percentage, user.first_name, user.last_name, user.username])
+                              [[user.id, sympathy_percentage, user.first_name, user.last_name, user.username]])
