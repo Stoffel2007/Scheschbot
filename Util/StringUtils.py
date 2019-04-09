@@ -36,10 +36,3 @@ def cut_spaces(string):
 # konvertiert eine Datetime in einen Datenbank-kompatiblen String
 def convert_datetime_to_string(datetime):
     return datetime.strftime('%Y-%m-%d %H:%M:%S')
-
-
-# liefert den Text einer Nachricht (entweder Bildnuterschrift oder Text)
-def get_text_from_message(message):
-    text = message.caption
-    if not text:
-        return message.text

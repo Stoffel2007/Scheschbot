@@ -4,7 +4,6 @@ import constants
 import db_connect
 import inline_results
 from Functions import aggronyme, cook, mood, answer
-from Util import StringUtils
 
 
 def get_message_list(update):
@@ -25,17 +24,27 @@ def get_message_list(update):
         message_list = __process_message(update.message)
     elif update.edited_message:
         message_list = __process_edited_message(update.edited_message)
-    elif update.inline_query and update.inline_query.query:
+    elif update.channel_post:
+        message_list = __process_channel_post(update.channel_post)
+    elif update.edited_channel_post:
+        message_list = __process_edited_channel_post(update.edited_channel_post)
+    elif update.inline_query:
         message_list = __process_inline_query(update.inline_query)
+    elif update.chosen_inline_result:
+        message_list = __process_chosen_inline_result(update.chosen_inline_result)
     elif update.callback_query:
         message_list = __process_callback_query(update.callback_query)
+    elif update.shipping_query:
+        message_list = __process_shipping_query(update.shipping_query)
+    elif update.pre_checkout_query:
+        message_list = __process_pre_checkout_query(update.pre_checkout_query)
 
     return message_list
 
 
 def __process_message(message):
     # Nachricht in Einzelteile zerlegen
-    command, botname, param = __get_message_args(StringUtils.get_text_from_message(message))
+    command, botname, param = __get_message_args(message.text)
 
     # Kommando war an den Scheschbot gerichtet
     # oder Nachricht enthielt kein Kommando
@@ -85,7 +94,7 @@ def __process_message(message):
 
 def __process_edited_message(edited_message):
     # Nachricht in Einzelteile zerlegen
-    command, botname, param = __get_message_args(StringUtils.get_text_from_message(edited_message))
+    command, botname, param = __get_message_args(edited_message.text)
 
     if botname == constants.botname:  # Kommando war an den Scheschbot gerichtet
         params_dict = {'chat_id': edited_message.chat_id,
@@ -95,10 +104,25 @@ def __process_edited_message(edited_message):
     return []  # Kommando ging an anderen Bot
 
 
+# TODO
+def __process_channel_post(channel_post):
+    return []
+
+
+# TODO
+def __process_edited_channel_post(edited_channel_post):
+    return []
+
+
 def __process_inline_query(inline_query):
     params_dict = {'inline_query_id': inline_query.id,
                    'results': inline_results.get_inline_results(inline_query.query)}
     return [{'action': 'inline', 'params_dict': params_dict}]
+
+
+# TODO
+def __process_chosen_inline_result(chosen_inline_result):
+    return []
 
 
 def __process_callback_query(callback_query,):
@@ -127,6 +151,16 @@ def __process_callback_query(callback_query,):
         params_dict['text'] = '"' + params + '" abgelehnt'
 
     return [{'action': 'edit_message', 'params_dict': params_dict}]
+
+
+# TODO
+def __process_shipping_query(shipping_query):
+    return []
+
+
+# TODO
+def __process_pre_checkout_query(pre_checkout_query):
+    return []
 
 
 # Kommando, Botname und Parameter aus einer Nachricht herausfiltern und zurückliefern

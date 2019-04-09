@@ -8,7 +8,7 @@ def get_answer(message):
     answer = ''
 
     # Nachricht anhand von Satzzeichen in einzelne Sätze aufteilen
-    sentence_array = __split_message(StringUtils.get_text_from_message(message))
+    sentence_array = __split_message(message.text)
 
     for sentence in sentence_array:
         # auf jeden Satz einzeln reagieren
