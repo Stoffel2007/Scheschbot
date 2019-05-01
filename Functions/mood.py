@@ -25,18 +25,18 @@ def set_mood(user, sympathy_percentage):
     elif sympathy_percentage < 0:
         sympathy_percentage = 0
 
-    user_result = db_connect.select('users', where_expression='telegram_id = ' + user.id.__str__())
+    user_result = db_connect.select('telegram_users', where_expression='telegram_user_id = ' + user.id.__str__())
 
     # bei Fehlschlagen der Datenbankanfrage würde False zurückgeliefert werden
     if user_result is not False:
         # zurückgeliefertes Array enthält einen Wert
         if len(user_result) > 0:  # sympathy_percentage (und andere User-Attribute) aktualisieren
-            db_connect.update('users',
+            db_connect.update('telegram_users',
                               ['sympathy_percentage', 'first_name', 'last_name', 'username'],
                               [sympathy_percentage, user.first_name, user.last_name, user.username],
-                              'telegram_id=' + user.id.__str__())
+                              'telegram_user_id=' + user.id.__str__())
         # zurückgeliefertes Array enthält keinen Wert
         else:  # neuen User hinzufügen
-            db_connect.insert('users',
-                              ['telegram_id', 'sympathy_percentage', 'first_name', 'last_name', 'username'],
+            db_connect.insert('telegram_users',
+                              ['telegram_user_id', 'sympathy_percentage', 'first_name', 'last_name', 'username'],
                               [[user.id, sympathy_percentage, user.first_name, user.last_name, user.username]])

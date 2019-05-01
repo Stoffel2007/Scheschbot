@@ -17,6 +17,9 @@ Kommando-Funktionen:
     - Aggronyme:
         - aggro: Bot beschreibt einen Namen anhand der einzelnen Buchstaben
         - feedme: Bot bekommt einen Vorschlag für Aggronyme, die die Admins noch bestätigen müssen
+    - Gsus:
+        - sendet ein zufälliges Bild aus dem Republiks-Chat (NUR im Uwe möglich)
+        - mitsenden einer Bild-ID muss möglich sein, um gezielt nach einem Bild zu suchen
 
 Inline-Funktionen:
     - randomize:

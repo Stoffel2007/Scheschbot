@@ -135,11 +135,11 @@ def __get_input_id(original_input):
 # liefert zu einer Input-ID die möglichen Outputs zurück
 # Output mit erfülltr Vorbedingung haben Vorrang
 def __get_possible_outputs(input_id, chat_id):
-    possible_outputs = db_connect.select('answer_relations AS rel '
-                                         'JOIN answer_outputs AS output ON rel.output_id = output.id '
-                                         'LEFT JOIN answer_outputs AS pre ON rel.previous_output_id = pre.id',
-                                         'output.output, pre.output',
-                                         'input_id = ' + input_id.__str__())
+    possible_outputs = db_connect.select('answer_relations AS r '
+                                         'JOIN answer_outputs AS o ON r.fk_output_id = o.output_id '
+                                         'LEFT JOIN answer_outputs AS p ON r.fk_output_id_previous = p.output_id',
+                                         'o.output, p.output',
+                                         'fk_input_id = ' + input_id.__str__())
 
     possible_outputs_with_pre = []
     possible_outputs_without_pre = []

@@ -2,13 +2,13 @@ import time
 import telegram
 import constants
 import db_connect
-import process_update
+from Process_Update import Main
 from Functions import timed_messages
 
 
 def main():
-    # Beispiel-Query
-    result = db_connect.select('users')
+    # TODO Beispiel-Query
+    result = db_connect.select('telegram_users')
     # beim Fehlschlagen der Datenbankabfrage wird False zurückgeliefert
     if result:
         for line in result:
@@ -31,7 +31,7 @@ def main():
             # neueste Updates von Telegram holen
             for update in bot.getUpdates(offset=last_update_id):
                 # Update verarbeiten
-                message_list = process_update.get_message_list(update)
+                message_list = Main.get_message_list(update)
 
                 # erhaltene Nachrichten abschicken
                 for message in message_list:

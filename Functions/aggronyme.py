@@ -97,9 +97,10 @@ def __get_words(command_text):
             # solange nicht letzter Buchstabe werden Adjektive aus DB geholt
             if index < len(arr_letters) - 1:
                 # x-dimensionales Array, zu jedem Buchstabe eine Dimension
-                adj_puffer = db_connect.select("aggronyme_words",
-                                               "word",
-                                               "type_id = 1 AND word LIKE '" + item_letters + "%' AND votes >= 2")
+                adj_puffer = db_connect.select("aggronymes",
+                                               "aggronyme",
+                                               "fk_word_type_id = 1 AND aggronyme LIKE '" + item_letters + "%' "
+                                               "AND number_of_admin_votes = 2")
                 if adj_puffer is False:
                     permit = False
                     err_mess = 'Verbindung zur Datenbank fehlgeschlagen'
@@ -110,10 +111,11 @@ def __get_words(command_text):
             # letzter Buchstabe --> hole Nomen
             else:
                 # hole Nomen aus DB mit dazu gehörigem Artikel/Genus
-                noun_puffer = db_connect.select("aggronyme_words AS agg JOIN word_articles AS art ON "
-                                                "agg.word_article_id = art.id",
-                                                "agg.word, art.word_article",
-                                                "word LIKE '" + item_letters + "%' AND votes >= 2")
+                noun_puffer = db_connect.select("aggronymes AS agg JOIN word_articles AS art ON "
+                                                "agg.fk_word_article_id = art.word_article_id",
+                                                "agg.aggronyme, art.word_article",
+                                                "aggronyme LIKE '" + item_letters + "%' "
+                                                "AND number_of_admin_votes = 2")
                 # Anzahl Adjektive pro Wort
                 count_letters_adj.append(index)
                 # Kopiere Puffer, wenn nicht, geht er kaputt beim iterieren --> nicht weiter verwendbar
