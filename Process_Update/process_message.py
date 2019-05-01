@@ -281,9 +281,11 @@ def __get_random_message_for_message_type(message_type):
     message_type_probability = __get_probabilty_for_message_type(message_type)
     probability_sum *= 100
     probability_sum /= message_type_probability
+    print('Summe:', probability_sum)
 
     # Zufallszahl generieren
     ranint = random.randint(1, probability_sum * 100) / 100
+    print('ranint:', ranint)
 
     # aus Zahlenbereich entsprechende Nachricht (oder keine Nachricht) ziehen
     temp = 0
