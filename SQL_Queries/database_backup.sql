@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 08. Apr 2019 um 19:05
+-- Erstellungszeit: 01. Mai 2019 um 14:01
 -- Server-Version: 10.1.38-MariaDB
 -- PHP-Version: 7.1.27
 
@@ -25,68 +25,68 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `aggronyme_words`
+-- Tabellenstruktur für Tabelle `aggronymes`
 --
 
-CREATE TABLE `aggronyme_words` (
-  `id` int(11) NOT NULL,
-  `word` text NOT NULL,
-  `type_id` int(11) NOT NULL,
-  `word_article_id` int(11) DEFAULT NULL,
-  `votes` int(11) NOT NULL DEFAULT '1'
+CREATE TABLE `aggronymes` (
+  `aggronyme_id` int(11) NOT NULL,
+  `aggronyme` text NOT NULL,
+  `fk_word_type_id` int(11) NOT NULL,
+  `fk_word_article_id` int(11) DEFAULT NULL,
+  `number_of_admin_votes` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
 --
--- Daten für Tabelle `aggronyme_words`
+-- Daten für Tabelle `aggronymes`
 --
 
-INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `votes`) VALUES
-(1, 'abartig', 1, NULL, 3),
-(2, 'assozial', 1, NULL, 3),
-(3, 'ägglhaft', 1, NULL, 3),
-(4, 'balancelos', 1, NULL, 3),
-(5, 'belanglos', 1, NULL, 3),
-(6, 'blöd', 1, NULL, 3),
-(7, 'charismatisch', 1, NULL, 3),
-(8, 'deppert', 1, NULL, 3),
-(9, 'dumm', 1, NULL, 3),
-(10, 'doof', 1, NULL, 3),
-(11, 'egglhaft', 1, NULL, 3),
-(12, 'ersetzbar', 1, NULL, 3),
-(13, 'frauenfeindlich', 1, NULL, 3),
-(14, 'hochnäsig', 1, NULL, 3),
-(15, 'idiotisch', 1, NULL, 3),
-(16, 'ignorant', 1, NULL, 3),
-(17, 'joggend', 1, NULL, 3),
-(18, 'kannibalistisch', 1, NULL, 3),
-(19, 'lieblos', 1, NULL, 3),
-(20, 'mickrig', 1, NULL, 3),
-(21, 'Monokel', 2, 3, 3),
-(22, 'nebulös', 1, NULL, 3),
-(23, 'oval', 1, NULL, 3),
-(24, 'Obazda', 2, 1, 3),
-(25, 'Orange', 2, 2, 3),
-(26, 'Omen', 2, 3, 3),
-(27, 'öde', 1, NULL, 3),
-(28, 'phasenverschoben', 1, NULL, 3),
-(29, 'qualifiziert', 1, NULL, 3),
-(30, 'respektlos', 1, NULL, 3),
-(31, 'Scheiß', 2, 1, 3),
-(32, 'Sauklaue', 2, 2, 3),
-(33, 'transatlantisch', 1, NULL, 3),
-(34, 'Taliban', 2, 1, 3),
-(35, 'unterirdisch', 1, NULL, 3),
-(36, 'überlebenswichtig', 1, NULL, 3),
-(37, 'verflucht', 1, NULL, 3),
-(38, 'weiß', 1, NULL, 3),
-(39, 'weis', 1, NULL, 3),
-(40, 'Yuppie verachtend', 1, NULL, 3),
+INSERT INTO `aggronymes` (`aggronyme_id`, `aggronyme`, `fk_word_type_id`, `fk_word_article_id`, `number_of_admin_votes`) VALUES
+(1, 'abartig', 1, NULL, 2),
+(2, 'assozial', 1, NULL, 2),
+(3, 'ägglhaft', 1, NULL, 2),
+(4, 'balancelos', 1, NULL, 2),
+(5, 'belanglos', 1, NULL, 2),
+(6, 'blöd', 1, NULL, 2),
+(7, 'charismatisch', 1, NULL, 2),
+(8, 'deppert', 1, NULL, 2),
+(9, 'dumm', 1, NULL, 2),
+(10, 'doof', 1, NULL, 2),
+(11, 'egglhaft', 1, NULL, 2),
+(12, 'ersetzbar', 1, NULL, 2),
+(13, 'frauenfeindlich', 1, NULL, 2),
+(14, 'hochnäsig', 1, NULL, 2),
+(15, 'idiotisch', 1, NULL, 2),
+(16, 'ignorant', 1, NULL, 2),
+(17, 'joggend', 1, NULL, 2),
+(18, 'kannibalistisch', 1, NULL, 2),
+(19, 'lieblos', 1, NULL, 2),
+(20, 'mickrig', 1, NULL, 2),
+(21, 'Monokel', 2, 3, 2),
+(22, 'nebulös', 1, NULL, 2),
+(23, 'oval', 1, NULL, 2),
+(24, 'Obazda', 2, 1, 2),
+(25, 'Orange', 2, 2, 2),
+(26, 'Omen', 2, 3, 2),
+(27, 'öd', 1, NULL, 2),
+(28, 'phasenverschoben', 1, NULL, 2),
+(29, 'qualifiziert', 1, NULL, 2),
+(30, 'respektlos', 1, NULL, 2),
+(31, 'Scheiß', 2, 1, 2),
+(32, 'Sauklaue', 2, 2, 2),
+(33, 'transatlantisch', 1, NULL, 2),
+(34, 'Taliban', 2, 1, 2),
+(35, 'unterirdisch', 1, NULL, 2),
+(36, 'überlebenswichtig', 1, NULL, 2),
+(37, 'verflucht', 1, NULL, 2),
+(38, 'weiß', 1, NULL, 2),
+(39, 'weis', 1, NULL, 2),
+(40, 'Yuppie verachtend', 1, NULL, 2),
 (41, 'unrasiert', 1, NULL, 2),
 (42, 'faschistisch', 1, NULL, 2),
 (43, 'rassistisch', 1, NULL, 2),
 (44, 'Lockenkopf', 2, 1, 2),
 (45, 'Nacktschnecke', 2, 2, 2),
-(46, 'ramponiert', 1, NULL, 3),
+(46, 'ramponiert', 1, NULL, 2),
 (47, 'Logistikexperte', 2, 1, 2),
 (48, 'Lappen', 2, 1, 2),
 (49, 'Lulatsch', 2, 1, 2),
@@ -113,7 +113,7 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (70, 'Jeffrey', 2, 1, 2),
 (71, 'Jugendlicher', 2, 1, 2),
 (72, 'Junkie', 2, 1, 2),
-(73, 'Jodler', 2, 1, 3),
+(73, 'Jodler', 2, 1, 2),
 (74, 'Jockel', 2, 1, 2),
 (75, 'Steckdosenbefruchter', 2, 1, 2),
 (76, 'Jogger', 2, 1, 2),
@@ -129,31 +129,31 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (86, 'Eierkopf', 2, 1, 2),
 (87, 'Ehrloser', 2, 1, 2),
 (88, 'Fickbratze', 2, 2, 2),
-(89, 'Fickfresse', 2, 2, 3),
-(90, 'Fotze', 2, 2, 3),
+(89, 'Fickfresse', 2, 2, 2),
+(90, 'Fotze', 2, 2, 2),
 (91, 'Ficker', 2, 1, 2),
-(92, 'Fanatiker', 2, 1, 3),
-(93, 'Faschist', 2, 1, 3),
+(92, 'Fanatiker', 2, 1, 2),
+(93, 'Faschist', 2, 1, 2),
 (94, 'Naturfascho', 2, 1, 2),
 (95, 'Furzgesicht', 2, 3, 2),
-(96, 'Furz', 2, 1, 3),
+(96, 'Furz', 2, 1, 2),
 (97, 'Fruchtzwerg', 2, 1, 2),
 (98, 'Gallmeder', 2, 1, 2),
 (99, 'Gartenzwerg', 2, 1, 2),
-(100, 'schlau', 1, NULL, 3),
-(101, 'Krüppel', 2, 1, 3),
-(102, 'stur', 1, NULL, 3),
+(100, 'schlau', 1, NULL, 2),
+(101, 'Krüppel', 2, 1, 2),
+(102, 'stur', 1, NULL, 2),
 (103, 'Gammler', 2, 1, 2),
-(104, 'Wichser', 2, 1, 3),
-(105, 'Affenkopf', 2, 1, 3),
+(104, 'Wichser', 2, 1, 2),
+(105, 'Affenkopf', 2, 1, 2),
 (106, 'Grünschnabel', 2, 1, 2),
 (107, 'Buttergolem', 2, 1, 2),
 (108, 'Gollum', 2, 1, 2),
 (109, 'Hans!', 2, 1, 2),
-(110, 'Hans', 2, 1, 3),
+(110, 'Hans', 2, 1, 2),
 (111, 'Glatzkopf', 2, 1, 2),
 (112, 'Gubbel', 2, 1, 2),
-(113, 'Spast', 2, 1, 3),
+(113, 'Spast', 2, 1, 2),
 (114, 'Halskrause', 2, 2, 2),
 (115, 'billig', 1, NULL, 2),
 (116, 'Hurensohn', 2, 1, 2),
@@ -162,7 +162,7 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (119, 'Hohlbirne', 2, 2, 2),
 (120, 'Halbtagsjobber', 2, 1, 2),
 (121, 'Hartzler', 2, 1, 2),
-(122, 'Honk', 2, 1, 3),
+(122, 'Honk', 2, 1, 2),
 (123, 'Ingwer-Konsument', 2, 1, 2),
 (124, 'Ingwerfascho', 2, 1, 2),
 (125, 'imaginär', 1, NULL, 2),
@@ -172,62 +172,62 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (129, 'Irrer', 2, 1, 2),
 (130, 'Intelligenzbestie', 2, 2, 2),
 (131, 'Inzestkind', 2, 3, 2),
-(132, '0lmaddin', 2, 1, 3),
-(133, 'Sachse', 2, 1, 3),
-(134, 'Massakermanfred', 2, 1, 3),
-(135, 'Schwachkupf', 2, 1, 3),
-(136, 'Oachkatzlschwoaf', 2, 1, 3),
-(137, 'Lunatiker', 2, 1, 3),
-(138, 'Dorfdepp', 2, 1, 3),
-(139, 'Sachsenbewohner', 2, 1, 3),
-(140, 'Nazi', 2, 1, 3),
-(141, 'Pegidawähler', 2, 1, 3),
-(142, 'rainst', 1, NULL, 3),
-(143, 'widerwertig', 1, NULL, 3),
-(144, 'widerwärtig', 1, NULL, 3),
-(145, 'sabbernd', 1, NULL, 3),
-(146, 'Wiederkäuer', 2, 1, 3),
-(147, 'rekursiv', 1, NULL, 3),
-(148, 'reinst', 1, NULL, 3),
-(149, 'Meest0', 2, 1, 3),
-(150, 'Nudel-Experte', 2, 1, 3),
-(151, 'Obba', 2, 1, 3),
-(152, 'Penetrator', 2, 1, 3),
-(153, 'Penedrant', 2, 1, 3),
-(154, 'Panadengurke', 2, 2, 3),
-(155, 'Alpecin-Experte', 2, 1, 3),
-(156, 'Gurke', 2, 2, 3),
-(157, 'Obstverweigerer', 2, 1, 3),
-(158, 'Penner', 2, 1, 3),
-(159, 'Oberbratze', 2, 2, 3),
-(160, 'Penis', 2, 1, 3),
-(161, 'ausgeschieden', 1, NULL, 3),
-(162, 'Unzucht', 2, 2, 3),
-(163, 'Untermensch', 2, 1, 3),
-(164, 'Urologe', 2, 1, 3),
-(165, 'Unfallgaffer', 2, 1, 3),
-(166, 'gaffend', 1, NULL, 3),
-(167, 'verunfallt', 1, NULL, 3),
-(168, 'Statist', 2, 1, 3),
+(132, '0lmaddin', 2, 1, 2),
+(133, 'Sachse', 2, 1, 2),
+(134, 'Massakermanfred', 2, 1, 2),
+(135, 'Schwachkupf', 2, 1, 2),
+(136, 'Oachkatzlschwoaf', 2, 1, 2),
+(137, 'Lunatiker', 2, 1, 2),
+(138, 'Dorfdepp', 2, 1, 2),
+(139, 'Sachsenbewohner', 2, 1, 2),
+(140, 'Nazi', 2, 1, 2),
+(141, 'Pegidawähler', 2, 1, 2),
+(142, 'rainst', 1, NULL, 2),
+(143, 'widerwertig', 1, NULL, 2),
+(144, 'widerwärtig', 1, NULL, 2),
+(145, 'sabbernd', 1, NULL, 2),
+(146, 'Wiederkäuer', 2, 1, 2),
+(147, 'rekursiv', 1, NULL, 2),
+(148, 'reinst', 1, NULL, 2),
+(149, 'Meest0', 2, 1, 2),
+(150, 'Nudel-Experte', 2, 1, 2),
+(151, 'Obba', 2, 1, 2),
+(152, 'Penetrator', 2, 1, 2),
+(153, 'Penedrant', 2, 1, 2),
+(154, 'Panadengurke', 2, 2, 2),
+(155, 'Alpecin-Experte', 2, 1, 2),
+(156, 'Gurke', 2, 2, 2),
+(157, 'Obstverweigerer', 2, 1, 2),
+(158, 'Penner', 2, 1, 2),
+(159, 'Oberbratze', 2, 2, 2),
+(160, 'Penis', 2, 1, 2),
+(161, 'ausgeschieden', 1, NULL, 2),
+(162, 'Unzucht', 2, 2, 2),
+(163, 'Untermensch', 2, 1, 2),
+(164, 'Urologe', 2, 1, 2),
+(165, 'Unfallgaffer', 2, 1, 2),
+(166, 'gaffend', 1, NULL, 2),
+(167, 'verunfallt', 1, NULL, 2),
+(168, 'Statist', 2, 1, 2),
 (169, 'Arsch', 2, 1, 2),
-(170, 'Dämon', 2, 1, 3),
-(171, 'Wambo', 2, 1, 3),
-(172, 'Arschgöttin', 2, 2, 3),
-(173, 'Daifl', 2, 1, 3),
-(174, 'Platzhalter', 2, 1, 3),
-(175, 'Klatsche', 2, 2, 3),
-(176, 'Gemüseklatsche', 2, 2, 3),
-(177, 'verfault', 1, NULL, 3),
-(178, 'arschig', 1, NULL, 3),
-(179, 'verdammt', 1, NULL, 3),
-(180, 'verdorben', 1, NULL, 3),
+(170, 'Dämon', 2, 1, 2),
+(171, 'Wambo', 2, 1, 2),
+(172, 'Arschgöttin', 2, 2, 2),
+(173, 'Daifl', 2, 1, 2),
+(174, 'Platzhalter', 2, 1, 2),
+(175, 'Klatsche', 2, 2, 2),
+(176, 'Gemüseklatsche', 2, 2, 2),
+(177, 'verfault', 1, NULL, 2),
+(178, 'arschig', 1, NULL, 2),
+(179, 'verdammt', 1, NULL, 2),
+(180, 'verdorben', 1, NULL, 2),
 (181, 'Fleischhackende-Zerhacker', 2, 1, 2),
-(182, 'Zerhacker', 2, 1, 3),
+(182, 'Zerhacker', 2, 1, 2),
 (183, 'Hackfleisch hassend', 1, NULL, 2),
 (184, 'Hackfleisch hackend', 1, NULL, 2),
 (185, 'Kackfleisch kackend', 1, NULL, 2),
 (186, 'Faschosau', 2, 2, 2),
-(187, 'Zuhälter', 2, 1, 3),
+(187, 'Zuhälter', 2, 1, 2),
 (188, 'Amputator', 2, 1, 2),
 (189, 'Zühorer', 2, 1, 2),
 (190, 'Sack', 2, 1, 2),
@@ -238,17 +238,17 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (196, 'Verbrecher', 2, 1, 2),
 (197, 'Krimineller', 2, 1, 2),
 (198, 'Ziegelsteingesicht', 2, 3, 2),
-(200, 'Kevin', 2, 1, 3),
-(201, 'entfremdet', 1, NULL, 3),
+(200, 'Kevin', 2, 1, 2),
+(201, 'entfremdet', 1, NULL, 2),
 (202, 'Önn0', 2, 1, 2),
-(203, 'obdachlos', 1, NULL, 3),
+(203, 'obdachlos', 1, NULL, 2),
 (204, 'mittellos', 1, NULL, 2),
 (205, 'enteignet', 1, NULL, 2),
 (206, 'nervig', 1, NULL, 2),
-(207, 'Doldi', 2, 1, 3),
+(207, 'Doldi', 2, 1, 2),
 (208, 'Dolln', 2, 2, 2),
 (209, 'Dummkopf', 2, 1, 2),
-(210, 'Spasti', 2, 1, 3),
+(210, 'Spasti', 2, 1, 2),
 (211, 'Spacko', 2, 1, 2),
 (212, 'daumendick', 1, NULL, 2),
 (213, 'Dullnraamer', 2, 1, 2),
@@ -256,7 +256,7 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (215, 'Crackhure', 2, 2, 2),
 (216, 'Cracknutte', 2, 2, 2),
 (217, 'Wackeldackel', 2, 1, 2),
-(218, 'Christ', 2, 1, 3),
+(218, 'Christ', 2, 1, 2),
 (219, 'Clown', 2, 1, 2),
 (220, '0ndi', 2, 1, 2),
 (221, 'Laborratte', 2, 2, 2),
@@ -293,12 +293,12 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (252, 'ungewollt', 1, NULL, 2),
 (253, 'Untier', 2, 3, 2),
 (254, 'Dachdegg0', 2, 1, 2),
-(255, 'Unmensch', 2, 1, 3),
+(255, 'Unmensch', 2, 1, 2),
 (256, 'gut', 1, NULL, 2),
 (257, 'teuflisch', 1, NULL, 2),
 (258, 'Trottel', 2, 1, 2),
 (259, 'Transe', 2, 2, 2),
-(260, 'Tölpel', 2, 1, 3),
+(260, 'Tölpel', 2, 1, 2),
 (261, 'Toilettentieftaucher', 2, 1, 2),
 (262, 'Tunte', 2, 2, 2),
 (263, 'Tussi', 2, 2, 2),
@@ -336,7 +336,7 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (295, 'Volldepp', 2, 1, 2),
 (296, 'Verräter', 2, 1, 2),
 (297, 'verräterisch', 1, NULL, 2),
-(298, 'formlos', 1, NULL, 3),
+(298, 'formlos', 1, NULL, 2),
 (300, 'fabulös', 1, NULL, 2),
 (301, 'Mongo', 2, 1, 2),
 (302, 'Hure', 2, 2, 2),
@@ -345,7 +345,7 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (305, 'Vollhorst', 1, NULL, 2),
 (306, 'Ranzl0', 2, 1, 2),
 (307, 'schier unermesslich', 1, NULL, 2),
-(308, 'schesch', 1, NULL, 3),
+(308, 'schesch', 1, NULL, 2),
 (309, 'dreist', 1, NULL, 2),
 (310, 'Kackspast', 2, 1, 2),
 (311, 'Missgeburt', 2, 2, 2),
@@ -366,9 +366,9 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (326, 'wirr', 1, NULL, 2),
 (327, 'Assi', 2, 1, 2),
 (328, 'Choleriker', 2, 1, 2),
-(329, 'cholerisch', 1, NULL, 3),
+(329, 'cholerisch', 1, NULL, 2),
 (330, 'fanatisch', 1, NULL, 2),
-(331, 'Cholesterin-verseucht', 1, NULL, 3),
+(331, 'Cholesterin-verseucht', 1, NULL, 2),
 (332, 'langweilig', 1, NULL, 2),
 (333, 'irrelevant', 1, NULL, 2),
 (334, 'Traumtänzer', 2, 1, 2),
@@ -394,13 +394,13 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (356, 'Kapitalist', 2, 1, 2),
 (357, 'Kapitalistenschwein', 2, 3, 2),
 (358, 'Versuchsratte', 2, 2, 2),
-(363, 'Sau', 2, 2, 3),
+(363, 'Sau', 2, 2, 2),
 (364, 'Schnarcher', 2, 1, 2),
 (365, 'Schnarchkopf', 2, 1, 2),
 (366, 'gehirnamputiert', 1, NULL, 2),
 (367, 'schwachsinnig', 1, NULL, 2),
-(368, 'Schwachkopf', 2, 1, 3),
-(369, 'Affe', 2, 1, 3),
+(368, 'Schwachkopf', 2, 1, 2),
+(369, 'Affe', 2, 1, 2),
 (371, 'leider glatzenlos', 1, NULL, 2),
 (372, 'in den Mosh geraten', 1, NULL, 2),
 (373, 'quälend', 1, NULL, 2),
@@ -420,7 +420,7 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (388, 'juristisch abgesichert', 1, NULL, 2),
 (389, 'nicht jugendfrei', 1, NULL, 2),
 (390, 'Zoo-Affe', 2, 1, 2),
-(391, 'jähzornig', 1, NULL, 3),
+(391, 'jähzornig', 1, NULL, 2),
 (392, 'jubelnd', 1, NULL, 2),
 (393, 'Jünger', 2, 1, 2),
 (394, 'jodelnd', 1, NULL, 2),
@@ -462,7 +462,7 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (433, 'mutlos', 1, NULL, 2),
 (434, 'unmusikalisch', 1, NULL, 2),
 (435, 'manierenlos', 1, NULL, 2),
-(436, 'taktlos', 1, NULL, 3),
+(436, 'taktlos', 1, NULL, 2),
 (437, 'Opfer', 2, 3, 2),
 (438, 'orientierungslos', 1, NULL, 2),
 (439, 'obszön', 1, NULL, 2),
@@ -503,7 +503,7 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (474, 'Leninist', 2, 1, 2),
 (475, 'Lama', 2, 3, 2),
 (476, 'lächerlich', 1, NULL, 2),
-(477, 'leicht katalogisierbar', 1, NULL, 3),
+(477, 'leicht katalogisierbar', 1, NULL, 2),
 (478, 'launisch', 1, NULL, 2),
 (479, 'lachhaft', 1, NULL, 2),
 (480, 'Kochnudel', 2, 2, 2),
@@ -530,7 +530,7 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (502, 'pädophil', 1, NULL, 2),
 (503, 'hydrophil', 1, NULL, 2),
 (504, 'hydrophob', 1, NULL, 2),
-(505, 'koalitionslos', 1, NULL, 3),
+(505, 'koalitionslos', 1, NULL, 2),
 (506, 'verlogen', 1, NULL, 2),
 (507, 'chronisch untervögelt', 1, NULL, 2),
 (508, 'chillig', 1, NULL, 2),
@@ -539,11 +539,11 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (511, 'Egomane', 2, 1, 2),
 (512, 'chronisch unterbelichtet', 1, NULL, 2),
 (513, 'unterbelichtet', 1, NULL, 2),
-(514, 'chaotisch', 1, NULL, 3),
-(515, 'Chaot', 2, 1, 3),
-(516, 'CDU-Wähler', 2, 1, 3),
-(518, 'charismatisch-beschränkt', 1, NULL, 3),
-(519, 'beschränkt', 1, NULL, 3),
+(514, 'chaotisch', 1, NULL, 2),
+(515, 'Chaot', 2, 1, 2),
+(516, 'CDU-Wähler', 2, 1, 2),
+(518, 'charismatisch-beschränkt', 1, NULL, 2),
+(519, 'beschränkt', 1, NULL, 2),
 (520, 'clean', 1, NULL, 2),
 (521, 'lean', 1, NULL, 2),
 (522, 'psychisch krank', 1, NULL, 2),
@@ -571,7 +571,7 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (544, 'sehr ziemlich', 1, NULL, 2),
 (545, 'äußerst ziemlich', 1, NULL, 2),
 (546, 'zerknirscht', 1, NULL, 2),
-(547, 'ziellos', 1, NULL, 3),
+(547, 'ziellos', 1, NULL, 2),
 (548, 'nutzlos', 1, NULL, 2),
 (549, 'zauberhaft', 1, NULL, 2),
 (550, 'Zink-verseucht', 1, NULL, 2),
@@ -633,7 +633,7 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (606, 'fehlgeleitet', 1, NULL, 2),
 (607, 'quirlig', 1, NULL, 2),
 (608, 'Quadratschädel', 2, 1, 2),
-(609, 'haarig', 1, NULL, 3),
+(609, 'haarig', 1, NULL, 2),
 (610, 'haarlos', 1, NULL, 2),
 (611, 'unbehaart', 1, NULL, 2),
 (612, 'heidnisch', 1, NULL, 2),
@@ -753,14 +753,14 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (727, 'schleimig', 1, NULL, 2),
 (728, 'berufsunfähig', 1, NULL, 2),
 (729, 'schelmisch', 1, NULL, 2),
-(730, 'Schelm', 2, 1, 3),
+(730, 'Schelm', 2, 1, 2),
 (731, 'Schlemil', 2, 1, 2),
 (732, 'Schmock', 2, 1, 2),
 (733, 'bedürftig', 1, NULL, 2),
 (734, 'bemitleidenswert', 1, NULL, 2),
 (735, 'programmier technisch unbegabt', 1, NULL, 2),
 (736, 'Kapellleiter', 2, 1, 2),
-(737, 'bibliophob', 1, NULL, 3),
+(737, 'bibliophob', 1, NULL, 2),
 (738, 'Blaskapellenleiter', 2, 1, 2),
 (739, 'bitchig', 1, NULL, 2),
 (740, 'bibeltreu', 1, NULL, 2),
@@ -783,12 +783,12 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (758, 'rain', 1, NULL, 2),
 (761, 'Barfuß-0ndi', 2, 1, 2),
 (762, 'Quatschtütenranzler', 2, 1, 2),
-(763, 'Hampelmann', 2, 1, 3),
+(763, 'Hampelmann', 2, 1, 2),
 (764, 'Blechkassum', 2, 3, 2),
 (765, 'Keck', 2, 1, 2),
-(766, 'x-beliebig', 1, NULL, 3),
+(766, 'x-beliebig', 1, NULL, 2),
 (767, 'Xanthippe', 2, 2, 2),
-(768, 'O-beinig', 1, NULL, 3),
+(768, 'O-beinig', 1, NULL, 2),
 (769, 'X-beinig', 1, NULL, 2),
 (770, 'Xavier Naidoo-Fan', 2, 1, 2),
 (771, 'Xavier-Glatze', 2, 2, 2),
@@ -809,12 +809,12 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 (787, 'unqualifiziert', 1, NULL, 2),
 (788, 'inkontinent', 1, NULL, 2),
 (789, 'Kräuterwastl', 2, 1, 2),
-(790, 'schwach', 1, NULL, 1),
-(791, 'stumpfsinnig', 1, NULL, 1),
-(792, 'Schleimer', 2, 1, 1),
-(793, 'Schwachmat', 2, 1, 1),
-(794, 'Doofbacke', 2, 2, 1),
-(795, 'Sturkopf', 2, 1, 1),
+(790, 'schwach', 1, NULL, 2),
+(791, 'stumpfsinnig', 1, NULL, 2),
+(792, 'Schleimer', 2, 1, 2),
+(793, 'Schwachmat', 2, 1, 2),
+(794, 'Doofbacke', 2, 2, 2),
+(795, 'Sturkopf', 2, 1, 2),
 (797, 'Fotzenknecht', 2, 1, 2);
 
 -- --------------------------------------------------------
@@ -824,110 +824,111 @@ INSERT INTO `aggronyme_words` (`id`, `word`, `type_id`, `word_article_id`, `vote
 --
 
 CREATE TABLE `answer_inputs` (
-  `id` int(11) NOT NULL,
+  `input_id` int(11) NOT NULL,
   `input` text NOT NULL,
   `has_text_before` tinyint(1) NOT NULL DEFAULT '0',
   `has_text_after` tinyint(1) NOT NULL DEFAULT '0',
   `is_question` tinyint(1) NOT NULL DEFAULT '0',
-  `contains_specialchars` tinyint(1) NOT NULL DEFAULT '0'
+  `contains_specialchars` tinyint(1) NOT NULL DEFAULT '0',
+  `sympathy_percentage_gain` int(3) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
 --
 -- Daten für Tabelle `answer_inputs`
 --
 
-INSERT INTO `answer_inputs` (`id`, `input`, `has_text_before`, `has_text_after`, `is_question`, `contains_specialchars`) VALUES
-(1, 'bot', 0, 0, 0, 0),
-(2, 'lustig lustig', 0, 0, 0, 0),
-(3, 'schnauze', 0, 1, 0, 0),
-(4, 'freiwild', 1, 1, 0, 0),
-(5, 'ingwer', 1, 1, 0, 0),
-(6, 'nusch', 1, 1, 0, 0),
-(7, 'joschi', 1, 1, 0, 0),
-(8, 'janosch', 1, 1, 0, 0),
-(9, 'josch', 1, 1, 0, 0),
-(10, 'subb0', 1, 1, 0, 0),
-(11, 'sybb0', 1, 1, 0, 0),
-(12, 'kaschber', 1, 1, 0, 0),
-(13, 'der önner', 1, 0, 0, 0),
-(14, 'der önn0', 1, 0, 0, 0),
-(15, 'legg0', 1, 1, 0, 0),
-(16, 'diese hier', 0, 0, 0, 0),
-(17, 'ja bitte', 0, 0, 0, 0),
-(18, 'danke', 0, 1, 0, 0),
-(19, 'dankek', 0, 1, 0, 0),
-(20, 'die mit der mühle', 0, 0, 0, 0),
-(21, 'genau', 0, 0, 0, 0),
-(22, 'sgeht', 1, 1, 0, 0),
-(23, 'hey hey', 0, 0, 0, 0),
-(24, 'heyhey', 0, 0, 0, 0),
-(25, 'ja ja', 0, 0, 0, 0),
-(26, 'jaja', 0, 0, 0, 0),
-(29, 'schesch', 1, 1, 0, 0),
-(30, 'offensichtlich', 1, 1, 0, 0),
-(31, 'offensichtlich nicht', 1, 1, 0, 0),
-(32, 'denken sie nicht mit', 0, 0, 0, 0),
-(33, 'wer hat uns verraten', 0, 0, 0, 0),
-(34, 'mess0', 1, 1, 0, 0),
-(35, 'clean', 1, 0, 0, 0),
-(36, 'so true', 0, 0, 0, 0),
-(37, 'sotrue', 0, 0, 0, 0),
-(38, 'kek', 0, 0, 0, 0),
-(39, 'essen', 1, 1, 0, 0),
-(40, 'sn', 1, 1, 0, 0),
-(41, 'uwe', 1, 1, 0, 0),
-(42, 'bist du dumm', 0, 0, 0, 0),
-(43, 'du isst wie ein schwein', 1, 0, 0, 0),
-(44, 'feierabend', 1, 1, 0, 0),
-(45, 'feieramd', 1, 1, 0, 0),
-(46, 'heftig deftig', 0, 0, 0, 0),
-(47, 'naise', 1, 1, 0, 0),
-(48, 'unsinn', 1, 1, 0, 0),
-(49, 'blödsinn', 0, 0, 0, 0),
-(50, 'hoch die hände', 1, 1, 0, 0),
-(51, 'linke hand', 0, 0, 0, 0),
-(52, 'rechte hand', 0, 0, 0, 0),
-(53, 'linkes bein', 0, 0, 0, 0),
-(54, 'rechtes bein', 0, 0, 0, 0),
-(55, 'önnen', 1, 0, 0, 0),
-(56, 'nacht', 0, 0, 0, 0),
-(57, 'n8', 0, 0, 0, 0),
-(58, 'gn8', 0, 0, 0, 0),
-(59, 'nein', 0, 0, 0, 0),
-(60, 'oh', 0, 0, 0, 0),
-(62, 'huff', 0, 0, 0, 0),
-(63, 'muss man wissen', 1, 0, 0, 0),
-(64, 'wer weiß das', 1, 0, 0, 0),
-(65, 'wochenende', 1, 1, 0, 0),
-(66, 'witzig', 1, 1, 0, 0),
-(68, 'frage', 1, 0, 0, 0),
-(69, ':v', 0, 0, 0, 1),
-(70, ':V', 0, 0, 0, 1),
-(71, 'v:', 0, 0, 0, 1),
-(72, 'V:', 0, 0, 0, 1),
-(73, 'D:', 0, 0, 0, 1),
-(74, 'wie viele', 0, 1, 1, 0),
-(75, 'wie viel', 0, 1, 1, 0),
-(76, 'wieso', 0, 1, 1, 0),
-(77, 'was', 0, 1, 1, 0),
-(78, 'wie', 0, 1, 1, 0),
-(79, 'weshalb', 0, 1, 1, 0),
-(80, 'warum', 0, 1, 1, 0),
-(81, 'weswegen', 0, 1, 1, 0),
-(82, 'wozu', 0, 1, 1, 0),
-(90, 'kaschb0', 1, 1, 0, 0),
-(91, 'wer war mit dabei', 0, 0, 0, 0),
-(92, 'schade', 0, 0, 0, 0),
-(93, 'wofür', 0, 1, 1, 0),
-(94, 'nice', 1, 1, 0, 0),
-(100, 'welcher', 0, 1, 1, 0),
-(101, 'welches', 0, 1, 1, 0),
-(102, 'welchen', 0, 1, 1, 0),
-(103, 'welchem', 0, 1, 1, 0),
-(104, 'welche', 0, 1, 1, 0),
-(108, 'wann', 0, 0, 0, 0),
-(109, 'wo', 0, 0, 0, 0),
-(110, 'hallo', 0, 1, 0, 0);
+INSERT INTO `answer_inputs` (`input_id`, `input`, `has_text_before`, `has_text_after`, `is_question`, `contains_specialchars`, `sympathy_percentage_gain`) VALUES
+(1, 'bot', 0, 0, 0, 0, 2),
+(2, 'lustig lustig', 0, 0, 0, 0, 0),
+(3, 'schnauze', 0, 1, 0, 0, -5),
+(4, 'freiwild', 1, 1, 0, 0, 1),
+(5, 'ingwer', 1, 1, 0, 0, -1),
+(6, 'nusch', 1, 1, 0, 0, 1),
+(7, 'joschi', 1, 1, 0, 0, 1),
+(8, 'janosch', 1, 1, 0, 0, 1),
+(9, 'josch', 1, 1, 0, 0, 1),
+(10, 'subb0', 1, 1, 0, 0, 0),
+(11, 'sybb0', 1, 1, 0, 0, 0),
+(12, 'kaschber', 1, 1, 0, 0, -3),
+(13, 'der önner', 1, 0, 0, 0, 0),
+(14, 'der önn0', 1, 0, 0, 0, 0),
+(15, 'legg0', 1, 1, 0, 0, 0),
+(16, 'diese hier', 0, 0, 0, 0, 0),
+(17, 'ja bitte', 0, 0, 0, 0, 0),
+(18, 'danke', 0, 1, 0, 0, 1),
+(19, 'dankek', 0, 1, 0, 0, 1),
+(20, 'die mit der mühle', 0, 0, 0, 0, 0),
+(21, 'genau', 0, 0, 0, 0, 0),
+(22, 'sgeht', 1, 1, 0, 0, 1),
+(23, 'hey hey', 0, 0, 0, 0, 0),
+(24, 'heyhey', 0, 0, 0, 0, 0),
+(25, 'ja ja', 0, 0, 0, 0, 0),
+(26, 'jaja', 0, 0, 0, 0, 0),
+(29, 'schesch', 1, 1, 0, 0, 2),
+(30, 'offensichtlich', 1, 1, 0, 0, 0),
+(32, 'denken sie nicht mit', 0, 0, 0, 0, 0),
+(33, 'wer hat uns verraten', 0, 0, 0, 0, 0),
+(34, 'mess0', 1, 1, 0, 0, 1),
+(35, 'clean', 1, 0, 0, 0, 0),
+(36, 'so true', 0, 0, 0, 0, 0),
+(37, 'sotrue', 0, 0, 0, 0, 0),
+(38, 'kek', 0, 0, 0, 0, 0),
+(39, 'essen', 1, 1, 0, 0, 0),
+(40, 'sn', 1, 1, 0, 0, 0),
+(41, 'uwe', 1, 1, 0, 0, 1),
+(42, 'bist du dumm', 0, 0, 0, 0, -3),
+(43, 'du isst wie ein schwein', 1, 0, 0, 0, 0),
+(44, 'feierabend', 1, 1, 0, 0, 0),
+(45, 'feieramd', 1, 1, 0, 0, 0),
+(46, 'heftig deftig', 0, 0, 0, 0, 0),
+(47, 'naise', 1, 1, 0, 0, 0),
+(48, 'unsinn', 1, 1, 0, 0, 0),
+(49, 'blödsinn', 0, 0, 0, 0, 0),
+(50, 'hoch die hände', 1, 1, 0, 0, 0),
+(51, 'linke hand', 0, 0, 0, 0, 0),
+(52, 'rechte hand', 0, 0, 0, 0, 0),
+(53, 'linkes bein', 0, 0, 0, 0, 0),
+(54, 'rechtes bein', 0, 0, 0, 0, 0),
+(55, 'önnen', 1, 0, 0, 0, 2),
+(56, 'nacht', 0, 0, 0, 0, 2),
+(57, 'n8', 0, 0, 0, 0, 2),
+(58, 'gn8', 0, 0, 0, 0, 2),
+(59, 'nein', 0, 0, 0, 0, 0),
+(60, 'oh', 0, 0, 0, 0, 0),
+(62, 'huff', 0, 0, 0, 0, -3),
+(63, 'muss man wissen', 1, 0, 0, 0, 0),
+(64, 'wer weiß das', 1, 0, 0, 0, 0),
+(65, 'wochenende', 1, 1, 0, 0, 5),
+(66, 'witzig', 1, 1, 0, 0, 0),
+(68, 'frage', 1, 0, 0, 0, 4),
+(69, ':v', 0, 0, 0, 1, 0),
+(70, ':V', 0, 0, 0, 1, 0),
+(71, 'v:', 0, 0, 0, 1, 0),
+(72, 'V:', 0, 0, 0, 1, 0),
+(73, 'D:', 0, 0, 0, 1, 0),
+(74, 'wie viele', 0, 1, 1, 0, 0),
+(75, 'wie viel', 0, 1, 1, 0, 0),
+(76, 'wieso', 0, 1, 1, 0, 0),
+(77, 'was', 0, 1, 1, 0, 0),
+(78, 'wie', 0, 1, 1, 0, 0),
+(79, 'weshalb', 0, 1, 1, 0, 0),
+(80, 'warum', 0, 1, 1, 0, 0),
+(81, 'weswegen', 0, 1, 1, 0, 0),
+(82, 'wozu', 0, 1, 1, 0, 0),
+(90, 'kaschb0', 1, 1, 0, 0, -3),
+(91, 'wer war mit dabei', 0, 0, 0, 0, 0),
+(92, 'schade', 0, 0, 0, 0, 0),
+(93, 'wofür', 0, 1, 1, 0, 0),
+(94, 'nice', 1, 1, 0, 0, 0),
+(100, 'welcher', 0, 1, 1, 0, 0),
+(101, 'welches', 0, 1, 1, 0, 0),
+(102, 'welchen', 0, 1, 1, 0, 0),
+(103, 'welchem', 0, 1, 1, 0, 0),
+(104, 'welche', 0, 1, 1, 0, 0),
+(108, 'wann', 0, 0, 0, 0, 0),
+(109, 'wo', 0, 0, 0, 0, 0),
+(110, 'hallo', 0, 1, 0, 0, 1),
+(111, 'moin', 0, 1, 0, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -936,7 +937,7 @@ INSERT INTO `answer_inputs` (`id`, `input`, `has_text_before`, `has_text_after`,
 --
 
 CREATE TABLE `answer_last_outputs` (
-  `id` int(11) NOT NULL,
+  `last_output_id` int(11) NOT NULL,
   `chat_id` int(11) NOT NULL,
   `last_output` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
@@ -945,9 +946,9 @@ CREATE TABLE `answer_last_outputs` (
 -- Daten für Tabelle `answer_last_outputs`
 --
 
-INSERT INTO `answer_last_outputs` (`id`, `chat_id`, `last_output`) VALUES
+INSERT INTO `answer_last_outputs` (`last_output_id`, `chat_id`, `last_output`) VALUES
 (1, 72111412, 'Äußerst :3'),
-(2, -180513391, 'Scho');
+(2, -180513391, 'Äußerst :3');
 
 -- --------------------------------------------------------
 
@@ -956,7 +957,7 @@ INSERT INTO `answer_last_outputs` (`id`, `chat_id`, `last_output`) VALUES
 --
 
 CREATE TABLE `answer_outputs` (
-  `id` int(11) NOT NULL,
+  `output_id` int(11) NOT NULL,
   `output` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
@@ -964,7 +965,7 @@ CREATE TABLE `answer_outputs` (
 -- Daten für Tabelle `answer_outputs`
 --
 
-INSERT INTO `answer_outputs` (`id`, `output`) VALUES
+INSERT INTO `answer_outputs` (`output_id`, `output`) VALUES
 (1, 'JOOOOOOOU'),
 (2, 'Herr Paschulke!'),
 (3, 'Hehehehekekekekek!'),
@@ -994,7 +995,7 @@ INSERT INTO `answer_outputs` (`id`, `output`) VALUES
 (29, '& lean :3'),
 (30, 'AMENAKOI'),
 (31, 'Äußerst :3'),
-(32, ':('),
+(32, '\\uD83D\\uDE15'),
 (33, 'Appetit'),
 (34, 'Einen Appetit'),
 (35, 'Einen Appetit wünsche ich'),
@@ -1058,7 +1059,8 @@ INSERT INTO `answer_outputs` (`id`, `output`) VALUES
 (108, 'Oh, Hallo'),
 (109, 'Ah, der Herr Nachbar.... Hallo!'),
 (110, 'Griaß di Gott!'),
-(111, 'Guten Tag, sie Arsch!');
+(111, 'Guten Tag, sie Arsch!'),
+(112, 'Moin, du Önn0 \\uD83D\\uDE0C');
 
 -- --------------------------------------------------------
 
@@ -1067,17 +1069,17 @@ INSERT INTO `answer_outputs` (`id`, `output`) VALUES
 --
 
 CREATE TABLE `answer_relations` (
-  `id` int(11) NOT NULL,
-  `input_id` int(11) NOT NULL,
-  `output_id` int(11) NOT NULL,
-  `previous_output_id` int(11) DEFAULT NULL
+  `relation_id` int(11) NOT NULL,
+  `fk_input_id` int(11) NOT NULL,
+  `fk_output_id` int(11) NOT NULL,
+  `fk_output_id_previous` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
 --
 -- Daten für Tabelle `answer_relations`
 --
 
-INSERT INTO `answer_relations` (`id`, `input_id`, `output_id`, `previous_output_id`) VALUES
+INSERT INTO `answer_relations` (`relation_id`, `fk_input_id`, `fk_output_id`, `fk_output_id_previous`) VALUES
 (6, 1, 1, NULL),
 (7, 2, 2, NULL),
 (8, 2, 3, 2),
@@ -1108,7 +1110,6 @@ INSERT INTO `answer_relations` (`id`, `input_id`, `output_id`, `previous_output_
 (34, 26, 21, NULL),
 (35, 29, 12, NULL),
 (36, 30, 23, NULL),
-(37, 31, 23, NULL),
 (38, 32, 24, NULL),
 (39, 33, 25, NULL),
 (40, 33, 26, 25),
@@ -1231,7 +1232,112 @@ INSERT INTO `answer_relations` (`id`, `input_id`, `output_id`, `previous_output_
 (185, 110, 108, NULL),
 (186, 110, 109, NULL),
 (187, 110, 110, NULL),
-(188, 110, 111, NULL);
+(188, 110, 111, NULL),
+(189, 111, 112, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `message_types`
+--
+
+CREATE TABLE `message_types` (
+  `message_type_id` int(11) NOT NULL,
+  `message_type` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `message_types`
+--
+
+INSERT INTO `message_types` (`message_type_id`, `message_type`) VALUES
+(1, 'text'),
+(2, 'audio'),
+(3, 'document'),
+(4, 'animation'),
+(5, 'game'),
+(6, 'photo'),
+(7, 'sticker'),
+(8, 'video'),
+(9, 'voice'),
+(10, 'video_note'),
+(11, 'location'),
+(12, 'venue'),
+(13, 'poll'),
+(14, 'new_chat_members'),
+(15, 'left_chat_members'),
+(16, 'new_chat_title'),
+(17, 'new_chat_photo'),
+(18, 'delete_chat_photo');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `random_messages`
+--
+
+CREATE TABLE `random_messages` (
+  `random_message_id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `probability_percentage` decimal(10,2) NOT NULL DEFAULT '3.00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `random_messages`
+--
+
+INSERT INTO `random_messages` (`random_message_id`, `message`, `probability_percentage`) VALUES
+(1, 'Welch ein unglaublicher Zufall!\nDiese Nachricht ist ULTRASELTEN und kommt nur mit einer Chance von 0,01%.', '0.01'),
+(2, 'Schesch', '3.00'),
+(3, 'Opfa!', '3.00'),
+(4, 'Affe!', '3.00'),
+(5, 'Halt\'s Maul!', '3.00'),
+(6, 'Witzig!', '3.00'),
+(7, 'SCHEI?VEREIN!', '3.00'),
+(8, 'Ficken ist gut für den Rücken!', '3.00'),
+(9, 'Du isst wie ein Schwein!', '3.00'),
+(10, 'uD83DuDC18!', '3.00'),
+(11, 'THC statt AfD!', '3.00'),
+(12, 'Kein Gras für Nazis!', '3.00'),
+(13, 'Yaaay, Scheschbot!', '3.00'),
+(14, 'Kapitalismus! Schweinesystem! Vietkong!', '3.00'),
+(15, 'Das ist so spannend wie der Oma beim Gebiss wechseln zuzuschauen....!', '3.00'),
+(16, 'Chauvis und Nazis muss man behandeln wie rohe Eier! Man haut sie in die Pfanne!!', '3.00');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `telegram_users`
+--
+
+CREATE TABLE `telegram_users` (
+  `telegram_user_id` int(11) NOT NULL,
+  `sympathy_percentage` int(3) NOT NULL DEFAULT '50',
+  `user_specific_answer_probabilty_percentage` int(3) NOT NULL DEFAULT '2',
+  `first_name` text NOT NULL,
+  `last_name` text,
+  `username` text,
+  `is_admin` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+
+--
+-- Daten für Tabelle `telegram_users`
+--
+
+INSERT INTO `telegram_users` (`telegram_user_id`, `sympathy_percentage`, `user_specific_answer_probabilty_percentage`, `first_name`, `last_name`, `username`, `is_admin`) VALUES
+(9838187, 50, 2, 'Julia', NULL, NULL, 0),
+(33545033, 11, 2, 'Andi', 'N.', 'VirtualNonsense', 0),
+(42451440, 50, 2, 'Timo', NULL, NULL, 0),
+(44867338, 10, 2, 'Fredi', 'B', 'Oenner', 0),
+(54185905, 7, 2, 'Alex', 'Ey', NULL, 1),
+(72111412, 14, 2, 'Stoffel', NULL, 'Stoffel2007', 1),
+(82613330, 69, 2, 'Wilhelmina', 'Fuchs', NULL, 0),
+(96829496, 50, 2, 'Vö', NULL, NULL, 0),
+(105131864, 60, 2, 'Joschi', NULL, NULL, 0),
+(213190902, 28, 10, 'Pascal', 'Rögner', NULL, 0),
+(227059450, 50, 10, 'Jona', NULL, NULL, 0),
+(578854610, 57, 2, 'Verena', 'Malowaniec', NULL, 0),
+(883968625, 50, 10, 'Krischan', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -1240,7 +1346,7 @@ INSERT INTO `answer_relations` (`id`, `input_id`, `output_id`, `previous_output_
 --
 
 CREATE TABLE `timed_messages` (
-  `id` int(11) NOT NULL,
+  `timed_message_id` int(11) NOT NULL,
   `message` text NOT NULL,
   `send_time` datetime NOT NULL,
   `chat_id` int(11) NOT NULL
@@ -1249,31 +1355,63 @@ CREATE TABLE `timed_messages` (
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `users`
+-- Tabellenstruktur für Tabelle `user_specific_answers`
 --
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `telegram_id` int(11) NOT NULL,
-  `sympathy_percentage` int(3) NOT NULL DEFAULT '50',
-  `first_name` text NOT NULL,
-  `last_name` text,
-  `username` text,
-  `is_admin` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+CREATE TABLE `user_specific_answers` (
+  `user_specific_answer_id` int(11) NOT NULL,
+  `fk_telegram_user_id` int(11) NOT NULL,
+  `answer` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Daten für Tabelle `users`
+-- Daten für Tabelle `user_specific_answers`
 --
 
-INSERT INTO `users` (`id`, `telegram_id`, `sympathy_percentage`, `first_name`, `last_name`, `username`, `is_admin`) VALUES
-(1, 105131864, 60, 'Joschi', NULL, NULL, 0),
-(2, 54185905, 26, 'Alex', 'Ey', NULL, 1),
-(3, 44867338, 10, 'Fredi', 'B', 'Oenner', 0),
-(4, 213190902, 28, 'Pascal', 'Rögner', NULL, 0),
-(5, 82613330, 69, 'Wilhelmina', 'Fuchs', NULL, 0),
-(6, 72111412, 46, 'Stoffel', NULL, 'Stoffel2007', 1),
-(7, 33545033, 92, 'Andi', 'N.', 'VirtualNonsense', 1);
+INSERT INTO `user_specific_answers` (`user_specific_answer_id`, `fk_telegram_user_id`, `answer`) VALUES
+(44, 578854610, 'Back door, beauty?:-*'),
+(45, 578854610, 'Besorg mir Graaaas, Bitch!'),
+(46, 578854610, 'Du Poledancing-Pole!'),
+(47, 578854610, 'Ayyy gurrrrrl'),
+(48, 72111412, 'Du lüüüüüügst! Er lüüüüügt!'),
+(49, 72111412, 'Programmier mich endlich neu, du Idiot!'),
+(50, 72111412, 'Du stinkst!'),
+(51, 72111412, 'Geh mal duschen, Suffl0!'),
+(52, 72111412, 'Du Hasenpups!'),
+(53, 105131864, 'Nudelparty beim Nusch!!!!!'),
+(54, 105131864, 'Schnell!\nBonusenergie!'),
+(55, 105131864, 'Du auf Bildern stets fotogener Lurch!'),
+(56, 105131864, 'Joschi, leg ein Ei!'),
+(57, 105131864, 'Yaaay, Joschi! :-)'),
+(58, 54185905, 'Önn0!'),
+(59, 54185905, 'Russensau!'),
+(60, 54185905, 'Programmier mich endlich neu, du Idiot!'),
+(61, 54185905, 'Du stets wohlgelaunte Kiffhexe!\nFurchtbar, sowas!'),
+(62, 54185905, 'Bananenschnüffler!'),
+(63, 33545033, 'Blechkupf!'),
+(64, 33545033, 'Du Bassist!'),
+(65, 33545033, 'Programmier mich endlich neu, du Idiot!'),
+(66, 33545033, 'Na, dazu musst du dir die Pointe wohl noch im 3D-Drucker drucken....'),
+(67, 33545033, 'Existence is paiiiiin.....'),
+(68, 33545033, 'Schnarchnase!'),
+(69, 42451440, 'Ruderboot-Önn0!'),
+(70, 42451440, 'Du politisch involvierter Stahlkappenträger!'),
+(71, 42451440, 'Du linksversiffter Beuteltierträger!'),
+(72, 42451440, 'Du notorischer Zu-Spät-Kommer!'),
+(73, 96829496, 'Vönn0!'),
+(74, 96829496, 'Flöv-Meest0 :3'),
+(75, 96829496, 'Vö-revoir! :3'),
+(76, 96829496, 'VÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖ! :33333'),
+(77, 9838187, 'Du (moderat) introvertierter Ganzkörper-Prolaps!'),
+(78, 9838187, 'Du (moderat) verschrecktes Einhörnchen!'),
+(79, 9838187, 'Du.... äh.... nie bei Veranstaltungen anwesende.... äh.... äh.... ARCHITEKT!\n[HIER könnte IHRE Werbung stehen!]'),
+(80, 9838187, 'Du Schattengestalt!'),
+(81, 227059450, 'Konzentrier dich auf die Vorlesung, du Kaschb0!'),
+(82, 227059450, 'So wird das nix mit dem Studium!'),
+(83, 227059450, 'Bestimmt landest du im Praxissemester bei Fraunhofer uD83DuDE08'),
+(84, 883968625, 'Konzentrier dich auf 2048, du Kaschber!'),
+(85, 883968625, 'Dämlack!'),
+(86, 883968625, 'Bestimmt landest du im Praxissemester bei Fraunhofer uD83DuDE08');
 
 -- --------------------------------------------------------
 
@@ -1282,7 +1420,7 @@ INSERT INTO `users` (`id`, `telegram_id`, `sympathy_percentage`, `first_name`, `
 --
 
 CREATE TABLE `word_articles` (
-  `id` int(11) NOT NULL,
+  `word_article_id` int(11) NOT NULL,
   `word_article` char(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
@@ -1290,7 +1428,7 @@ CREATE TABLE `word_articles` (
 -- Daten für Tabelle `word_articles`
 --
 
-INSERT INTO `word_articles` (`id`, `word_article`) VALUES
+INSERT INTO `word_articles` (`word_article_id`, `word_article`) VALUES
 (1, 'der'),
 (2, 'die'),
 (3, 'das');
@@ -1302,15 +1440,15 @@ INSERT INTO `word_articles` (`id`, `word_article`) VALUES
 --
 
 CREATE TABLE `word_types` (
-  `id` int(11) NOT NULL,
-  `name` char(16) NOT NULL
+  `fk_word_type_id` int(11) NOT NULL,
+  `word_type` char(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
 --
 -- Daten für Tabelle `word_types`
 --
 
-INSERT INTO `word_types` (`id`, `name`) VALUES
+INSERT INTO `word_types` (`fk_word_type_id`, `word_type`) VALUES
 (1, 'Adjective'),
 (2, 'Noun');
 
@@ -1319,140 +1457,177 @@ INSERT INTO `word_types` (`id`, `name`) VALUES
 --
 
 --
--- Indizes für die Tabelle `aggronyme_words`
+-- Indizes für die Tabelle `aggronymes`
 --
-ALTER TABLE `aggronyme_words`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `aggronyme_words_ibfk_2` (`word_article_id`),
-  ADD KEY `aggronyme_words_ibfk_1` (`type_id`) USING BTREE;
+ALTER TABLE `aggronymes`
+  ADD PRIMARY KEY (`aggronyme_id`),
+  ADD KEY `fk_word_article_id` (`fk_word_article_id`),
+  ADD KEY `fk_word_type_id` (`fk_word_type_id`);
 
 --
 -- Indizes für die Tabelle `answer_inputs`
 --
 ALTER TABLE `answer_inputs`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`input_id`);
 
 --
 -- Indizes für die Tabelle `answer_last_outputs`
 --
 ALTER TABLE `answer_last_outputs`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`last_output_id`);
 
 --
 -- Indizes für die Tabelle `answer_outputs`
 --
 ALTER TABLE `answer_outputs`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`output_id`);
 
 --
 -- Indizes für die Tabelle `answer_relations`
 --
 ALTER TABLE `answer_relations`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `answer_relations_ibfk_3` (`previous_output_id`),
-  ADD KEY `answer_relations_ibfk_1` (`input_id`),
-  ADD KEY `answer_relations_ibfk_2` (`output_id`);
+  ADD PRIMARY KEY (`relation_id`),
+  ADD KEY `fk_output_id` (`fk_output_id`) USING BTREE,
+  ADD KEY `fk_output_id_previous` (`fk_output_id_previous`) USING BTREE,
+  ADD KEY `fk_input_id` (`fk_input_id`) USING BTREE;
+
+--
+-- Indizes für die Tabelle `message_types`
+--
+ALTER TABLE `message_types`
+  ADD PRIMARY KEY (`message_type_id`);
+
+--
+-- Indizes für die Tabelle `random_messages`
+--
+ALTER TABLE `random_messages`
+  ADD PRIMARY KEY (`random_message_id`);
+
+--
+-- Indizes für die Tabelle `telegram_users`
+--
+ALTER TABLE `telegram_users`
+  ADD PRIMARY KEY (`telegram_user_id`);
 
 --
 -- Indizes für die Tabelle `timed_messages`
 --
 ALTER TABLE `timed_messages`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`timed_message_id`);
 
 --
--- Indizes für die Tabelle `users`
+-- Indizes für die Tabelle `user_specific_answers`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `user_specific_answers`
+  ADD PRIMARY KEY (`user_specific_answer_id`),
+  ADD KEY `fk_telegram_user_id` (`fk_telegram_user_id`) USING BTREE;
 
 --
 -- Indizes für die Tabelle `word_articles`
 --
 ALTER TABLE `word_articles`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`word_article_id`);
 
 --
 -- Indizes für die Tabelle `word_types`
 --
 ALTER TABLE `word_types`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`fk_word_type_id`);
 
 --
 -- AUTO_INCREMENT für exportierte Tabellen
 --
 
 --
--- AUTO_INCREMENT für Tabelle `aggronyme_words`
---
-ALTER TABLE `aggronyme_words`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=798;
-
---
 -- AUTO_INCREMENT für Tabelle `answer_inputs`
 --
 ALTER TABLE `answer_inputs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `input_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT für Tabelle `answer_last_outputs`
 --
 ALTER TABLE `answer_last_outputs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `last_output_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT für Tabelle `answer_outputs`
 --
 ALTER TABLE `answer_outputs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `output_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT für Tabelle `answer_relations`
 --
 ALTER TABLE `answer_relations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
+  MODIFY `relation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
+
+--
+-- AUTO_INCREMENT für Tabelle `message_types`
+--
+ALTER TABLE `message_types`
+  MODIFY `message_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT für Tabelle `random_messages`
+--
+ALTER TABLE `random_messages`
+  MODIFY `random_message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT für Tabelle `telegram_users`
+--
+ALTER TABLE `telegram_users`
+  MODIFY `telegram_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=883968626;
 
 --
 -- AUTO_INCREMENT für Tabelle `timed_messages`
 --
 ALTER TABLE `timed_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `timed_message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT für Tabelle `users`
+-- AUTO_INCREMENT für Tabelle `user_specific_answers`
 --
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+ALTER TABLE `user_specific_answers`
+  MODIFY `user_specific_answer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT für Tabelle `word_articles`
 --
 ALTER TABLE `word_articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `word_article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT für Tabelle `word_types`
 --
 ALTER TABLE `word_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `fk_word_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints der exportierten Tabellen
 --
 
 --
--- Constraints der Tabelle `aggronyme_words`
+-- Constraints der Tabelle `aggronymes`
 --
-ALTER TABLE `aggronyme_words`
-  ADD CONSTRAINT `aggronyme_words_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `word_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `aggronyme_words_ibfk_2` FOREIGN KEY (`word_article_id`) REFERENCES `word_articles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `aggronymes`
+  ADD CONSTRAINT `fk_word_article_id` FOREIGN KEY (`fk_word_article_id`) REFERENCES `word_articles` (`word_article_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_word_type_id` FOREIGN KEY (`fk_word_type_id`) REFERENCES `word_types` (`fk_word_type_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints der Tabelle `answer_relations`
 --
 ALTER TABLE `answer_relations`
-  ADD CONSTRAINT `answer_relations_ibfk_1` FOREIGN KEY (`input_id`) REFERENCES `answer_inputs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `answer_relations_ibfk_2` FOREIGN KEY (`output_id`) REFERENCES `answer_outputs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `answer_relations_ibfk_3` FOREIGN KEY (`previous_output_id`) REFERENCES `answer_outputs` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_input_id` FOREIGN KEY (`fk_input_id`) REFERENCES `answer_inputs` (`input_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_output_id` FOREIGN KEY (`fk_output_id`) REFERENCES `answer_outputs` (`output_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_output_id_previous` FOREIGN KEY (`fk_output_id_previous`) REFERENCES `answer_outputs` (`output_id`);
+
+--
+-- Constraints der Tabelle `user_specific_answers`
+--
+ALTER TABLE `user_specific_answers`
+  ADD CONSTRAINT `fk_telegram_user_id` FOREIGN KEY (`fk_telegram_user_id`) REFERENCES `telegram_users` (`telegram_user_id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
