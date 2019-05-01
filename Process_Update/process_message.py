@@ -1,5 +1,4 @@
 import random
-
 import telegram
 import db_connect
 import Main
@@ -9,46 +8,42 @@ from Functions import aggronyme, cook, answer
 
 
 def get_message_list(message):
-    message_list = []
-
     if message.text:
-        message_list = get_message_list_for_text(message)
-    elif message.audio:
-        message_list = get_message_list_for_audio(message.audio)
-    elif message.document:
-        message_list = get_message_list_for_document(message)
-    elif message.animation:
-        message_list = get_message_list_for_animation(message.animation)
-    elif message.game:
-        message_list = get_message_list_for_game(message.game)
-    elif message.photo:
-        message_list = get_message_list_for_photo(message.photo)
-    elif message.sticker:
-        message_list = get_message_list_for_sticker(message.sticker)
-    elif message.sticker:
-        message_list = get_message_list_for_video(message.video)
-    elif message.voice:
-        message_list = get_message_list_for_voice(message.voice)
-    elif message.video_note:
-        message_list = get_message_list_for_video_note(message.video_note)
-    elif message.location:
-        message_list = get_message_list_for_location(message.location)
-    elif message.venue:
-        message_list = get_message_list_for_venue(message.venue)
-    elif message.poll:
-        message_list = get_message_list_for_poll(message.poll)
-    elif message.new_chat_members:
-        message_list = get_message_list_for_new_chat_members(message.new_chat_members)
-    elif message.left_chat_members:
-        message_list = get_message_list_for_left_chat_members(message.left_chat_members)
-    elif message.new_chat_title:
-        message_list = get_message_list_for_new_chat_title(message.new_chat_title)
-    elif message.new_chat_photo:
-        message_list = get_message_list_for_new_chat_photo(message.new_chat_photo)
-    elif message.delete_chat_photo:
-        message_list = get_message_list_for_delete_chat_photo(message.delete_chat_photo)
-
-    return message_list
+        return get_message_list_for_text(message)
+    if message.audio:
+        return get_message_list_for_audio(message)
+    if message.document:
+        return get_message_list_for_document(message)
+    if message.animation:
+        return get_message_list_for_animation(message)
+    if message.game:
+        return get_message_list_for_game(message)
+    if message.photo:
+        return get_message_list_for_photo(message)
+    if message.sticker:
+        return get_message_list_for_sticker(message)
+    if message.sticker:
+        return get_message_list_for_video(message)
+    if message.voice:
+        return get_message_list_for_voice(message)
+    if message.video_note:
+        return get_message_list_for_video_note(message)
+    if message.location:
+        return get_message_list_for_location(message)
+    if message.venue:
+        return get_message_list_for_venue(message)
+    if message.poll:
+        return get_message_list_for_poll(message)
+    if message.new_chat_members:
+        return get_message_list_for_new_chat_members(message)
+    if message.left_chat_members:
+        return get_message_list_for_left_chat_members(message)
+    if message.new_chat_title:
+        return get_message_list_for_new_chat_title(message)
+    if message.new_chat_photo:
+        return get_message_list_for_new_chat_photo(message)
+    if message.delete_chat_photo:
+        return get_message_list_for_delete_chat_photo(message)
 
 
 def get_message_list_for_text(message):
@@ -101,93 +96,212 @@ def get_message_list_for_text(message):
     return []  # Kommando ging an anderen Bot
 
 
-def get_message_list_for_audio(audio):
-    return []
-
-
-def get_message_list_for_document(message):
-    output = __get_random_message_for_message_type('document')
+def get_message_list_for_audio(message):
+    output = __get_random_message_for_message_type('audio')
+    if output == '':
+        return []
 
     params_dict = {'chat_id': message.chat_id,
                    'text': output}
     return [{'action': 'text', 'params_dict': params_dict}]
 
 
-def get_message_list_for_animation(animation):
-    return []
+def get_message_list_for_document(message):
+    output = __get_random_message_for_message_type('document')
+    if output == '':
+        return []
+
+    params_dict = {'chat_id': message.chat_id,
+                   'text': output}
+    return [{'action': 'text', 'params_dict': params_dict}]
 
 
-def get_message_list_for_game(game):
-    return []
+def get_message_list_for_animation(message):
+    output = __get_random_message_for_message_type('animation')
+    if output == '':
+        return []
+
+    params_dict = {'chat_id': message.chat_id,
+                   'text': output}
+    return [{'action': 'text', 'params_dict': params_dict}]
 
 
-def get_message_list_for_photo(photo):
-    return []
+def get_message_list_for_game(message):
+    output = __get_random_message_for_message_type('game')
+    if output == '':
+        return []
+
+    params_dict = {'chat_id': message.chat_id,
+                   'text': output}
+    return [{'action': 'text', 'params_dict': params_dict}]
 
 
-def get_message_list_for_sticker(sticker):
-    return []
+def get_message_list_for_photo(message):
+    output = __get_random_message_for_message_type('photo')
+    if output == '':
+        return []
+
+    params_dict = {'chat_id': message.chat_id,
+                   'text': output}
+    return [{'action': 'text', 'params_dict': params_dict}]
 
 
-def get_message_list_for_video(video):
-    return []
+def get_message_list_for_sticker(message):
+    output = __get_random_message_for_message_type('sticker')
+    if output == '':
+        return []
+
+    params_dict = {'chat_id': message.chat_id,
+                   'text': output}
+    return [{'action': 'text', 'params_dict': params_dict}]
 
 
-def get_message_list_for_voice(voice):
-    return []
+def get_message_list_for_video(message):
+    output = __get_random_message_for_message_type('video')
+    if output == '':
+        return []
+
+    params_dict = {'chat_id': message.chat_id,
+                   'text': output}
+    return [{'action': 'text', 'params_dict': params_dict}]
 
 
-def get_message_list_for_video_note(video_note):
-    return []
+def get_message_list_for_voice(message):
+    output = __get_random_message_for_message_type('voice')
+    if output == '':
+        return []
+
+    params_dict = {'chat_id': message.chat_id,
+                   'text': output}
+    return [{'action': 'text', 'params_dict': params_dict}]
 
 
-def get_message_list_for_location(location):
-    return []
+def get_message_list_for_video_note(message):
+    output = __get_random_message_for_message_type('video_note')
+    if output == '':
+        return []
+
+    params_dict = {'chat_id': message.chat_id,
+                   'text': output}
+    return [{'action': 'text', 'params_dict': params_dict}]
 
 
-def get_message_list_for_venue(venue):
-    return []
+def get_message_list_for_location(message):
+    output = __get_random_message_for_message_type('location')
+    if output == '':
+        return []
+
+    params_dict = {'chat_id': message.chat_id,
+                   'text': output}
+    return [{'action': 'text', 'params_dict': params_dict}]
 
 
-def get_message_list_for_poll(poll):
-    return []
+def get_message_list_for_venue(message):
+    output = __get_random_message_for_message_type('venue')
+    if output == '':
+        return []
+
+    params_dict = {'chat_id': message.chat_id,
+                   'text': output}
+    return [{'action': 'text', 'params_dict': params_dict}]
 
 
-def get_message_list_for_new_chat_members(new_chat_members):
-    return []
+def get_message_list_for_poll(message):
+    output = __get_random_message_for_message_type('poll')
+    if output == '':
+        return []
+
+    params_dict = {'chat_id': message.chat_id,
+                   'text': output}
+    return [{'action': 'text', 'params_dict': params_dict}]
 
 
-def get_message_list_for_left_chat_members(left_chat_members):
-    return []
+def get_message_list_for_new_chat_members(message):
+    output = __get_random_message_for_message_type('new_chat_members')
+    if output == '':
+        return []
+
+    params_dict = {'chat_id': message.chat_id,
+                   'text': output}
+    return [{'action': 'text', 'params_dict': params_dict}]
 
 
-def get_message_list_for_new_chat_title(new_chat_title):
-    return []
+def get_message_list_for_left_chat_members(message):
+    output = __get_random_message_for_message_type('left_chat_members')
+    if output == '':
+        return []
+
+    params_dict = {'chat_id': message.chat_id,
+                   'text': output}
+    return [{'action': 'text', 'params_dict': params_dict}]
 
 
-def get_message_list_for_new_chat_photo(new_chat_photo):
-    return []
+def get_message_list_for_new_chat_title(message):
+    output = __get_random_message_for_message_type('new_chat_title')
+    if output == '':
+        return []
+
+    params_dict = {'chat_id': message.chat_id,
+                   'text': output}
+    return [{'action': 'text', 'params_dict': params_dict}]
 
 
-def get_message_list_for_delete_chat_photo(delete_chat_photo):
-    return []
+def get_message_list_for_new_chat_photo(message):
+    output = __get_random_message_for_message_type('new_chat_photo')
+    if output == '':
+        return []
+
+    params_dict = {'chat_id': message.chat_id,
+                   'text': output}
+    return [{'action': 'text', 'params_dict': params_dict}]
+
+
+def get_message_list_for_delete_chat_photo(message):
+    output = __get_random_message_for_message_type('delete_chat_photo')
+    if output == '':
+        return []
+
+    params_dict = {'chat_id': message.chat_id,
+                   'text': output}
+    return [{'action': 'text', 'params_dict': params_dict}]
 
 
 def __get_random_message_for_message_type(message_type):
-    probabilty_treshold = random.randint(1, 10001) / 100
-
-    print(probabilty_treshold)
-
+    # Zufallsnachrichten für Typ holen
     random_messages_for_type = db_connect.select('random_messages m JOIN message_types t '
                                                  'ON m.fk_message_type_id = t.message_type_id',
                                                  'message, probability_percentage',
-                                                 'message_type = "' + message_type + '" '
-                                                 'AND probability_percentage <= ' + str(probabilty_treshold),
-                                                 'probability_percentage ASC')
-    for line in random_messages_for_type:
-        print('\t', end='')
-        for value in line:
-            print(value, end="\t")
-        print()
+                                                 'message_type = "' + message_type + '"',
+                                                 'probability_percentage DESC')
 
-    return ['Mederer']
+    # Wahrscheinlichkeiten aufsummieren
+    probability_sum = sum(line[1] for line in random_messages_for_type)
+
+    # individuelle Wahrscheinlichkeit für Nachrichtentyp miteinbeziehen
+    message_type_probability = __get_probabilty_for_message_type(message_type)
+    probability_sum *= 100
+    probability_sum /= message_type_probability
+
+    # Zufallszahl generieren
+    ranint = random.randint(1, probability_sum * 100) / 100
+
+    # aus Zahlenbereich entsprechende Nachricht (oder keine Nachricht) ziehen
+    temp = 0
+    for line in random_messages_for_type:
+        temp += line[1]
+        print('temp:', temp)
+        if ranint <= temp:
+            return line[0]
+
+    return ''
+
+
+def __get_probabilty_for_message_type(message_type):
+    probability = db_connect.select('message_types',
+                                    'message_type_probability_percentage',
+                                    'message_type ="' + message_type + '"')
+
+    if probability:
+        return probability[0][0]
+
+    return 100
