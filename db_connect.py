@@ -46,10 +46,14 @@ def __query(query_string):
 
 
 # SELECT-Abfrage auf der Datenbank
-def select(table, column="*", where_expression="1 = 1"):
+def select(table, column='*', where_expression='1 = 1', order_expression=''):
+    if order_expression != '':
+        order_expression = 'ORDER BY ' + order_expression
+
     query_string = 'SELECT ' + column + ' ' +\
                    'FROM ' + table + ' ' +\
-                   'WHERE ' + where_expression
+                   'WHERE ' + where_expression + ' ' + \
+                   order_expression
 
     return __query(query_string)
 
