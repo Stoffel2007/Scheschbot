@@ -32,11 +32,11 @@ def get_message_list(message):
         return get_message_list_for_location(message)
     if message.venue:
         return get_message_list_for_venue(message)
-    if message.poll:
-        return get_message_list_for_poll(message)
+    # if message.poll:
+    #     return get_message_list_for_poll(message)
     if message.new_chat_members:
         return get_message_list_for_new_chat_members(message)
-    if message.left_chat_members:
+    if message.left_chat_member:
         return get_message_list_for_left_chat_members(message)
     if message.new_chat_title:
         return get_message_list_for_new_chat_title(message)
@@ -227,7 +227,7 @@ def get_message_list_for_new_chat_members(message):
 
 
 def get_message_list_for_left_chat_members(message):
-    output = __get_random_message_for_message_type('left_chat_members')
+    output = __get_random_message_for_message_type('left_chat_member')
     if output == '':
         return []
 
@@ -281,17 +281,14 @@ def __get_random_message_for_message_type(message_type):
     message_type_probability = __get_probabilty_for_message_type(message_type)
     probability_sum *= 100
     probability_sum /= message_type_probability
-    print('Summe:', probability_sum)
 
     # Zufallszahl generieren
     ranint = random.randint(1, probability_sum * 100) / 100
-    print('ranint:', ranint)
 
     # aus Zahlenbereich entsprechende Nachricht (oder keine Nachricht) ziehen
     temp = 0
     for line in random_messages_for_type:
         temp += line[1]
-        print('temp:', temp)
         if ranint <= temp:
             return line[0]
 
